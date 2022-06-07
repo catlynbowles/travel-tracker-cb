@@ -59,11 +59,11 @@ describe('Trip', () => {
     trip = new Trip(tripData);
   });
 
-  it.only('should be a function', function () {
+  it('should be a function', function () {
     expect(Trip).to.be.a('function');
   });
 
-  it.only('should be an instance of a Trip', () => {
+  it('should be an instance of a Trip', () => {
     expect(tripData).to.be.an('array');
     expect(trip).to.be.an.instanceof(Trip);
   });
