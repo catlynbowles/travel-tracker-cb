@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import TravelerRepository from '../src/TravelerRepository'
 import Traveler from '../src/Traveler';
 
-describe('Traveler', () => {
+describe('Traveler Repository', () => {
   let singleTraveler
   let traveler;
   let travelerRepo
@@ -47,7 +47,7 @@ describe('Traveler', () => {
     expect(travelerRepo.data).to.deep.equal(travelersData);
   });
 
-  it('should be able to create a new user instance', () => {
+  it('should be able to create a new traveler instance', () => {
     expect(traveler).to.be.an.instanceof(Traveler);
     expect(travelerRepo.getDataById(22)).to.deep.equal(traveler);
   });
