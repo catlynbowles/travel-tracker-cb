@@ -1,4 +1,4 @@
-class Traveler{
+class Traveler {
   constructor(travelerData) {
     this.id = travelerData.id;
     this.name = travelerData.name;
