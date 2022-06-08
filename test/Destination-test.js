@@ -52,4 +52,15 @@ describe('Destination', () => {
     expect(destinationData).to.be.an('array');
     expect(destination).to.be.an.instanceof(Destination);
   });
+
+  it('should be able to take in an array of locations and return the name of that destination', () => {
+    let locationNames = destination.returnLocationName(destinationData);
+    expect(locationNames).to.be.an('array');
+    expect(locationNames).to.deep.equal([
+      'New York, New York',
+      'Kathmandu, Nepal',
+      'Caye Caulker, Belize',
+      'Castries, St Lucia'
+    ]);
+  });
 });
