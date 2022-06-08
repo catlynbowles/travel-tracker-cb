@@ -40,11 +40,23 @@ class Trip {
 
   getPendingTrips(userTripData, currentDate) {
     let pendingTrips = userTripData.filter(trip => {
-      console.log(trip)
       return trip.status === 'pending'
     });
-    console.log(pendingTrips)
+    // console.log(pendingTrips)
+    // also, should I sort these trips?
     return pendingTrips;
+  }
+
+  getPresentTrips(userTripData, currentDate) {
+    // what qualifies a present trip?
+    // tricky.
+    // look at all the user trip data.
+    // look at the date,
+    // look at the duration
+    // make an array of all those dates
+    // if the current date is included
+    // in that array,
+    // then add that trip to the new array.
   }
 }
 

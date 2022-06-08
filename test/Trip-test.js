@@ -79,6 +79,16 @@ describe('Trip', () => {
       "status": "approved",
       "suggestedActivities": []
     },
+          {
+      "id": 203,
+      "userID": 29,
+      "destinationID": 12,
+      "travelers": 6,
+      "date": "2021/08/08",
+      "duration": 7,
+      "status": "approved",
+      "suggestedActivities": []
+    },
     {
       "id": 18,
       "userID": 18,
@@ -116,6 +126,16 @@ describe('Trip', () => {
       "travelers": 4,
       "date": "2020/10/31",
       "duration": 17,
+      "status": "approved",
+      "suggestedActivities": []
+    },
+    {
+      "id": 200,
+      "userID": 29,
+      "destinationID": 23,
+      "travelers": 6,
+      "date": "2022/06/29",
+      "duration": 7,
       "status": "approved",
       "suggestedActivities": []
     },
@@ -326,7 +346,7 @@ describe('Trip', () => {
     ]);
   });
 
-  it('should be able to find pending trips for the user', () => {
+  it('should be able to find all pending trips for the user', () => {
     let pendingTrips3 = trip.getPendingTrips(userTripData3, date);
     expect(pendingTrips3).to.be.an('array');
     expect(pendingTrips3).to.deep.equal([
@@ -356,5 +376,9 @@ describe('Trip', () => {
         suggestedActivities: []
       }
     ]);
+  });
+
+  it('should be able to get present trips for the user' () => {
+    
   })
 });
