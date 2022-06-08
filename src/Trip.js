@@ -19,23 +19,32 @@ class Trip {
 
     today = yyyy + '/' + mm + '/' + dd;
     // console.log(today)
-    return today
+    return today;
   }
 
   getPastTrips(userTripData, currentDate) {
     let pastTrips = userTripData.filter(trip => {
       return trip.date < currentDate
-    })
+    });
     // console.log(pastTrips)
-    return pastTrips
+    return pastTrips;
   }
 
   getUpcomingTrips(userTripData, currentDate) {
     let upcomingTrips = userTripData.filter(trip => {
       return trip.date > currentDate
-    })
+    });
     // console.log(upcomingTrips)
-    return upcomingTrips
+    return upcomingTrips;
+  }
+
+  getPendingTrips(userTripData, currentDate) {
+    let pendingTrips = userTripData.filter(trip => {
+      console.log(trip)
+      return trip.status === 'pending'
+    });
+    console.log(pendingTrips)
+    return pendingTrips;
   }
 }
 

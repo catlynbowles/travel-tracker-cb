@@ -5,7 +5,7 @@ describe('Trip', () => {
   let trip;
   let tripData;
   let singleTraveler;
-  let userTripData1, userTripData2;
+  let userTripData1, userTripData2, userTripData3, userTripData4;
   let date;
 
   beforeEach(() => {
@@ -27,6 +27,26 @@ describe('Trip', () => {
       "date": "2022/05/01",
       "duration": 19,
       "status": "approved",
+      "suggestedActivities": []
+    },
+    {
+      "id": 71,
+      "userID": 50,
+      "destinationID": 28,
+      "travelers": 1,
+      "date": "2020/05/26",
+      "duration": 11,
+      "status": "pending",
+      "suggestedActivities": []
+    },
+    {
+      "id": 84,
+      "userID": 2,
+      "destinationID": 1,
+      "travelers": 1,
+      "date": "2020/11/23",
+      "duration": 19,
+      "status": "pending",
       "suggestedActivities": []
     },
     {
@@ -110,19 +130,11 @@ describe('Trip', () => {
       "suggestedActivities": []
     }
   ]
-    singleTraveler = {
-      "id": 22,
-      "name": "Gus Courtenay",
-      "travelerType": "foodie"
-    };
-    // method: get all user trips by userID.
-    // with that in mind, how do you want to setup your constructor?
-    // input: an array of all trips
-    // output: specific trips/ trip needed which will always be an arr.
-    // do we want a travelerRepo?
     trip = new Trip(tripData);
     userTripData1 = trip.getUserTripData(22);
     userTripData2 = trip.getUserTripData(18);
+    userTripData3 = trip.getUserTripData(50);
+    userTripData4 = trip.getUserTripData(2);
     date = trip.getCurrentDate();
   });
 
@@ -313,4 +325,36 @@ describe('Trip', () => {
       }
     ]);
   });
+
+  it('should be able to find pending trips for the user', () => {
+    let pendingTrips3 = trip.getPendingTrips(userTripData3, date);
+    expect(pendingTrips3).to.be.an('array');
+    expect(pendingTrips3).to.deep.equal([
+      {
+        id: 71,
+        userID: 50,
+        destinationID: 28,
+        travelers: 1,
+        date: '2020/05/26',
+        duration: 11,
+        status: 'pending',
+        suggestedActivities: []
+      }
+    ]);
+
+    let pendingTrips4 = trip.getPendingTrips(userTripData4, date);
+    expect(pendingTrips4).to.be.an('array');
+    expect(pendingTrips4).to.deep.equal([
+      {
+        id: 84,
+        userID: 2,
+        destinationID: 1,
+        travelers: 1,
+        date: '2020/11/23',
+        duration: 19,
+        status: 'pending',
+        suggestedActivities: []
+      }
+    ]);
+  })
 });
