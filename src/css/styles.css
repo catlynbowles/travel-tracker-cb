@@ -1,7 +1,73 @@
 * {
-  border: gray;
+  border: 1px solid white;
 }
 
 body {
   background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  font-family: 'Lato', sans-serif;
+  height: 100%;
+}
+
+.left-contents {
+  position: absolute;
+  top: 0;
+  left:0;
+  margin-top: 10px;
+  margin-right: 10px;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
+.top-bar {
+  position:fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #7F7B82;
+  height: 100px;
+}
+
+.right-contents {
+  /* position: relative; */
+  display: flex;
+  align-items: flex-end;
+  /* width: 200px; */
+  justify-content: flex-end;
+}
+
+.box-styling {
+  margin: 150px;
+  display: flex;
+  justify-content: space-between;
+  height: 400px;
+}
+
+form {
+  width: 400px;
+  text-align: center;
+}
+
+fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trip-request-box {
+  width: 500px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+}
+
+.all-user-trips {
+  width: 300px;
+  text-align: center;
+  margin-right: 50px;
 }
