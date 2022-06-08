@@ -71,3 +71,7 @@ fieldset {
   text-align: center;
   margin-right: 50px;
 }
+
+.hidden {
+  display: none;
+}

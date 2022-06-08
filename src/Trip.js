@@ -13,6 +13,7 @@ class Trip {
 
   getCurrentDate() {
     var today = new Date();
+    // console.log('today', today)
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
@@ -47,7 +48,9 @@ class Trip {
     return pendingTrips;
   }
 
-  getPresentTrips(userTripData, currentDate) {
+  checkForPresentTrips(userTripData, currentDate) {
+
+    // let endDate = currentDate.getDate() + duration
     // what qualifies a present trip?
     // tricky.
     // look at all the user trip data.
@@ -57,7 +60,11 @@ class Trip {
     // if the current date is included
     // in that array,
     // then add that trip to the new array.
+    // find ?
+
   }
+
 }
+
 
 export default Trip;

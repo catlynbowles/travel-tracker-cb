@@ -5,7 +5,7 @@ describe('Trip', () => {
   let trip;
   let tripData;
   let singleTraveler;
-  let userTripData1, userTripData2, userTripData3, userTripData4;
+  let userTripData1, userTripData2, userTripData3, userTripData4, userTripData5;
   let date;
 
   beforeEach(() => {
@@ -79,16 +79,16 @@ describe('Trip', () => {
       "status": "approved",
       "suggestedActivities": []
     },
-          {
-      "id": 203,
-      "userID": 29,
-      "destinationID": 12,
-      "travelers": 6,
-      "date": "2021/08/08",
-      "duration": 7,
-      "status": "approved",
-      "suggestedActivities": []
-    },
+    //       {
+    //   "id": 203,
+    //   "userID": 29,
+    //   "destinationID": 12,
+    //   "travelers": 6,
+    //   "date": "2021/08/08",
+    //   "duration": 7,
+    //   "status": "approved",
+    //   "suggestedActivities": []
+    // },
     {
       "id": 18,
       "userID": 18,
@@ -134,8 +134,8 @@ describe('Trip', () => {
       "userID": 29,
       "destinationID": 23,
       "travelers": 6,
-      "date": "2022/06/29",
-      "duration": 7,
+      "date": "2022/06/07",
+      "duration": 30,
       "status": "approved",
       "suggestedActivities": []
     },
@@ -155,6 +155,7 @@ describe('Trip', () => {
     userTripData2 = trip.getUserTripData(18);
     userTripData3 = trip.getUserTripData(50);
     userTripData4 = trip.getUserTripData(2);
+    userTripData5 = trip.getUserTripData(29);
     date = trip.getCurrentDate();
   });
 
@@ -378,7 +379,18 @@ describe('Trip', () => {
     ]);
   });
 
-  it('should be able to get present trips for the user' () => {
-    
+  it('should be able to get present trips for the user', () => {
+    let presentTrip = trip.checkForPresentTrips(userTripData5, date)
+    // {
+    //   "id": 200,
+    //   "userID": 29,
+    //   "destinationID": 23,
+    //   "travelers": 6,
+    //   "date": "2022/06/07",
+    //   "duration": 30,
+    //   "status": "approved",
+    //   "suggestedActivities": []
+    // }
+
   })
 });
