@@ -6,10 +6,10 @@ describe('Traveler Repository', () => {
   let singleTraveler
   let traveler;
   let travelerRepo
-  let travelersData;
+  let travelerData;
 
   beforeEach(() => {
-    travelersData = [{
+    travelerData = [{
       "id": 45,
       "name": "Ofilia Titman",
       "travelerType": "thrill-seeker"
@@ -29,7 +29,7 @@ describe('Traveler Repository', () => {
       "name": "Gus Courtenay",
       "travelerType": "foodie"
     };
-    travelerRepo = new TravelerRepository(travelersData);
+    travelerRepo = new TravelerRepository(travelerData);
     traveler = new Traveler(singleTraveler)
   });
 
@@ -38,13 +38,13 @@ describe('Traveler Repository', () => {
   });
 
   it('should be an instance of Traveler Repository', () => {
-    expect(travelersData).to.be.an('array');
+    expect(travelerData).to.be.an('array');
     expect(travelerRepo).to.be.an.instanceof(TravelerRepository);
   });
 
   it('should be able to take in traveler data', () => {
     expect(travelerRepo.data).to.be.an('array');
-    expect(travelerRepo.data).to.deep.equal(travelersData);
+    expect(travelerRepo.data).to.deep.equal(travelerData);
   });
 
   it('should be able to create a new traveler instance', () => {
