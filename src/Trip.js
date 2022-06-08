@@ -29,6 +29,14 @@ class Trip {
     // console.log(pastTrips)
     return pastTrips
   }
+
+  getUpcomingTrips(userTripData, currentDate) {
+    let upcomingTrips = userTripData.filter(trip => {
+      return trip.date > currentDate
+    })
+    // console.log(upcomingTrips)
+    return upcomingTrips
+  }
 }
 
 export default Trip;

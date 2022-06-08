@@ -281,4 +281,36 @@ describe('Trip', () => {
       }
     ]);
   });
+
+  it('should be able find all upcoming trips for the user', () => {
+    let upcomingTrips1 = trip.getUpcomingTrips(userTripData1, date);
+    expect(upcomingTrips1).to.be.an('array');
+    expect(upcomingTrips1).to.deep.equal([
+      {
+        id: 86,
+        userID: 22,
+        destinationID: 46,
+        travelers: 4,
+        date: '2023/11/27',
+        duration: 10,
+        status: 'approved',
+        suggestedActivities: []
+      }
+    ]);
+
+    let upcomingTrips2 = trip.getUpcomingTrips(userTripData2, date);
+    expect(upcomingTrips2).to.be.an('array');
+    expect(upcomingTrips2).to.deep.equal([
+      {
+        id: 18,
+        userID: 18,
+        destinationID: 2,
+        travelers: 2,
+        date: '2022/09/25',
+        duration: 17,
+        status: 'approved',
+        suggestedActivities: []
+      }
+    ]);
+  });
 });
