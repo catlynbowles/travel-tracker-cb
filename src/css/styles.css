@@ -6,7 +6,13 @@ body {
   background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   font-family: 'Lato', sans-serif;
   height: 100%;
+  font-weight: bold;
 }
+
+p {
+  font-size: 20px;
+}
+
 
 .left-contents {
   position: absolute;
@@ -33,10 +39,14 @@ body {
 
 .right-contents {
   /* position: relative; */
+  margin-top: 0;
+  margin: 0;
+  padding: 0;
   display: flex;
-  align-items: flex-end;
-  /* width: 200px; */
+  /* align-items: flex-end; */
+  height: 20px;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .box-styling {
@@ -72,6 +82,114 @@ fieldset {
   margin-right: 50px;
 }
 
+.welcome-text {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+h3, h4 {
+  margin: 0;
+}
+
+h4 {
+  margin-left: 30px;
+}
+
+.trip-type {
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
+}
+
+p {
+
+}
+
+/* grid contents */
+
+.grid {
+  border: 2px black;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(2, 225px);
+  grid-template-rows: repeat(3, 270px);
+  size: 80px;
+  grid-gap: 30px;
+  padding: 0px;
+  cursor: pointer;
+  padding-right: 400px;
+}
+
+.location,
+.trip-date {
+  color: black;
+}
+
+/* .img-container {
+  position: relative;
+} */
+
+/* .img-container .box-img {
+  display: block
+} */
+
+/* .img-container .text-on-img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 75px;
+  padding-left: 12px;
+} */
+
+/* .img-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 75px;
+  padding-right: 12px;
+} */
+
+/* .text-box {
+  font-weight: bold;
+  padding: 5px;
+  background: #F8BBD0;
+  display: block;
+  height: 45px;
+  width: 210px;
+
+}
+
+.text-box-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-img {
+  margin: -242px 0px 0px 0px;
+}
+
+.layer-0 {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+} */
+
+.grid-contents{
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding-right: 100px; */
+}
+
+.box {
+  background-color: white;
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
 }

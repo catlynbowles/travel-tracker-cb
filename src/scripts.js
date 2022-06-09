@@ -22,8 +22,20 @@ var travelerRepository;
 var globalTrip;
 var globalDestination;
 
-console.log('This is the JavaScript entry file - your code begins here.');
-window.addEventListener('load', displayResolvedData)
+// query selectors
+var clickPastTrips = document.getElementById('pastTrips');
+var clickPresentTrips = document.getElementById('presentTrips');
+var clickUpcomingTrips = document.getElementById('upcomingTrips');
+var clickPendingTrips = document.getElementById('pendingTrips');
+var tripRequestBox = document.getElementById('tripRequestBox');
+
+// event listeners
+window.addEventListener('load', displayResolvedData);
+clickPastTrips.addEventListener('click', displayPastTrips);
+clickPresentTrips.addEventListener('click', displayPresentTrips);
+clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
+clickPendingTrips.addEventListener('click', displayPendingTrips)
+
 
 // Fetch API
 function displayResolvedData() {
@@ -42,15 +54,56 @@ const getAllTravelerData = (data) => {
 }
 
 const getAllTripData = (data) => {
-  travelerData = data;
+  tripData = data;
   globalTrip = new Trip(tripData);
 }
 
 const getAllDestinationData = (data) => {
   destinationData = data;
   globalDestination = new Destination(destinationData);
+  loadUserDashboard();
 }
 
-const getRandomUserId = (anyUserData) => {
+//functions
+function removeHidden(ele) {
+  ele.classList.remove('hidden')
+}
+
+function addHidden(ele) {
+  ele.classList.add('hidden')
+}
+
+function loadUserDashboard() {
+  // refactored upon creation of login page.
+  // let travelerInformation = blabla.value of the input
+  // removeHidden(tripRequestBox);
+  let travelerInformation = getRandomUserId(travelerData);
+  let newTraveler = travelerRepository.getDataById(travelerInformation);
+  let travelerFirstName = newTraveler.returnFirstName();
+  welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
+  // displayIdCardInfo(newUser);
+  // displayStepsInfo(newUser);
+  // displayHydrationInfo(newUser);
+  // displaySleepInfo(newUser);
+}
+
+function displayPastTrips() {
+  addHidden(tripRequestBox);
+  console.log('hi')
+}
+
+function displayPresentTrips() {
+  addHidden(tripRequestBox);
+}
+
+function displayUpcomingTrips() {
+  addHidden(tripRequestBox);
+}
+
+function displayPendingTrips() {
+  addHidden(tripRequestBox);
+}
+
+function getRandomUserId (anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }
