@@ -15,12 +15,17 @@ import Destination from './Destination';
 import './images/turing-logo.png'
 
 // global variables
+var today;
 var travelerData;
+var dashboardTravelerTrips;
 var tripData;
 var destinationData;
 var travelerRepository;
+var globalTraveler;
+var globalTravelerInfo;
 var globalTrip;
 var globalDestination;
+
 
 // query selectors
 var clickPastTrips = document.getElementById('pastTrips');
@@ -82,10 +87,17 @@ function loadUserDashboard() {
   // let travelerInformation = blabla.value of the input
   removeHidden(tripRequestBox);
   addHidden(userSelectedTrips);
-  let travelerInformation = getRandomUserId(travelerData);
-  let newTraveler = travelerRepository.getDataById(travelerInformation);
+  let travelerId = getRandomUserId(travelerData);
+  let newTraveler = travelerRepository.getDataById(travelerId);
+  globalTraveler = newTraveler;
+  let todaysDate = globalTrip.getCurrentDate();
+  today = todaysDate;
+  console.log(newTraveler)
   let travelerFirstName = newTraveler.returnFirstName();
   welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
+  // let today = globalTrip.getCurrentDate();
+  //
+  // console.log(today)
   // displayIdCardInfo(newUser);
   // displayStepsInfo(newUser);
   // displayHydrationInfo(newUser);
@@ -100,7 +112,11 @@ function backToHome() {
 function displayPastTrips() {
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
-  console.log('hi')
+  // let today = globalTrip.getCurrentDate();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  console.log(travelerTrips)
+  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
+  console.log(pastTrips)
 }
 
 function displayPresentTrips() {
@@ -111,11 +127,17 @@ function displayPresentTrips() {
 function displayUpcomingTrips() {
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let upcomingTrips = globalTrip.getUpcomingTrips(travelerTrips, today);
+  console.log(upcomingTrips)
 }
 
 function displayPendingTrips() {
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let pendingTrips = globalTrip.getPendingTrips(travelerTrips, today);
+  console.log(pendingTrips)
 }
 
 function getRandomUserId (anyUserData) {
