@@ -23,8 +23,8 @@
           <h2 id='welcomeText'>Welcome!</h2>
         </div>
         <div class="right-contents">
-          <h3>Home</h3>
-          <h4>Dashboard</h4>
+          <h3 class='dashboard-buttons' id='homeButton'>Home</h3>
+          <h4 class='dashboard-buttons' id='logoutButton'>Logout</h4>
           <!-- <div class="left-icons">
           <img src='images/social-media.png' width='20' height='20'></img>
           <img src='images/support.png' width='20' height='20'></img>
@@ -42,7 +42,7 @@
             <p class="trip-type" id="upcomingTrips">Upcoming</p>
             <p class="trip-type" id="pendingTrips">Pending</p>
           </section>
-          <section class='user-selected-trips' id='userSelectedTrips'>
+          <section class='user-selected-trips hidden' id='userSelectedTrips'>
             <!-- grid contents -->
             <section class='grid-contents'>
               <div class="grid-container">
@@ -85,15 +85,15 @@
             <fieldset>
               <legend>Book Your Trip Today!</legend>
               <form>
-                <label class="booking-date" id="bookingDate">Date:</label><br>
-                <input class="booking-date-input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" required><br>
-                <label class="duration" id="duration">Duration:</label><br>
-                <input class="duration-input" id="durationInput" type="number" placeholder="Duration of Stay" required><br>
-                <label class="num-travelers" id="numTravelers">Travelers:</label><br>
-                <input class="num-travelers-input" id="numTravelersInput" type="number" placeholder="Number of Travelers" required><br><br>
-                <label class="destinations" id="destinations">Destinations:</label><br>
-                <input class="destinations-input" id="destinationsInput" type="number" placeholder="Choose your destination" required><br><br>
-                <input class="submit-trip" id="submitTrip" type="submit" value="Submit">
+                <label class="booking-date input" id="bookingDate">Date:</label><br>
+                <input class="booking-date-input input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" required><br>
+                <label class="duration input" id="duration">Duration:</label><br>
+                <input class="duration-input input" id="durationInput" type="number" placeholder="Duration of Stay" required><br>
+                <label class="num-travelers input" id="numTravelers">Travelers:</label><br>
+                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" required><br><br>
+                <label class="destinations input" id="destinations">Destinations:</label><br>
+                <input class="destinations-input input" id="destinationsInput" type="number" placeholder="Choose your destination" required><br><br>
+                <input class="submit-trip input" id="submitTrip" type="submit" value="Submit">
               </form>
             </fieldset>
             <p class='estimated-cost' id="estimatedCost"></p>

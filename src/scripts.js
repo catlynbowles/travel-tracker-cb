@@ -28,13 +28,17 @@ var clickPresentTrips = document.getElementById('presentTrips');
 var clickUpcomingTrips = document.getElementById('upcomingTrips');
 var clickPendingTrips = document.getElementById('pendingTrips');
 var tripRequestBox = document.getElementById('tripRequestBox');
+var userSelectedTrips = document.getElementById('userSelectedTrips');
+var logoutButton = document.getElementById('logoutButton');
+var homeButton = document.getElementById('homeButton');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
 clickPastTrips.addEventListener('click', displayPastTrips);
 clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
-clickPendingTrips.addEventListener('click', displayPendingTrips)
+clickPendingTrips.addEventListener('click', displayPendingTrips);
+homeButton.addEventListener('click', backToHome)
 
 
 // Fetch API
@@ -76,7 +80,8 @@ function addHidden(ele) {
 function loadUserDashboard() {
   // refactored upon creation of login page.
   // let travelerInformation = blabla.value of the input
-  // removeHidden(tripRequestBox);
+  removeHidden(tripRequestBox);
+  addHidden(userSelectedTrips);
   let travelerInformation = getRandomUserId(travelerData);
   let newTraveler = travelerRepository.getDataById(travelerInformation);
   let travelerFirstName = newTraveler.returnFirstName();
@@ -87,21 +92,30 @@ function loadUserDashboard() {
   // displaySleepInfo(newUser);
 }
 
+function backToHome() {
+  removeHidden(tripRequestBox);
+  addHidden(userSelectedTrips);
+}
+
 function displayPastTrips() {
   addHidden(tripRequestBox);
+  removeHidden(userSelectedTrips);
   console.log('hi')
 }
 
 function displayPresentTrips() {
   addHidden(tripRequestBox);
+  removeHidden(userSelectedTrips);
 }
 
 function displayUpcomingTrips() {
   addHidden(tripRequestBox);
+  removeHidden(userSelectedTrips);
 }
 
 function displayPendingTrips() {
   addHidden(tripRequestBox);
+  removeHidden(userSelectedTrips);
 }
 
 function getRandomUserId (anyUserData) {
