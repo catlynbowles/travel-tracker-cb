@@ -36,6 +36,9 @@ var tripRequestBox = document.getElementById('tripRequestBox');
 var userSelectedTrips = document.getElementById('userSelectedTrips');
 var logoutButton = document.getElementById('logoutButton');
 var homeButton = document.getElementById('homeButton');
+var location = document.getElementById('location');
+var tripDate = document.getElementById('tripDate');
+var boxImage = document.getElementById('boxImg');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -95,13 +98,6 @@ function loadUserDashboard() {
   console.log(newTraveler)
   let travelerFirstName = newTraveler.returnFirstName();
   welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
-  // let today = globalTrip.getCurrentDate();
-  //
-  // console.log(today)
-  // displayIdCardInfo(newUser);
-  // displayStepsInfo(newUser);
-  // displayHydrationInfo(newUser);
-  // displaySleepInfo(newUser);
 }
 
 function backToHome() {
@@ -112,11 +108,10 @@ function backToHome() {
 function displayPastTrips() {
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
-  // let today = globalTrip.getCurrentDate();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   console.log(travelerTrips)
   let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
-  console.log(pastTrips)
+  console.log(pastTrips[0])
 }
 
 function displayPresentTrips() {

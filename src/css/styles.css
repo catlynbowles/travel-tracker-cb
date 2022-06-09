@@ -194,5 +194,6 @@ p {
   background-color: white;
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  text-align: center
 }
