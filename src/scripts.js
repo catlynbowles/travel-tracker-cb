@@ -39,6 +39,8 @@ var homeButton = document.getElementById('homeButton');
 var location = document.getElementById('location');
 var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
+var gridContents = document.getElementById('gridContents')
+var grid = document.getElementById('grid')
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -111,11 +113,30 @@ function displayPastTrips() {
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   console.log(travelerTrips)
   let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
-  console.log(pastTrips[0])
-  let pastTripIDs = pastTrips.map(trip => trip.destinationID)
-  let destinationNames = globalDestination.returnLocationName(pastTripIDs);
-  console.log(destinationNames)
-  console.log(pastTripIDs)
+  let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
+  console.log(pastTripProperties)
+  modifyTripsToCards(pastTripProperties)
+  // let pastCards = modifyTripsToCards(pastTrips);
+  // console.log(pastCards)
+  // console.log(pastTrips[0])
+  // let pastTripIDs = pastTrips.map(trip => trip.destinationID)
+  // let destinationNames = globalDestination.returnLocationName(pastTripIDs);
+  // console.log(destinationNames)
+  // console.log(pastTripIDs)
+}
+
+function modifyTripsToCards(arr) {
+  let displayCards = arr.map(trip => {
+    console.log(trip)
+    grid.innerHTML +=
+    `<article class="box" id="${arr.indexOf(trip)}">
+    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
+    <p class='location' id='location'>${trip.location}</p>
+    <p date='trip-date' id='tripDate'>${trip.date}</p>
+    </article>`
+  });
+  // gridContents.innerHTML
+  console.log(displayCards)
 }
 
 function displayPresentTrips() {

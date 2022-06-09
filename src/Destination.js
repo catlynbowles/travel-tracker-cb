@@ -37,9 +37,9 @@ class Destination {
   //   return tripsObj
   // }
 
-  returnLocationProperties(destArr, tripsArr) {
+  returnLocationProperties(tripsArr) {
     let locationProperties = tripsArr.reduce((acc, trip) => {
-      let destProperties = destArr.forEach(destination => {
+      let destProperties = this.data.forEach(destination => {
         if (trip.destinationID === destination.id) {
           acc.push({location: destination.destination, date: trip.date, img: destination.image, alt: destination.alt})
         }
