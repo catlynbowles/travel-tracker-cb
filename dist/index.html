@@ -11,50 +11,54 @@
     <title>Travel Tracker</title>
   </head>
   <body>
-    <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
-    <!-- <h2 role='presentation'class="welcome-text" id="welcomeText">Welcome, name!</h2> -->
     <main>
       <section class ="top-bar">
         <div class='left-contents'>
           <img class='tracker-logo'></img>
           <h1 class='title-header'>Travel Tracker</h1>
         </div>
+        <div class='welcome-text'>
+          <h2 id='welcomeText'>Welcome!</h2>
+        </div>
         <div class="right-contents">
-          <h2>Home</h2>
-          <h3>Dashboard</h3>
-          <!-- <div class="left-icons">
-          <img src='images/social-media.png' width='20' height='20'></img>
-          <img src='images/support.png' width='20' height='20'></img>
-          <img class='video-icon' src='images/video.png' width='20' height='20'></img>
-        </div> -->
+          <h3 class='dashboard-buttons' id='homeButton'>Home</h3>
+          <h4 class='dashboard-buttons' id='logoutButton'>Logout</h4>
         </div>
       </section>
       <section class='user-dashboard-display' id='userDashboardDisplay'>
         <div class='box-styling'>
-          <section class='trip-request-box' id='tripRequestBox'>
+          <section class='all-user-trips' id='allUserTrips'>
+            <h4 class='your-trips'>Your Trips</h4>
+            <p class='instructions'>Click below to learn more about your trips!</p>
+            <p class="trip-type" id="pastTrips">Past</p>
+            <p class="trip-type" id="presentTrips">Present</p>
+            <p class="trip-type" id="upcomingTrips">Upcoming</p>
+            <p class="trip-type" id="pendingTrips">Pending</p>
+          </section>
+          <section class='user-selected-trips hidden' id='userSelectedTrips'>
+            <section class='grid-contents' id='gridContents'>
+              <div class='grid-container'>
+            <section class='grid' id='grid'>
+            </section>
+            </div>
+            </section>
+        </section>
+          <section class='trip-request-box hidden' id='tripRequestBox'>
             <fieldset>
               <legend>Book Your Trip Today!</legend>
               <form>
-                <label class="booking-date" id="bookingDate">Date:</label><br>
-                <input class="booking-date-input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" required><br>
-                <label class="duration" id="duration">Duration:</label><br>
-                <input class="duration-input" id="durationInput" type="number" placeholder="Duration of Stay" required><br>
-                <label class="num-travelers" id="numTravelers">Travelers:</label><br>
-                <input class="num-travelers-input" id="numTravelersInput" type="number" placeholder="Number of Travelers" required><br><br>
-                <label class="destinations" id="destinations">Destinations:</label><br>
-                <input class="destinations-input" id="destinationsInput" type="number" placeholder="Choose your destination" required><br><br>
-                <input class="submit-trip" id="submitTrip" type="submit" value="Submit">
+                <label class="booking-date input" id="bookingDate">Date:</label><br>
+                <input class="booking-date-input input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" required><br>
+                <label class="duration input" id="duration">Duration:</label><br>
+                <input class="duration-input input" id="durationInput" type="number" placeholder="Duration of Stay" required><br>
+                <label class="num-travelers input" id="numTravelers">Travelers:</label><br>
+                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" required><br><br>
+                <label class="destinations input" id="destinations">Destinations:</label><br>
+                <input class="destinations-input input" id="destinationsInput" type="number" placeholder="Choose your destination" required><br><br>
+                <input class="submit-trip input" id="submitTrip" type="submit" value="Submit">
               </form>
             </fieldset>
             <p class='estimated-cost' id="estimatedCost"></p>
-          </section>
-          <section class='all-user-trips' id='allUserTrips'>
-            <h4 class='your-trips'>Your Trips</h4>
-              <!-- <p class='instructions'>Click below to learn more about your trips!</p> -->
-              <p class="trip-type" id="pastTrips">Past</p>
-              <p class="trip-type" id="presentTrips">Present</p>
-              <p class="trip-type" id="upcomingTrips">Upcoming</p>
-              <p class="trip-type" id="strideLength">Pending</p>
           </section>
         </div>
       </section>

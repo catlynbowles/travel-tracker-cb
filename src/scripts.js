@@ -15,15 +15,41 @@ import Destination from './Destination';
 import './images/turing-logo.png'
 
 // global variables
+var today;
 var travelerData;
+var dashboardTravelerTrips;
 var tripData;
 var destinationData;
 var travelerRepository;
+var globalTraveler;
+var globalTravelerInfo;
 var globalTrip;
 var globalDestination;
 
-console.log('This is the JavaScript entry file - your code begins here.');
-window.addEventListener('load', displayResolvedData)
+
+// query selectors
+var clickPastTrips = document.getElementById('pastTrips');
+var clickPresentTrips = document.getElementById('presentTrips');
+var clickUpcomingTrips = document.getElementById('upcomingTrips');
+var clickPendingTrips = document.getElementById('pendingTrips');
+var tripRequestBox = document.getElementById('tripRequestBox');
+var userSelectedTrips = document.getElementById('userSelectedTrips');
+var logoutButton = document.getElementById('logoutButton');
+var homeButton = document.getElementById('homeButton');
+var location = document.getElementById('location');
+var tripDate = document.getElementById('tripDate');
+var boxImage = document.getElementById('boxImg');
+var grid = document.getElementById('grid');
+var gridBoxes = document.getElementsByClassName('box')
+
+// event listeners
+window.addEventListener('load', displayResolvedData);
+clickPastTrips.addEventListener('click', displayPastTrips);
+clickPresentTrips.addEventListener('click', displayPresentTrips);
+clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
+clickPendingTrips.addEventListener('click', displayPendingTrips);
+homeButton.addEventListener('click', backToHome)
+
 
 // Fetch API
 function displayResolvedData() {
@@ -42,15 +68,109 @@ const getAllTravelerData = (data) => {
 }
 
 const getAllTripData = (data) => {
-  travelerData = data;
+  tripData = data;
   globalTrip = new Trip(tripData);
 }
 
 const getAllDestinationData = (data) => {
   destinationData = data;
   globalDestination = new Destination(destinationData);
+  loadUserDashboard();
 }
 
-const getRandomUserId = (anyUserData) => {
+//functions
+function removeHidden(ele) {
+  ele.classList.remove('hidden')
+}
+
+function addHidden(ele) {
+  ele.classList.add('hidden')
+}
+
+function loadUserDashboard() {
+  // refactored upon creation of login page.
+  // let travelerInformation = blabla.value of the input
+  removeHidden(tripRequestBox);
+  addHidden(userSelectedTrips);
+  let travelerId = getRandomUserId(travelerData);
+  let newTraveler = travelerRepository.getDataById(travelerId);
+  globalTraveler = newTraveler;
+  let todaysDate = globalTrip.getCurrentDate();
+  today = todaysDate;
+  console.log(newTraveler)
+  let travelerFirstName = newTraveler.returnFirstName();
+  welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
+}
+
+function backToHome() {
+  removeHidden(tripRequestBox);
+  addHidden(userSelectedTrips);
+}
+
+function displayTripSelection() {
+  addHidden(tripRequestBox);
+  removeHidden(userSelectedTrips);
+}
+
+function displayPastTrips() {
+  displayTripSelection();
+  clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
+  let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
+  checkForEmptyDisplay(pastTripProperties);
+  console.log(pastTripProperties);
+  modifyTripsToCards(pastTripProperties);
+}
+
+function modifyTripsToCards(trips) {
+  let displayCards = trips.map(trip => {
+    console.log(trip)
+    grid.innerHTML +=
+    `<article class="box" id="${trips.indexOf(trip)}">
+    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
+    <p class='location' id='location'>${trip.location}</p>
+    <p date='trip-date' id='tripDate'>${trip.date}</p>
+    </article>`
+  });
+  console.log(grid)
+}
+
+function displayPresentTrips() {
+  displayTripSelection();
+  clearGrid();
+}
+
+function displayUpcomingTrips() {
+  displayTripSelection();
+  clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let upcomingTrips = globalTrip.getUpcomingTrips(travelerTrips, today);
+  let upcomingTripsProperties = globalDestination.returnLocationProperties(upcomingTrips);
+  checkForEmptyDisplay(upcomingTripsProperties);
+  modifyTripsToCards(upcomingTripsProperties);
+  console.log(upcomingTrips)
+}
+
+function displayPendingTrips() {
+  displayTripSelection();
+  clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let pendingTrips = globalTrip.getPendingTrips(travelerTrips, today);
+  checkForEmptyDisplay(pendingTrips);
+  console.log(pendingTrips)
+}
+
+function checkForEmptyDisplay(trips) {
+  if (trips.length === 0) {
+    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+  }
+}
+
+function clearGrid() {
+  grid.innerHTML = ''
+}
+
+function getRandomUserId (anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }
