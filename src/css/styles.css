@@ -38,12 +38,10 @@ p {
 }
 
 .right-contents {
-  /* position: relative; */
   margin-top: 0;
   margin: 0;
   padding: 0;
   display: flex;
-  /* align-items: flex-end; */
   height: 20px;
   justify-content: flex-end;
   flex-wrap: wrap;
@@ -108,12 +106,6 @@ h4 {
   display: none;
 }
 
-p {
-
-}
-
-/* grid contents */
-
 .grid {
   border: 2px black;
   display: grid;
@@ -132,55 +124,6 @@ p {
 .trip-date {
   color: black;
 }
-
-/* .img-container {
-  position: relative;
-} */
-
-/* .img-container .box-img {
-  display: block
-} */
-
-/* .img-container .text-on-img {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding-bottom: 75px;
-  padding-left: 12px;
-} */
-
-/* .img-container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding-bottom: 75px;
-  padding-right: 12px;
-} */
-
-/* .text-box {
-  font-weight: bold;
-  padding: 5px;
-  background: #F8BBD0;
-  display: block;
-  height: 45px;
-  width: 210px;
-
-}
-
-.text-box-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.box-img {
-  margin: -242px 0px 0px 0px;
-}
-
-.layer-0 {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  overflow: hidden;
-} */
 
 .grid-contents{
   width: 500px;

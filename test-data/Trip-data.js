@@ -69,16 +69,16 @@ const tripData = [
     "status": "approved",
     "suggestedActivities": []
   },
-  //       {
-  //   "id": 203,
-  //   "userID": 29,
-  //   "destinationID": 12,
-  //   "travelers": 6,
-  //   "date": "2021/08/08",
-  //   "duration": 7,
-  //   "status": "approved",
-  //   "suggestedActivities": []
-  // },
+        {
+    "id": 203,
+    "userID": 29,
+    "destinationID": 12,
+    "travelers": 6,
+    "date": "2021/08/08",
+    "duration": 7,
+    "status": "approved",
+    "suggestedActivities": []
+  },
   {
     "id": 18,
     "userID": 18,
