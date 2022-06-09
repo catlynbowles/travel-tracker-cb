@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import Destination from '../src/Destination';
+import tripData from '../test-data/Trip-data';
 
 describe('Destination', () => {
   let destination;
@@ -53,14 +54,27 @@ describe('Destination', () => {
     expect(destination).to.be.an.instanceof(Destination);
   });
 
-  it('should be able to take in an array of locations and return the name of that destination', () => {
-    let locationNames = destination.returnLocationName(destinationData);
-    expect(locationNames).to.be.an('array');
-    expect(locationNames).to.deep.equal([
-      'New York, New York',
-      'Kathmandu, Nepal',
-      'Caye Caulker, Belize',
-      'Castries, St Lucia'
-    ]);
-  });
+  // what if it only took in an array of location ids?
+  // it('should be able to take in an array of locations and return the name of that destination', () => {
+  //   let locationNames = destination.returnLocationName(destinationData);
+  //   expect(locationNames).to.be.an('array');
+  //   expect(locationNames).to.deep.equal([
+  //     'New York, New York',
+  //     'Kathmandu, Nepal',
+  //     'Caye Caulker, Belize',
+  //     'Castries, St Lucia'
+  //   ]);
+  // });
+
+  // it('should be able to take in an array of ids and return the name of the destination associated with the id', () => {
+  //   let locationIDs = destinationData.map(destination => destination.id)
+  //   let locationNames = destination.returnLocationName(locationIDs)
+  //   expect(locationNames).to.be.an('array');
+  //   expect(locationNames).to.deep.equal([
+  //     'New York, New York',
+  //     'Kathmandu, Nepal',
+  //     'Caye Caulker, Belize',
+  //     'Castries, St Lucia'
+  //   ]);
+  // });
 });

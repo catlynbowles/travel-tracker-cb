@@ -112,6 +112,10 @@ function displayPastTrips() {
   console.log(travelerTrips)
   let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
   console.log(pastTrips[0])
+  let pastTripIDs = pastTrips.map(trip => trip.destinationID)
+  let destinationNames = globalDestination.returnLocationName(pastTripIDs);
+  console.log(destinationNames)
+  console.log(pastTripIDs)
 }
 
 function displayPresentTrips() {
