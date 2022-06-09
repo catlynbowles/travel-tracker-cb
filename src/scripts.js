@@ -39,8 +39,8 @@ var homeButton = document.getElementById('homeButton');
 var location = document.getElementById('location');
 var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
-var gridContents = document.getElementById('gridContents')
-var grid = document.getElementById('grid')
+var grid = document.getElementById('grid');
+var gridBoxes = document.getElementsByClassName('box')
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -107,57 +107,68 @@ function backToHome() {
   addHidden(userSelectedTrips);
 }
 
-function displayPastTrips() {
+function displayTripSelection() {
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
-  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  console.log(travelerTrips)
-  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
-  let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
-  console.log(pastTripProperties)
-  modifyTripsToCards(pastTripProperties)
-  // let pastCards = modifyTripsToCards(pastTrips);
-  // console.log(pastCards)
-  // console.log(pastTrips[0])
-  // let pastTripIDs = pastTrips.map(trip => trip.destinationID)
-  // let destinationNames = globalDestination.returnLocationName(pastTripIDs);
-  // console.log(destinationNames)
-  // console.log(pastTripIDs)
 }
 
-function modifyTripsToCards(arr) {
-  let displayCards = arr.map(trip => {
+function displayPastTrips() {
+  displayTripSelection();
+  clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
+  let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
+  checkForEmptyDisplay(pastTripProperties);
+  console.log(pastTripProperties);
+  modifyTripsToCards(pastTripProperties);
+}
+
+function modifyTripsToCards(trips) {
+  let displayCards = trips.map(trip => {
     console.log(trip)
     grid.innerHTML +=
-    `<article class="box" id="${arr.indexOf(trip)}">
+    `<article class="box" id="${trips.indexOf(trip)}">
     <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
     <p class='location' id='location'>${trip.location}</p>
     <p date='trip-date' id='tripDate'>${trip.date}</p>
     </article>`
   });
-  // gridContents.innerHTML
-  console.log(displayCards)
+  console.log(grid)
 }
 
 function displayPresentTrips() {
-  addHidden(tripRequestBox);
-  removeHidden(userSelectedTrips);
+  displayTripSelection();
+  clearGrid();
 }
 
 function displayUpcomingTrips() {
-  addHidden(tripRequestBox);
-  removeHidden(userSelectedTrips);
+  displayTripSelection();
+  clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let upcomingTrips = globalTrip.getUpcomingTrips(travelerTrips, today);
+  let upcomingTripsProperties = globalDestination.returnLocationProperties(upcomingTrips);
+  checkForEmptyDisplay(upcomingTripsProperties);
+  modifyTripsToCards(upcomingTripsProperties);
   console.log(upcomingTrips)
 }
 
 function displayPendingTrips() {
-  addHidden(tripRequestBox);
-  removeHidden(userSelectedTrips);
+  displayTripSelection();
+  clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let pendingTrips = globalTrip.getPendingTrips(travelerTrips, today);
+  checkForEmptyDisplay(pendingTrips);
   console.log(pendingTrips)
+}
+
+function checkForEmptyDisplay(trips) {
+  if (trips.length === 0) {
+    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+  }
+}
+
+function clearGrid() {
+  grid.innerHTML = ''
 }
 
 function getRandomUserId (anyUserData) {
