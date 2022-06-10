@@ -3,7 +3,7 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import {fetchAllData} from './apiCalls.js'
+import {fetchAllData, addUserTravelData} from './apiCalls.js'
 import TravelerRepository from './TravelerRepository';
 import Traveler from './Traveler';
 import Trip from './Trip';
@@ -44,16 +44,22 @@ var yearlyCost = document.getElementById('yearlyCost');
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
-// let destinationsDropdown = document.getElementById('destinationsDropdown')
+let durationInput = document.getElementById('bookingDateInput');
+let numTravelersInput = document.getElementById('numTravelersInput');
+let destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
+let submitTripButton = document.getElementById('submitTrip');
 let datalist = document.getElementById('datalist');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
+
 clickPastTrips.addEventListener('click', displayPastTrips);
 clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
-homeButton.addEventListener('click', backToHome)
+
+homeButton.addEventListener('click', backToHome);
+submitTripButton.addEventListener('click', addUserTripFromInput)
 
 
 // Fetch API
@@ -81,6 +87,41 @@ const getAllDestinationData = (data) => {
   destinationData = data;
   globalDestination = new Destination(destinationData);
   loadUserDashboard();
+}
+
+// {id: <number>,
+//   userID: <number>,
+//   destinationID: <number>,
+//   travelers: <number>,
+//   date: <string 'YYYY/MM/DD'>,
+//   duration: <number>,
+//   status: <string 'approved' or 'pending'>,
+//   suggestedActivities: <array of strings>}
+
+//posts
+function addUserTripFromInput() {
+  event.preventDefault();
+  const bookingDate = bookingDateInput.value;
+  const duration = durationInput.value;
+  const numTravelers = numTravelersInput.value;
+  const destination = destinationsDropdownInput.value;
+  const destinationID = globalDestination.findDestinationByName(destination);
+  let tripID = tripData.length + 1;
+  let dataToTransmit = {id: tripID,
+    userID: globalTraveler.id,
+    destinationID: destinationID,
+    travelers: numTravelers,
+    date: bookingDate,
+    duration: duration,
+    status: 'pending',
+    suggestedActivities: []
+  };
+  console.log(dataToTransmit)
+
+    // var response = addUserTravelData(dataToTransmit).then((res) => console.log(res)))
+  // let dataToTransmit = { userID: selectedUser.id, date: formattedDate , hoursSlept: sleepAmount , sleepQuality: sleepQuality };
+  // var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData().then(allData => console.log(allData)))
+  // var response = addUserSleepData(dataToTransmit).then((res) => getSleepData().then(sleepDataFromApi => console.log(sleepDataFromApi)));
 }
 
 //functions

@@ -36,6 +36,13 @@ class Destination {
     return yearlyTravelExpense + travelAgentFee
   }
 
+  findDestinationByName(name) {
+    let travelerDestination = this.data.find(destination => {
+      return destination.destination === name
+    });
+    return travelerDestination.id;
+  }
+
   returnLocationProperties(tripsArr) {
     let locationProperties = tripsArr.reduce((acc, trip) => {
       let destProperties = this.data.forEach(destination => {

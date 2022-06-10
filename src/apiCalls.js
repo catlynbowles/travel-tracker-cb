@@ -18,3 +18,17 @@ export function fetchAllData() {
 
   return allData;
 }
+
+export function addUserTravelData(dataToTransmit) {
+  var response = fetch('http://localhost:3001/api/v1/trips', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(dataToTransmit)
+}).then(res => {return res.json()})
+.catch(error => console.log(error));
+
+  return response;
+}
