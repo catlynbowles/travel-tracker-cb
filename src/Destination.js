@@ -3,14 +3,27 @@ class Destination {
     this.data = destinationData;
   }
 
-  // returnLocationName(data) {
-  //   let locationNames = data.reduce((acc, cur) => {
-  //     acc.push(cur.destination)
-  //     return acc
-  //   }, [])
-  //   return locationNames
-  //   // return this.name.split(" ")[0];
-  // }
+
+  getCurrentYear() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    return yyyy;
+  }
+
+  calculateYearlyTravelExpenses(userTrips) {
+    let currentYear = this.getCurrentYear();
+    let yearlyTravelExpense = userTrips.reduce((acc, trip) => {
+      let destinations = this.data.forEach(destination => {
+        if (trip.destinationID === destination.id && trip.date.includes(currentYear)) {
+          acc += destination.estimatedLodgingCostPerDay * trip.duration;
+          acc += destination.estimatedFlightCostPerPerson * trip.travelers;
+        }
+      });
+      return acc
+    }, 0);
+    let travelAgentFee = yearlyTravelExpense * .10
+    return yearlyTravelExpense + travelAgentFee
+  }
 
   returnLocationProperties(tripsArr) {
     let locationProperties = tripsArr.reduce((acc, trip) => {

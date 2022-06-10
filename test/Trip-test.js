@@ -1,22 +1,32 @@
 import { expect } from 'chai';
 import Trip from '../src/Trip';
-import tripData from '../test-data/Trip-data';
+import {tripData, presentTripData} from '../test-data/Trip-data';
+// import presentTripData from '../test-data/Trip-data'
 
 describe('Trip', () => {
   let trip;
-  let tripData;
-  let singleTraveler;
   let userTripData1, userTripData2, userTripData3, userTripData4, userTripData5;
   let date;
 
   beforeEach(() => {
+
     trip = new Trip(tripData);
     userTripData1 = trip.getUserTripData(22);
     userTripData2 = trip.getUserTripData(18);
     userTripData3 = trip.getUserTripData(50);
     userTripData4 = trip.getUserTripData(2);
     userTripData5 = trip.getUserTripData(29);
-    date = trip.getCurrentDate();
+
+    function getToday() {
+      let day = new Date();
+      var dd = String(day.getDate()).padStart(2, '0');
+      var mm = String(day.getMonth() + 1).padStart(2, '0');
+      var yyyy = day.getFullYear();
+      var formattedDay = yyyy + '/' + mm + '/' + dd;
+      return formattedDay;
+    }
+    date = getToday();
+  })
 
   it('should be a function', function () {
     expect(Trip).to.be.a('function');
@@ -106,11 +116,6 @@ describe('Trip', () => {
       }
     ])
   });
-
-  // it('should be able to calculate today/s date', () => {
-  //   // let date = trip.getCurrentDate()
-  //   // expect method to return today's date! how can i do this lol
-  // });
 
   it('should be able find all past trips for the user', () => {
     let pastTrips1 = trip.getPastTrips(userTripData1, date);
@@ -238,19 +243,27 @@ describe('Trip', () => {
     ]);
   });
 
-  it('should be able to get present trips for the user', () => {
-    let presentTrip = trip.checkForPresentTrips(userTripData5, date)
-    // {
-    //   "id": 200,
-    //   "userID": 29,
-    //   "destinationID": 23,
-    //   "travelers": 6,
-    //   "date": "2022/06/07",
-    //   "duration": 30,
-    //   "status": "approved",
-    //   "suggestedActivities": []
-    // }
+  it('should take in a list of trip dates and return the trip start date if it finds a match within the duration of the trip', () => {
+    let presentDateMatch = trip.findPresentTrips(presentTripData, date);
+    expect(presentDateMatch).to.be.a('string');
+    expect(presentDateMatch).to.equal('2022/06/07')
+  });
 
-  })
-});
+  it('should take in the start date of the present trip found, and return the information of that trip.', () => {
+    let presentDateMatch = trip.findPresentTrips(presentTripData, date);
+    let tripMatch = trip.returnPresentTrip(presentDateMatch);
+    expect(tripMatch).to.be.an('array');
+    expect(tripMatch).to.deep.equal([
+      {
+        id: 200,
+        userID: 29,
+        destinationID: 23,
+        travelers: 6,
+        date: '2022/06/07',
+        duration: 30,
+        status: 'approved',
+        suggestedActivities: []
+      }
+    ]);
+  });
 });

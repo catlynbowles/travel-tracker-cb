@@ -40,7 +40,7 @@ var location = document.getElementById('location');
 var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
-var gridBoxes = document.getElementsByClassName('box')
+var yearlyCost = document.getElementById('yearlyCost');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -58,7 +58,7 @@ function displayResolvedData() {
     getAllTravelerData(allData[0].travelers);
     getAllTripData(allData[1].trips)
     getAllDestinationData(allData[2].destinations)
-    console.log(allData)
+    // console.log(allData)
   })
 }
 
@@ -90,16 +90,35 @@ function addHidden(ele) {
 function loadUserDashboard() {
   // refactored upon creation of login page.
   // let travelerInformation = blabla.value of the input
-  removeHidden(tripRequestBox);
-  addHidden(userSelectedTrips);
+  backToHome();
+  let today = getTodaysDate();
   let travelerId = getRandomUserId(travelerData);
   let newTraveler = travelerRepository.getDataById(travelerId);
   globalTraveler = newTraveler;
-  let todaysDate = globalTrip.getCurrentDate();
-  today = todaysDate;
+  displayFirstName();
+  displayYearlyCosts();
   console.log(newTraveler)
-  let travelerFirstName = newTraveler.returnFirstName();
+}
+
+function getTodaysDate() {
+  let todaysDate = new Date();
+  let formattedToday = formatDate(todaysDate);
+  today = formattedToday;
+  console.log(today)
+  return today
+}
+
+function displayFirstName() {
+  let travelerFirstName = globalTraveler.returnFirstName();
   welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
+}
+
+function displayYearlyCosts() {
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(travelerTrips);
+  yearlyCost.innerText += ` $${yearlyExpense}`;
+  // if the cost is 0, should i say something else?
+  console.log(yearlyExpense)
 }
 
 function backToHome() {
@@ -119,26 +138,24 @@ function displayPastTrips() {
   let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
   let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
   checkForEmptyDisplay(pastTripProperties);
-  console.log(pastTripProperties);
   modifyTripsToCards(pastTripProperties);
-}
-
-function modifyTripsToCards(trips) {
-  let displayCards = trips.map(trip => {
-    console.log(trip)
-    grid.innerHTML +=
-    `<article class="box" id="${trips.indexOf(trip)}">
-    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
-    <p class='location' id='location'>${trip.location}</p>
-    <p date='trip-date' id='tripDate'>${trip.date}</p>
-    </article>`
-  });
-  console.log(grid)
+  console.log(pastTripProperties);
 }
 
 function displayPresentTrips() {
   displayTripSelection();
   clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let tripDates = getAllTripDates(travelerTrips);
+  let presentTripDateMatch = globalTrip.findPresentTrips(tripDates, today);
+  if (!presentTripDateMatch) {
+    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+  } else {
+    console.log('there is a present trip')
+    let presentTrip = globalTrip.returnPresentTrip(presentTripDateMatch, tripData);
+    let presentTripProperties = globalDestination.returnLocationProperties(presentTrip);
+    modifyTripsToCards(presentTripProperties);
+  }
 }
 
 function displayUpcomingTrips() {
@@ -157,8 +174,21 @@ function displayPendingTrips() {
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let pendingTrips = globalTrip.getPendingTrips(travelerTrips, today);
-  checkForEmptyDisplay(pendingTrips);
+  let pendingTripsProperties = globalDestination.returnLocationProperties(pendingTrips);
+  checkForEmptyDisplay(pendingTripsProperties);
+  modifyTripsToCards(pendingTripsProperties);
   console.log(pendingTrips)
+}
+
+function modifyTripsToCards(trips) {
+  let displayCards = trips.map(trip => {
+    grid.innerHTML +=
+    `<article class="box" id="${trips.indexOf(trip)}">
+    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
+    <p class='location' id='location'>${trip.location}</p>
+    <p date='trip-date' id='tripDate'>${trip.date}</p>
+    </article>`
+  });
 }
 
 function checkForEmptyDisplay(trips) {
@@ -171,6 +201,55 @@ function clearGrid() {
   grid.innerHTML = ''
 }
 
+//date functions
+function getAllTripDates(allTripData) {
+  let allTripDates = allTripData.map(trip => {
+    let tripDates = stringDatesOfTrip(trip)
+    return tripDates
+  })
+  return allTripDates
+}
+
+function stringDatesOfTrip(trip) {
+  let endDate = calculateEndDate(trip.date, trip.duration);
+  let allTripDays = getDaysInTrip(new Date(trip.date), endDate);
+  let formattedTripDays = formatDatesList(allTripDays);
+  console.log(formattedTripDays)
+  return formattedTripDays;
+}
+
+function calculateEndDate(startDate, tripDuration) {
+  var endDate = new Date(startDate);
+  endDate.setDate(endDate.getDate() + tripDuration);
+  return endDate;
+}
+
+function getDaysInTrip(startDate, endDate) {
+    for(var days = [], date = new Date(startDate); date <= new Date(endDate); date.setDate(date.getDate() + 1)) {
+        days.push(new Date(date));
+    }
+    return days;
+};
+
+function formatDatesList(daylist) {
+  let formattedDaylist = daylist.map(day => {
+    var dd = String(day.getDate()).padStart(2, '0');
+    var mm = String(day.getMonth() + 1).padStart(2, '0');
+    var yyyy = day.getFullYear();
+    return day = yyyy + '/' + mm + '/' + dd;
+  })
+    return formattedDaylist
+}
+
+function formatDate(day) {
+    var dd = String(day.getDate()).padStart(2, '0');
+    var mm = String(day.getMonth() + 1).padStart(2, '0');
+    var yyyy = day.getFullYear();
+    var formattedDay = yyyy + '/' + mm + '/' + dd;
+    return formattedDay;
+}
+
+//get random user
 function getRandomUserId (anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }
