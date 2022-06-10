@@ -119,7 +119,7 @@ function displayYearlyCosts() {
   let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
   let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(pastTrips);
   yearlyCost.innerText += ` $${yearlyExpense}`;
-  // is this correct? is it past a year ,or only for the year 2022?
+  // if the cost is 0, should i say something else? 
   console.log(yearlyExpense)
 }
 
