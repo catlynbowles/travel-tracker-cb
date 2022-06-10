@@ -37,6 +37,7 @@ class Trip {
   }
 
 findPresentTrips(tripArrs, today) {
+  console.log(tripArrs, today)
     let presentTripDate = tripArrs.reduce((acc, trip) => {
       if (trip.includes(today)) {
         acc = trip[0]
@@ -44,16 +45,16 @@ findPresentTrips(tripArrs, today) {
       return acc
     }, '')
     if (presentTripDate) {
-      console.log(presentTripDate)
+      console.log('there is a match!', presentTripDate)
     } else {
       console.log('nopresentTrips')
     }
     return presentTripDate;
   }
 
-returnPresentTrip(tripStartDate, tripData) {
-    let presentTrip = tripData.find(trip => {
-      return tripData.date === tripStartDate
+returnPresentTrip(tripStartDate) {
+    let presentTrip = this.data.find(trip => {
+      return trip.date === tripStartDate
     })
     console.log('there is one!', presentTrip)
     return [presentTrip]
