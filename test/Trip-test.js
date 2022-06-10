@@ -4,12 +4,11 @@ import tripData from '../test-data/Trip-data';
 
 describe('Trip', () => {
   let trip;
-  let tripData;
-  let singleTraveler;
   let userTripData1, userTripData2, userTripData3, userTripData4, userTripData5;
   let date;
 
   beforeEach(() => {
+
     trip = new Trip(tripData);
     userTripData1 = trip.getUserTripData(22);
     userTripData2 = trip.getUserTripData(18);
@@ -17,6 +16,7 @@ describe('Trip', () => {
     userTripData4 = trip.getUserTripData(2);
     userTripData5 = trip.getUserTripData(29);
     date = trip.getCurrentDate();
+  })
 
   it('should be a function', function () {
     expect(Trip).to.be.a('function');
@@ -252,5 +252,4 @@ describe('Trip', () => {
     // }
 
   })
-});
 });

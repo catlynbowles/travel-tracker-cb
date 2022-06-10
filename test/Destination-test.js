@@ -1,14 +1,13 @@
 import { expect } from 'chai';
 import Destination from '../src/Destination';
-import {destinationData, tripData} from '../test-data/Destination-data.js';
+import {destTripData, destinationData} from '../test-data/Destination-data';
 
 describe('Destination', () => {
   let destination;
-  let destinationData;
-  let tripData;
 
   beforeEach(() => {
     destination = new Destination(destinationData);
+  })
 
   it('should be a function', function () {
     expect(Destination).to.be.a('function');
@@ -20,12 +19,12 @@ describe('Destination', () => {
   });
 
   it('should be able to take in an array of destinations and trip data and return the name of the location the date, picture and alt text of each associated location.', () => {
-    let locationInformation = destination.returnLocationProperties(tripData)
+    let locationInformation = destination.returnLocationProperties(destTripData)
     expect(locationInformation).to.be.an('array');
     expect(locationInformation).to.deep.equal([
       {
         location: 'Castries, St Lucia',
-        date: '2022/07/04',
+        date: '2022/03/04',
         img: 'https://images.unsplash.com/photo-1524478075552-c2763ea171b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80',
         alt: 'aerial photography of rocky mountain under cloudy sky'
       },
@@ -51,9 +50,10 @@ describe('Destination', () => {
   });
 
   it('should take in past trip data for the user and calculate the price spent for the year', () => {
-    let yearlyPrice = destination.calculateYearlyPrice(tripData)
+    let yearlyPrice = destination.calculateYearlyTravelExpenses(destTripData)
     expect(yearlyPrice).to.be.a('number');
-    // expect(locationInformation).to.deep.equal(
+    console.log(yearlyPrice)
+    expect(yearlyPrice).to.deep.equal(13040);
+    // ^^ hot dang!
   });
 });
-})

@@ -10,10 +10,18 @@ class Destination {
     return yyyy;
   }
 
-  calculateYearlyPrice() {
+  calculateYearlyTravelExpenses(pastTrips) {
     let currentYear = this.getCurrentYear();
-    // take in past trips, year?
-    // year === 2022
+    let yearlyTravelExpense = pastTrips.reduce((acc, trip) => {
+      let destinations = this.data.forEach(destination => {
+        if (trip.destinationID === destination.id && trip.date.includes(currentYear)) {
+          acc += destination.estimatedLodgingCostPerDay * trip.duration;
+          acc += destination.estimatedFlightCostPerPerson * trip.travelers;
+        }
+      });
+      return acc
+    }, 0);
+    return yearlyTravelExpense;
   }
 
   returnLocationProperties(tripsArr) {

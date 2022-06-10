@@ -1,10 +1,10 @@
-const tripData = [
+export const destTripData = [
   {
     "id": 15,
     "userID": 50,
     "destinationID": 49,
     "travelers": 3,
-    "date": "2022/07/04",
+    "date": "2022/03/04",
     "duration": 6,
     "status": "approved",
     "suggestedActivities": []
@@ -39,7 +39,7 @@ const tripData = [
     "status": "pending",
     "suggestedActivities": []
   }]
-const destinationData = [{
+export const destinationData = [{
   "id": 25,
   "destination": "New York, New York",
   "estimatedLodgingCostPerDay": 175,
@@ -71,5 +71,3 @@ const destinationData = [{
   "image": "https://images.unsplash.com/photo-1524478075552-c2763ea171b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80",
   "alt": "aerial photography of rocky mountain under cloudy sky"
 }];
-
-export {tripData, destinationData}
