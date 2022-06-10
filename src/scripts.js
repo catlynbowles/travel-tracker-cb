@@ -48,8 +48,9 @@ let bookingDateInput = document.getElementById('bookingDateInput');
 let durationInput = document.getElementById('durationInput');
 let numTravelersInput = document.getElementById('numTravelersInput');
 let destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
-let submitTripButton = document.getElementById('submitTrip');
+let tripForm = document.getElementById('tripForm');
 let datalist = document.getElementById('datalist');
+let priceyAgreement = document.getElementById('checkbox');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -60,7 +61,7 @@ clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
 
 homeButton.addEventListener('click', backToHome);
-submitTripButton.addEventListener('click', addUserTripFromInput)
+tripForm.addEventListener('submit', addUserTripFromInput)
 
 
 // Fetch API
@@ -112,7 +113,8 @@ function addUserTripFromInput() {
     status: 'pending',
     suggestedActivities: []
   };
-  var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
+  console.log(dataToTransmit)
+  // var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
   loadUserDashboard();
 }
 

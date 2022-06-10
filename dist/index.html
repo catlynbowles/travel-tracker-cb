@@ -48,7 +48,7 @@
           <section class='trip-request-box hidden' id='tripRequestBox'>
             <fieldset>
               <legend>Book Your Trip Today!</legend>
-              <form>
+              <form id='tripForm'>
                 <label class="booking-date input" id="bookingDate">Date:</label><br>
                 <input class="booking-date-input input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" min='' max='2025-01-01' required><br>
                 <label class="duration input" id="duration">Duration:</label><br>
@@ -57,14 +57,21 @@
                 <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" min='1' max='15' required><br><br>
                 <label class="destinations input" id="destinations">Destinations:</label><br>
                 <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdownInput" name='destination' placeholder="Choose your destination" required>
-                  <div>
-                  <datalist id='datalist'>
+
+                    <datalist id='datalist'>
                     <!-- <option value='' disabled selected>Choose Destination</option> -->
-                </datalist><br>
-                <!-- <input  autoComplete="on" list="datalist"/> -->
-              </div>
+                    </datalist><br>
+
                 <!-- </select><br> -->
-                <input class="submit-trip input" id="submitTrip" type="submit" value="Submit"><br>
+                <fieldset class='price-estimate'>
+                  <div>
+                    <p class='price-estimate' id='priceEstimate'>Total Estimated Cost of Trip:<span>$</span></p>
+                    <p class='price-estimate' id='priceAgent'>(includes a 10% travel agent fee)</p>
+                    <input type="checkbox" id="priceyAgreement" name="priceAgreement" required>
+                    <label for="priceAgreement">I agree to the above terms and conditions.</label>
+                  </div>
+                </fieldset>
+                <button class="submit-trip input" id="submitTrip" type="submit" value="Submit"><br>
               </form>
             </fieldset>
             <p class='estimated-cost' id="estimatedCost"></p>
