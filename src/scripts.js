@@ -3,7 +3,7 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import {fetchAllData} from './apiCalls.js'
+import {fetchAllData, addUserTravelData} from './apiCalls.js'
 import TravelerRepository from './TravelerRepository';
 import Traveler from './Traveler';
 import Trip from './Trip';
@@ -41,66 +41,100 @@ var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
+let yearlyCostValue = document.getElementById('yearlyCostValue');
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
-// let destinationsDropdown = document.getElementById('destinationsDropdown')
+let durationInput = document.getElementById('durationInput');
+let numTravelersInput = document.getElementById('numTravelersInput');
+let destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
+let submitTripButton = document.getElementById('submitTrip');
 let datalist = document.getElementById('datalist');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
+
 clickPastTrips.addEventListener('click', displayPastTrips);
 clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
-homeButton.addEventListener('click', backToHome)
+
+homeButton.addEventListener('click', backToHome);
+submitTripButton.addEventListener('click', addUserTripFromInput)
 
 
 // Fetch API
 function displayResolvedData() {
   fetchAllData()
   .then((allData) => {
-    getAllTravelerData(allData[0].travelers);
+    getAllTravelerData(allData[0].travelers)
     getAllTripData(allData[1].trips)
     getAllDestinationData(allData[2].destinations)
-    // console.log(allData)
+    console.log(allData)
   })
 }
 
 const getAllTravelerData = (data) => {
   travelerData = data;
+  console.log('travelerData', travelerData)
   travelerRepository = new TravelerRepository(travelerData);
 }
 
 const getAllTripData = (data) => {
   tripData = data;
+  console.log('tripData', tripData)
   globalTrip = new Trip(tripData);
 }
 
 const getAllDestinationData = (data) => {
   destinationData = data;
+  console.log('tripData', destinationData)
   globalDestination = new Destination(destinationData);
+  loadUserDashboard();
+}
+
+//posts
+function addUserTripFromInput() {
+  event.preventDefault();
+  const bookingDate = bookingDateInput.value;
+  let formattedDate = bookingDate.split('-').join('/')
+  const duration = Number(durationInput.value);
+  const numTravelers = Number(numTravelersInput.value);
+  const destination = destinationsDropdownInput.value;
+  const destinationID = globalDestination.findDestinationByName(destination);
+  let tripID = tripData.length + 1;
+  let dataToTransmit = {id: tripID,
+    userID: globalTraveler.id,
+    destinationID: destinationID,
+    travelers: numTravelers,
+    date: formattedDate,
+    duration: duration,
+    status: 'pending',
+    suggestedActivities: []
+  };
+  var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
   loadUserDashboard();
 }
 
 //functions
 function removeHidden(ele) {
-  ele.classList.remove('hidden')
+  ele.classList.remove('hidden');
 }
 
 function addHidden(ele) {
-  ele.classList.add('hidden')
+  ele.classList.add('hidden');
 }
 
 function loadUserDashboard() {
   // refactored upon creation of login page.
   // let travelerInformation = blabla.value of the input
   backToHome();
+  clearInputFields();
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
-  let travelerId = getRandomUserId(travelerData);
-  let newTraveler = travelerRepository.getDataById(travelerId);
+  // let travelerId = getRandomUserId(travelerData);
+  let newTraveler = travelerRepository.getDataById(22);
   globalTraveler = newTraveler;
   displayFirstName();
   displayYearlyCosts();
@@ -108,13 +142,19 @@ function loadUserDashboard() {
   console.log(newTraveler)
 }
 
+function clearInputFields() {
+  clearGrid();
+  yearlyCostValue.innerHTML = '';
+}
+
 function supplyDestinationDropDown() {
   let destinationNames = globalDestination.returnDestinationNames(tripData);
-  let dropDownDestinations = destinationNames.forEach(destination => {
+  let alphabeticallySorted = destinationNames.sort();
+  let dropDownDestinations = alphabeticallySorted.forEach(destination => {
     if (!datalist.innerHTML.includes(`<option value="${destination}">${destination}</option>`)) {
       datalist.innerHTML += `<option value="${destination}">${destination}</option>`
     }
-  })
+  });
   return dropDownDestinations
 }
 
@@ -123,7 +163,7 @@ function getTodaysDate() {
   let formattedToday = formatDate(todaysDate);
   today = formattedToday;
   console.log(today)
-  return today
+  return today;
 }
 
 function displayFirstName() {
@@ -134,7 +174,7 @@ function displayFirstName() {
 function displayYearlyCosts() {
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(travelerTrips);
-  yearlyCost.innerText += ` $${yearlyExpense}`;
+  yearlyCostValue.innerText = ` $${yearlyExpense}`;
   // if the cost is 0, should i say something else?
   console.log(yearlyExpense)
 }
