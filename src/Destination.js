@@ -15,6 +15,18 @@ class Destination {
     return destinationNames;
   }
 
+  calculateTripExpense(duration, numTravelers, id) {
+      let userTrip = this.data.filter(destination => destination.id === id);
+      console.log(userTrip)
+        let tripExpense = userTrip.reduce((acc, destination) => {
+          acc += destination.estimatedLodgingCostPerDay * duration;
+          acc += destination.estimatedFlightCostPerPerson * numTravelers;
+          return acc
+        }, 0);
+    let travelAgentFee = tripExpense * .10
+    return tripExpense + travelAgentFee
+  }
+
   getCurrentYear() {
     var today = new Date();
     var yyyy = today.getFullYear();

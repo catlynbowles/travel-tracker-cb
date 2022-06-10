@@ -51,6 +51,9 @@ let destinationsDropdownInput = document.getElementById('destinationsDropdownInp
 let tripForm = document.getElementById('tripForm');
 let datalist = document.getElementById('datalist');
 let priceyAgreement = document.getElementById('checkbox');
+let priceEstimateField = document.getElementById('priceEstimateField')
+let tripPlanFieldset = document.getElementById('tripPlanFieldset')
+let tripCost = document.getElementById('cost')
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -61,9 +64,28 @@ clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
 
 homeButton.addEventListener('click', backToHome);
-tripForm.addEventListener('submit', addUserTripFromInput)
+tripForm.addEventListener('submit', displayCosts)
 
+function displayCosts() {
+  event.preventDefault()
+  removeHidden(priceEstimateField);
+  addHidden(tripPlanFieldset);
+  let tripExpense = calculateTripCosts();
+  tripCost.innerText = `$${tripExpense} USD`
+}
 
+function calculateTripCosts() {
+  // const bookingDate = bookingDateInput.value;
+  // let formattedDate = bookingDate.split('-').join('/')
+  const duration = Number(durationInput.value);
+  const numTravelers = Number(numTravelersInput.value);
+  const destination = destinationsDropdownInput.value;
+  const destinationID = globalDestination.findDestinationByName(destination);
+  // let tripID = tripData.length + 1;
+  let tripExpense = globalDestination.calculateTripExpense(duration, numTravelers, destinationID);
+  console.log(tripExpense)
+  return tripExpense.toFixed(2)
+}
 // Fetch API
 function displayResolvedData() {
   fetchAllData()

@@ -142,10 +142,13 @@ h4 {
   text-align: center
 }
 
-/* .submit-trip {
-  display: none;
-} */
+.form-and-book {
+  display: flex;
+  flex-direction: column;
+  wrap: wrap;
+  width: 200px
+}
 
-/* input[type='radio']:checked ~ * .submit-trip {
-  display: block;
-} */
+.form-trip {
+
+}
