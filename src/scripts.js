@@ -110,7 +110,8 @@ function loadUserDashboard() {
 
 function supplyDestinationDropDown() {
   let destinationNames = globalDestination.returnDestinationNames(tripData);
-  let dropDownDestinations = destinationNames.forEach(destination => {
+  let alphabeticallySorted = destinationNames.sort();
+  let dropDownDestinations = alphabeticallySorted.forEach(destination => {
     if (!datalist.innerHTML.includes(`<option value="${destination}">${destination}</option>`)) {
       datalist.innerHTML += `<option value="${destination}">${destination}</option>`
     }
