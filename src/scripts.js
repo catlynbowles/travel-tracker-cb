@@ -40,7 +40,6 @@ var location = document.getElementById('location');
 var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
-var gridBoxes = document.getElementsByClassName('box')
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -58,7 +57,7 @@ function displayResolvedData() {
     getAllTravelerData(allData[0].travelers);
     getAllTripData(allData[1].trips)
     getAllDestinationData(allData[2].destinations)
-    console.log(allData)
+    // console.log(allData)
   })
 }
 
@@ -90,15 +89,26 @@ function addHidden(ele) {
 function loadUserDashboard() {
   // refactored upon creation of login page.
   // let travelerInformation = blabla.value of the input
-  removeHidden(tripRequestBox);
-  addHidden(userSelectedTrips);
+  backToHome();
+  let today = getTodaysDate();
   let travelerId = getRandomUserId(travelerData);
   let newTraveler = travelerRepository.getDataById(travelerId);
   globalTraveler = newTraveler;
+  displayFirstName();
+  console.log(newTraveler)
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
+}
+
+function getTodaysDate() {
   let todaysDate = globalTrip.getCurrentDate();
   today = todaysDate;
-  console.log(newTraveler)
-  let travelerFirstName = newTraveler.returnFirstName();
+  console.log(today)
+  return today
+}
+
+function displayFirstName() {
+  let travelerFirstName = globalTraveler.returnFirstName();
   welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
 }
 
@@ -119,13 +129,12 @@ function displayPastTrips() {
   let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
   let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
   checkForEmptyDisplay(pastTripProperties);
-  console.log(pastTripProperties);
   modifyTripsToCards(pastTripProperties);
+  console.log(pastTripProperties);
 }
 
 function modifyTripsToCards(trips) {
   let displayCards = trips.map(trip => {
-    console.log(trip)
     grid.innerHTML +=
     `<article class="box" id="${trips.indexOf(trip)}">
     <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
@@ -133,7 +142,6 @@ function modifyTripsToCards(trips) {
     <p date='trip-date' id='tripDate'>${trip.date}</p>
     </article>`
   });
-  console.log(grid)
 }
 
 function displayPresentTrips() {
@@ -157,7 +165,9 @@ function displayPendingTrips() {
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let pendingTrips = globalTrip.getPendingTrips(travelerTrips, today);
-  checkForEmptyDisplay(pendingTrips);
+  let pendingTripsProperties = globalDestination.returnLocationProperties(pendingTrips);
+  checkForEmptyDisplay(pendingTripsProperties);
+  modifyTripsToCards(pendingTripsProperties);
   console.log(pendingTrips)
 }
 

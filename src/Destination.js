@@ -3,14 +3,18 @@ class Destination {
     this.data = destinationData;
   }
 
-  // returnLocationName(data) {
-  //   let locationNames = data.reduce((acc, cur) => {
-  //     acc.push(cur.destination)
-  //     return acc
-  //   }, [])
-  //   return locationNames
-  //   // return this.name.split(" ")[0];
-  // }
+
+  getCurrentYear() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    return yyyy;
+  }
+
+  calculateYearlyPrice() {
+    let currentYear = this.getCurrentYear();
+    // take in past trips, year?
+    // year === 2022
+  }
 
   returnLocationProperties(tripsArr) {
     let locationProperties = tripsArr.reduce((acc, trip) => {
