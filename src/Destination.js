@@ -3,6 +3,17 @@ class Destination {
     this.data = destinationData;
   }
 
+  returnDestinationNames(allTrips) {
+    let destinationNames = allTrips.reduce((acc, trip) => {
+      let namesByID = this.data.forEach(destination => {
+        if (trip.destinationID === destination.id) {
+          acc.push(destination.destination)
+        }
+      })
+      return acc
+    }, []);
+    return destinationNames;
+  }
 
   getCurrentYear() {
     var today = new Date();

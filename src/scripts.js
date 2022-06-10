@@ -42,6 +42,11 @@ var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 
+//inputs
+let bookingDateInput = document.getElementById('bookingDateInput');
+// let destinationsDropdown = document.getElementById('destinationsDropdown')
+let datalist = document.getElementById('datalist');
+
 // event listeners
 window.addEventListener('load', displayResolvedData);
 clickPastTrips.addEventListener('click', displayPastTrips);
@@ -92,12 +97,25 @@ function loadUserDashboard() {
   // let travelerInformation = blabla.value of the input
   backToHome();
   let today = getTodaysDate();
+  let calendarMin = today.split('/').join('-');
+  bookingDateInput.min = calendarMin;
   let travelerId = getRandomUserId(travelerData);
   let newTraveler = travelerRepository.getDataById(travelerId);
   globalTraveler = newTraveler;
   displayFirstName();
   displayYearlyCosts();
+  supplyDestinationDropDown();
   console.log(newTraveler)
+}
+
+function supplyDestinationDropDown() {
+  let destinationNames = globalDestination.returnDestinationNames(tripData);
+  let dropDownDestinations = destinationNames.forEach(destination => {
+    if (!datalist.innerHTML.includes(`<option value="${destination}">${destination}</option>`)) {
+      datalist.innerHTML += `<option value="${destination}">${destination}</option>`
+    }
+  })
+  return dropDownDestinations
 }
 
 function getTodaysDate() {

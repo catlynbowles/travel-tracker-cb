@@ -49,14 +49,21 @@
               <legend>Book Your Trip Today!</legend>
               <form>
                 <label class="booking-date input" id="bookingDate">Date:</label><br>
-                <input class="booking-date-input input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" required><br>
+                <input class="booking-date-input input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" min='' max='2025-01-01' required><br>
                 <label class="duration input" id="duration">Duration:</label><br>
-                <input class="duration-input input" id="durationInput" type="number" placeholder="Duration of Stay" required><br>
+                <input class="duration-input input" id="durationInput" type="number" placeholder="Duration of Stay" min='1' max='30' required><br>
                 <label class="num-travelers input" id="numTravelers">Travelers:</label><br>
-                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" required><br><br>
+                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" min='1' max='15' required><br><br>
                 <label class="destinations input" id="destinations">Destinations:</label><br>
-                <input class="destinations-input input" id="destinationsInput" type="number" placeholder="Choose your destination" required><br><br>
-                <input class="submit-trip input" id="submitTrip" type="submit" value="Submit">
+                <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdown" name='destination' placeholder="Choose your destination" required>
+                  <div>
+                  <datalist id='datalist'>
+                    <!-- <option value='' disabled selected>Choose Destination</option> -->
+                </datalist><br>
+                <!-- <input  autoComplete="on" list="datalist"/> -->
+              </div>
+                <!-- </select><br> -->
+                <input class="submit-trip input" id="submitTrip" type="submit" value="Submit"><br>
               </form>
             </fieldset>
             <p class='estimated-cost' id="estimatedCost"></p>
