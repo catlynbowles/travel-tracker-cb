@@ -11,19 +11,6 @@ class Trip {
     return userTripData
   }
 
-  getCurrentDate() {
-    var today = new Date();
-    // console.log('today', today)
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    today = yyyy + '/' + mm + '/' + dd;
-    // console.log(today)
-    return today;
-  }
-  // getCurrentDate() doesn't belong here.
-
   getPastTrips(userTripData, currentDate) {
     let pastTrips = userTripData.filter(trip => {
       return trip.date < currentDate
@@ -50,8 +37,6 @@ class Trip {
   }
 
 findPresentTrips(tripArrs, today) {
-    // var today = new Date();
-    // var formattedToday = formatDate(today)
     let presentTripDate = tripArrs.reduce((acc, trip) => {
       if (trip.includes(today)) {
         acc = trip[0]
@@ -70,9 +55,9 @@ returnPresentTrip(tripStartDate, tripData) {
     let presentTrip = tripData.find(trip => {
       return tripData.date === tripStartDate
     })
+    console.log('there is one!', presentTrip)
     return [presentTrip]
   }
-
 }
 
 

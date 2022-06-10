@@ -15,7 +15,16 @@ describe('Trip', () => {
     userTripData3 = trip.getUserTripData(50);
     userTripData4 = trip.getUserTripData(2);
     userTripData5 = trip.getUserTripData(29);
-    date = trip.getCurrentDate();
+
+    function getToday() {
+      let day = new Date();
+      var dd = String(day.getDate()).padStart(2, '0');
+      var mm = String(day.getMonth() + 1).padStart(2, '0');
+      var yyyy = day.getFullYear();
+      var formattedDay = yyyy + '/' + mm + '/' + dd;
+      return formattedDay;
+    }
+    date = getToday();
   })
 
   it('should be a function', function () {
@@ -238,18 +247,18 @@ describe('Trip', () => {
     ]);
   });
 
-  it('should be able to get present trips for the user', () => {
-    let presentTrip = trip.checkForPresentTrips(userTripData5, date)
-    // {
-    //   "id": 200,
-    //   "userID": 29,
-    //   "destinationID": 23,
-    //   "travelers": 6,
-    //   "date": "2022/06/07",
-    //   "duration": 30,
-    //   "status": "approved",
-    //   "suggestedActivities": []
-    // }
-
-  })
+  // it('should be able to get present trips for the user', () => {
+  //   let presentTrip = trip.findPresentTrips(userTripData5, date)
+  //   // {
+  //   //   "id": 200,
+  //   //   "userID": 29,
+  //   //   "destinationID": 23,
+  //   //   "travelers": 6,
+  //   //   "date": "2022/06/07",
+  //   //   "duration": 30,
+  //   //   "status": "approved",
+  //   //   "suggestedActivities": []
+  //   // }
+  //
+  // })
 });

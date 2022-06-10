@@ -98,13 +98,12 @@ function loadUserDashboard() {
   displayFirstName();
   displayYearlyCosts();
   console.log(newTraveler)
-  // let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  // let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
 }
 
 function getTodaysDate() {
-  let todaysDate = globalTrip.getCurrentDate();
-  today = todaysDate;
+  let todaysDate = new Date();
+  let formattedToday = formatDate(todaysDate);
+  today = formattedToday;
   console.log(today)
   return today
 }
@@ -141,17 +140,6 @@ function displayPastTrips() {
   checkForEmptyDisplay(pastTripProperties);
   modifyTripsToCards(pastTripProperties);
   console.log(pastTripProperties);
-}
-
-function modifyTripsToCards(trips) {
-  let displayCards = trips.map(trip => {
-    grid.innerHTML +=
-    `<article class="box" id="${trips.indexOf(trip)}">
-    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
-    <p class='location' id='location'>${trip.location}</p>
-    <p date='trip-date' id='tripDate'>${trip.date}</p>
-    </article>`
-  });
 }
 
 function displayPresentTrips() {
@@ -192,6 +180,17 @@ function displayPendingTrips() {
   console.log(pendingTrips)
 }
 
+function modifyTripsToCards(trips) {
+  let displayCards = trips.map(trip => {
+    grid.innerHTML +=
+    `<article class="box" id="${trips.indexOf(trip)}">
+    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
+    <p class='location' id='location'>${trip.location}</p>
+    <p date='trip-date' id='tripDate'>${trip.date}</p>
+    </article>`
+  });
+}
+
 function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
     grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
@@ -202,7 +201,7 @@ function clearGrid() {
   grid.innerHTML = ''
 }
 
-//dates
+//date functions
 function getAllTripDates(allTripData) {
   let allTripDates = allTripData.map(trip => {
     let tripDates = stringDatesOfTrip(trip)
