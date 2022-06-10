@@ -40,6 +40,7 @@ var location = document.getElementById('location');
 var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
+var yearlyCost = document.getElementById('yearlyCost');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -95,9 +96,10 @@ function loadUserDashboard() {
   let newTraveler = travelerRepository.getDataById(travelerId);
   globalTraveler = newTraveler;
   displayFirstName();
+  displayYearlyCosts();
   console.log(newTraveler)
-  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
+  // let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  // let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
 }
 
 function getTodaysDate() {
@@ -110,6 +112,15 @@ function getTodaysDate() {
 function displayFirstName() {
   let travelerFirstName = globalTraveler.returnFirstName();
   welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
+}
+
+function displayYearlyCosts() {
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
+  let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(pastTrips);
+  yearlyCost.innerText += ` $${yearlyExpense}`;
+  // is this correct? is it past a year ,or only for the year 2022?
+  console.log(yearlyExpense)
 }
 
 function backToHome() {
