@@ -55,9 +55,14 @@
                 <label class="num-travelers input" id="numTravelers">Travelers:</label><br>
                 <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" min='1' max='15' required><br><br>
                 <label class="destinations input" id="destinations">Destinations:</label><br>
-                <select class="destinations-dropdown input" id="destinationsDropdown" name='destination' placeholder="Choose your destination" required><br><br>
-                  <option value='' disabled selected>Choose Destination</option>
-                </select><br>
+                <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdown" name='destination' placeholder="Choose your destination" required>
+                  <div>
+                  <datalist id='datalist'>
+                    <!-- <option value='' disabled selected>Choose Destination</option> -->
+                </datalist><br>
+                <!-- <input  autoComplete="on" list="datalist"/> -->
+              </div>
+                <!-- </select><br> -->
                 <input class="submit-trip input" id="submitTrip" type="submit" value="Submit"><br>
               </form>
             </fieldset>
