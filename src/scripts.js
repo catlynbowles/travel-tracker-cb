@@ -42,6 +42,9 @@ var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 
+//inputs
+let bookingDateInput = document.getElementById('bookingDateInput');
+
 // event listeners
 window.addEventListener('load', displayResolvedData);
 clickPastTrips.addEventListener('click', displayPastTrips);
@@ -92,6 +95,10 @@ function loadUserDashboard() {
   // let travelerInformation = blabla.value of the input
   backToHome();
   let today = getTodaysDate();
+  let calendarMin = today.split('/').join('-');
+  console.log(calendarMin)
+  bookingDateInput.min = calendarMin;
+  console.log(bookingDateInput)
   let travelerId = getRandomUserId(travelerData);
   let newTraveler = travelerRepository.getDataById(travelerId);
   globalTraveler = newTraveler;
