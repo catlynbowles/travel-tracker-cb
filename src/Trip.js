@@ -22,6 +22,7 @@ class Trip {
     // console.log(today)
     return today;
   }
+  // getCurrentDate() doesn't belong here.
 
   getPastTrips(userTripData, currentDate) {
     let pastTrips = userTripData.filter(trip => {
@@ -48,20 +49,28 @@ class Trip {
     return pendingTrips;
   }
 
-  checkForPresentTrips(userTripData, currentDate) {
+findPresentTrips(tripArrs, today) {
+    // var today = new Date();
+    // var formattedToday = formatDate(today)
+    let presentTripDate = tripArrs.reduce((acc, trip) => {
+      if (trip.includes(today)) {
+        acc = trip[0]
+      }
+      return acc
+    }, '')
+    if (presentTripDate) {
+      console.log(presentTripDate)
+    } else {
+      console.log('nopresentTrips')
+    }
+    return presentTripDate;
+  }
 
-    // let endDate = currentDate.getDate() + duration
-    // what qualifies a present trip?
-    // tricky.
-    // look at all the user trip data.
-    // look at the date,
-    // look at the duration
-    // make an array of all those dates
-    // if the current date is included
-    // in that array,
-    // then add that trip to the new array.
-    // find ?
-
+returnPresentTrip(tripStartDate, tripData) {
+    let presentTrip = tripData.find(trip => {
+      return tripData.date === tripStartDate
+    })
+    return [presentTrip]
   }
 
 }

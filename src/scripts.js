@@ -116,10 +116,9 @@ function displayFirstName() {
 
 function displayYearlyCosts() {
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
-  let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(pastTrips);
+  let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(travelerTrips);
   yearlyCost.innerText += ` $${yearlyExpense}`;
-  // if the cost is 0, should i say something else? 
+  // if the cost is 0, should i say something else?
   console.log(yearlyExpense)
 }
 
@@ -158,6 +157,17 @@ function modifyTripsToCards(trips) {
 function displayPresentTrips() {
   displayTripSelection();
   clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let tripDates = getAllTripDates(travelerTrips);
+  let presentTripDateMatch = globalTrip.findPresentTrips(tripDates, today);
+  if (!presentTripDateMatch) {
+    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+  } else {
+    console.log('there is a present trip')
+    let presentTrip = globalTrip.returnPresentTrip(presentTripDateMatch, tripData);
+    let presentTripProperties = globalDestination.returnLocationProperties(presentTrip);
+    modifyTripsToCards(presentTripProperties);
+  }
 }
 
 function displayUpcomingTrips() {
@@ -192,6 +202,55 @@ function clearGrid() {
   grid.innerHTML = ''
 }
 
+//dates
+function getAllTripDates(allTripData) {
+  let allTripDates = allTripData.map(trip => {
+    let tripDates = stringDatesOfTrip(trip)
+    return tripDates
+  })
+  return allTripDates
+}
+
+function stringDatesOfTrip(trip) {
+  let endDate = calculateEndDate(trip.date, trip.duration);
+  let allTripDays = getDaysInTrip(new Date(trip.date), endDate);
+  let formattedTripDays = formatDatesList(allTripDays);
+  console.log(formattedTripDays)
+  return formattedTripDays;
+}
+
+function calculateEndDate(startDate, tripDuration) {
+  var endDate = new Date(startDate);
+  endDate.setDate(endDate.getDate() + tripDuration);
+  return endDate;
+}
+
+function getDaysInTrip(startDate, endDate) {
+    for(var days = [], date = new Date(startDate); date <= new Date(endDate); date.setDate(date.getDate() + 1)) {
+        days.push(new Date(date));
+    }
+    return days;
+};
+
+function formatDatesList(daylist) {
+  let formattedDaylist = daylist.map(day => {
+    var dd = String(day.getDate()).padStart(2, '0');
+    var mm = String(day.getMonth() + 1).padStart(2, '0');
+    var yyyy = day.getFullYear();
+    return day = yyyy + '/' + mm + '/' + dd;
+  })
+    return formattedDaylist
+}
+
+function formatDate(day) {
+    var dd = String(day.getDate()).padStart(2, '0');
+    var mm = String(day.getMonth() + 1).padStart(2, '0');
+    var yyyy = day.getFullYear();
+    var formattedDay = yyyy + '/' + mm + '/' + dd;
+    return formattedDay;
+}
+
+//get random user
 function getRandomUserId (anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }

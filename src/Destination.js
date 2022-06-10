@@ -10,9 +10,9 @@ class Destination {
     return yyyy;
   }
 
-  calculateYearlyTravelExpenses(pastTrips) {
+  calculateYearlyTravelExpenses(userTrips) {
     let currentYear = this.getCurrentYear();
-    let yearlyTravelExpense = pastTrips.reduce((acc, trip) => {
+    let yearlyTravelExpense = userTrips.reduce((acc, trip) => {
       let destinations = this.data.forEach(destination => {
         if (trip.destinationID === destination.id && trip.date.includes(currentYear)) {
           acc += destination.estimatedLodgingCostPerDay * trip.duration;
@@ -21,7 +21,8 @@ class Destination {
       });
       return acc
     }, 0);
-    return yearlyTravelExpense;
+    let travelAgentFee = yearlyTravelExpense * .10
+    return yearlyTravelExpense + travelAgentFee
   }
 
   returnLocationProperties(tripsArr) {

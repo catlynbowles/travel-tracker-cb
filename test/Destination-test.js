@@ -52,8 +52,7 @@ describe('Destination', () => {
   it('should take in past trip data for the user and calculate the price spent for the year', () => {
     let yearlyPrice = destination.calculateYearlyTravelExpenses(destTripData)
     expect(yearlyPrice).to.be.a('number');
-    console.log(yearlyPrice)
-    expect(yearlyPrice).to.deep.equal(13040);
+    expect(yearlyPrice).to.deep.equal(14344);
     // ^^ hot dang!
   });
 });
