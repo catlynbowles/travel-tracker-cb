@@ -44,6 +44,7 @@ var yearlyCost = document.getElementById('yearlyCost');
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
+let destinationsDropdown = document.getElementById('destinationsDropdown')
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -96,15 +97,23 @@ function loadUserDashboard() {
   backToHome();
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
-  console.log(calendarMin)
   bookingDateInput.min = calendarMin;
-  console.log(bookingDateInput)
   let travelerId = getRandomUserId(travelerData);
   let newTraveler = travelerRepository.getDataById(travelerId);
   globalTraveler = newTraveler;
   displayFirstName();
   displayYearlyCosts();
+  supplyDestinationDropDown();
   console.log(newTraveler)
+}
+
+function supplyDestinationDropDown() {
+  let destinationNames = globalDestination.returnDestinationNames(tripData);
+  // <option value="Yuma County">Yuma County</option>
+  let dropDownDestinations = destinationNames.forEach(destination => {
+    destinationsDropdown.innerHTML += `<option value=${destination}>${destination}</option>`
+  })
+  console.log(destinationNames)
 }
 
 function getTodaysDate() {
