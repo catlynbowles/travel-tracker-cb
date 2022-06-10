@@ -27,8 +27,8 @@ export function addUserTravelData(dataToTransmit) {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify(dataToTransmit)
-}).then(res => {return res.json()})
-.catch(error => console.log(error));
+  }).then(res => {return res.json()})
+  .catch(error => console.log(error));
 
   return response;
 }
