@@ -43,7 +43,6 @@ var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 let yearlyCostValue = document.getElementById('yearlyCostValue');
 let tripConfirmation = document.getElementById('tripConfirmation');
-let formAndBook = document.getElementById('formAndBook');
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
@@ -93,7 +92,6 @@ function displayCosts() {
   event.preventDefault()
   removeHidden(priceEstimateField);
   addHidden(tripPlanFieldset);
-  addHidden(formAndBook);
   let tripExpense = calculateTripCosts();
   tripCost.innerText = `$${tripExpense} USD`
 }

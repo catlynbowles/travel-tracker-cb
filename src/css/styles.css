@@ -149,6 +149,9 @@ h4 {
   width: 200px
 }
 
-.form-trip {
-
+.trip-confirmation-message {
+  width: 1000px;
+  align-items: center;
+  text-align: center;
+  padding-right: 300px;
 }
