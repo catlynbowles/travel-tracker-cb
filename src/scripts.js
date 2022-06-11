@@ -56,7 +56,7 @@ let datalist = document.getElementById('datalist');
 let tripForm = document.getElementById('tripForm');
 let addTripForm = document.getElementById('addTripSubmit');
 let tripPlanFieldset = document.getElementById('tripPlanFieldset');
-let priceAgreement = document.getElementById('checkbox');
+let priceAgreement = document.getElementById('priceAgreement');
 let priceEstimateField = document.getElementById('priceEstimateField');
 let tripCost = document.getElementById('cost');
 
@@ -79,14 +79,14 @@ function displayTripConfirmation() {
 }
 
 function clearInputFields() {
-  bookingDateInput.value = undefined;
-  durationInput.value = undefined;
-  numTravelersInput.value = undefined;
-  destinationsDropdownInput.value = undefined
-  // let formattedDate = bookingDate.split('-').join('/')
-  // const duration = Number(durationInput.value);
-  // const numTravelers = Number(numTravelersInput.value);
-  // const destination = destinationsDropdownInput.value;
+  bookingDateInput.value = '';
+  durationInput.value = '';
+  numTravelersInput.value = '';
+  priceAgreement.checked = false;
+  destinationsDropdownInput.value = ''
+  // document.getElementById(priceAgreement).value = '';
+  console.log('priceagree', priceAgreement)
+  tripCost.innerText = '';
 }
 
 function displayCosts() {
@@ -178,6 +178,7 @@ function loadUserDashboard() {
   // refactored upon creation of login page.
   // let travelerInformation = blabla.value of the input
   backToHome();
+  clearInputFields();
   clearCostValue();
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
@@ -204,6 +205,7 @@ function supplyDestinationDropDown() {
       datalist.innerHTML += `<option value="${destination}">${destination}</option>`
     }
   });
+  console.log('dropdowns', dropDownDestinations)
   return dropDownDestinations
 }
 
