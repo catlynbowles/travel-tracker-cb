@@ -46,7 +46,8 @@
             </section>
         </section>
           <section class='trip-request-box hidden' id='tripRequestBox'>
-            <fieldset class='form-and-book'>
+            <p class='trip-confirmation-message hidden' id="tripConfirmation">Congratulations, your trip has been successfully booked! Return 'Home' to book another trip, or continue browsing!</p>
+            <fieldset class='form-and-book' id='formAndBook'>
             <fieldset id='tripPlanFieldset'>
               <legend>Plan Your Dream Trip!</legend>
               <form id='tripForm'>
@@ -70,15 +71,14 @@
                   <div>
                     <p class='price-estimate' id='priceEstimate'>Total Estimated Cost of Trip:<span id='cost'>$</span></p>
                     <p class='price-estimate' id='priceAgent'>(includes a 10% travel agent fee)</p>
-                    <input type="checkbox" id="priceyAgreement" name="priceAgreement" required>
+                    <input type="checkbox" id="priceAgreement" name="priceAgreement" required>
                     <label for="priceAgreement">I understand that by clicking this button I am booking this trip, and responsible for the fees thereof.</label>
                   </div>
                 <!-- </fieldset> -->
-                <input class="submit-trip input" id="submitTrip" type="submit" value="Submit"><br>
+                <input class="submit-trip input" id="submitTrip" type="submit" value="Book Trip"><br>
               </form>
             </fieldset>
           </fieldset>
-            <p class='estimated-cost' id="estimatedCost"></p>
           </section>
         </div>
       </section>

@@ -42,18 +42,23 @@ var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 let yearlyCostValue = document.getElementById('yearlyCostValue');
+let tripConfirmation = document.getElementById('tripConfirmation');
+let formAndBook = document.getElementById('formAndBook');
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
 let durationInput = document.getElementById('durationInput');
 let numTravelersInput = document.getElementById('numTravelersInput');
 let destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
-let tripForm = document.getElementById('tripForm');
 let datalist = document.getElementById('datalist');
-let priceyAgreement = document.getElementById('checkbox');
-let priceEstimateField = document.getElementById('priceEstimateField')
-let tripPlanFieldset = document.getElementById('tripPlanFieldset')
-let tripCost = document.getElementById('cost')
+
+// form selectors
+let tripForm = document.getElementById('tripForm');
+let addTripForm = document.getElementById('addTripSubmit');
+let tripPlanFieldset = document.getElementById('tripPlanFieldset');
+let priceAgreement = document.getElementById('checkbox');
+let priceEstimateField = document.getElementById('priceEstimateField');
+let tripCost = document.getElementById('cost');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -63,13 +68,32 @@ clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
 
-homeButton.addEventListener('click', backToHome);
-tripForm.addEventListener('submit', displayCosts)
+homeButton.addEventListener('click', loadUserDashboard);
+tripForm.addEventListener('submit', displayCosts);
+addTripForm.addEventListener('submit', displayTripConfirmation);
+
+function displayTripConfirmation() {
+  event.preventDefault();
+  addHidden(priceEstimateField);
+  removeHidden(tripConfirmation);
+}
+
+function clearInputFields() {
+  bookingDateInput.value = undefined;
+  durationInput.value = undefined;
+  numTravelersInput.value = undefined;
+  destinationsDropdownInput.value = undefined
+  // let formattedDate = bookingDate.split('-').join('/')
+  // const duration = Number(durationInput.value);
+  // const numTravelers = Number(numTravelersInput.value);
+  // const destination = destinationsDropdownInput.value;
+}
 
 function displayCosts() {
   event.preventDefault()
   removeHidden(priceEstimateField);
   addHidden(tripPlanFieldset);
+  addHidden(formAndBook);
   let tripExpense = calculateTripCosts();
   tripCost.innerText = `$${tripExpense} USD`
 }
@@ -86,6 +110,7 @@ function calculateTripCosts() {
   console.log(tripExpense)
   return tripExpense.toFixed(2)
 }
+
 // Fetch API
 function displayResolvedData() {
   fetchAllData()
@@ -153,7 +178,7 @@ function loadUserDashboard() {
   // refactored upon creation of login page.
   // let travelerInformation = blabla.value of the input
   backToHome();
-  clearInputFields();
+  clearCostValue();
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
@@ -166,7 +191,7 @@ function loadUserDashboard() {
   console.log(newTraveler)
 }
 
-function clearInputFields() {
+function clearCostValue() {
   clearGrid();
   yearlyCostValue.innerHTML = '';
 }
@@ -204,8 +229,11 @@ function displayYearlyCosts() {
 }
 
 function backToHome() {
+  addHidden(tripConfirmation);
   removeHidden(tripRequestBox);
+  removeHidden(tripPlanFieldset);
   addHidden(userSelectedTrips);
+  addHidden(priceEstimateField);
 }
 
 function displayTripSelection() {
