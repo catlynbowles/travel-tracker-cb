@@ -28,36 +28,36 @@ class Trip {
   }
 
   getPendingTrips(userTripData, currentDate) {
-    let pendingTrips = userTripData.filter(trip => {
-      return trip.status === 'pending'
-    });
-    // console.log(pendingTrips)
-    // also, should I sort these trips?
+    let pendingTrips = userTripData.reduce((acc, trip) => {
+      if (trip.status === 'pending' && !acc.includes(trip)) {
+        acc.push(trip)
+      }
+      return acc
+    }, []);
     return pendingTrips;
   }
 
 findPresentTrips(tripArrs, today) {
-  console.log(tripArrs, today)
     let presentTripDate = tripArrs.reduce((acc, trip) => {
       if (trip.includes(today)) {
-        acc = trip[0]
+        acc.push(trip[0])
       }
       return acc
-    }, '')
-    if (presentTripDate) {
-      console.log('there is a match!', presentTripDate)
-    } else {
-      console.log('nopresentTrips')
-    }
+    }, []);
     return presentTripDate;
   }
 
-returnPresentTrip(tripStartDate) {
-    let presentTrip = this.data.find(trip => {
-      return trip.date === tripStartDate
-    })
-    console.log('there is one!', presentTrip)
-    return [presentTrip]
+returnPresentTrip(tripStartDates) {
+    let presentTrips = this.data.reduce((acc, trip) => {
+      tripStartDates.forEach(date => {
+        if (trip.date === date && !acc.includes(trip)) {
+          acc.push(trip)
+        }
+      })
+      return acc
+    }, [])
+    console.log('there is one!', presentTrips)
+    return presentTrips
   }
 }
 

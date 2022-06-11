@@ -245,8 +245,8 @@ describe('Trip', () => {
 
   it('should take in a list of trip dates and return the trip start date if it finds a match within the duration of the trip', () => {
     let presentDateMatch = trip.findPresentTrips(presentTripData, date);
-    expect(presentDateMatch).to.be.a('string');
-    expect(presentDateMatch).to.equal('2022/06/07')
+    expect(presentDateMatch).to.be.an('array');
+    expect(presentDateMatch).to.deep.equal(["2022/06/07"])
   });
 
   it('should take in the start date of the present trip found, and return the information of that trip.', () => {
