@@ -46,10 +46,7 @@
             </section>
         </section>
           <section class='trip-request-box hidden' id='tripRequestBox'>
-            <div class='message-display'>
-              <p class='trip-confirmation-message' id="tripConfirmation">Congratulations, your trip has been successfully booked! Return 'Home' to book another trip, or continue browsing!</p>
-            </div>
-            <fieldset class='form-and-book' id='formAndBook'>
+            <!-- <fieldset class='form-and-book' id='formAndBook'> -->
             <fieldset id='tripPlanFieldset'>
               <legend>Plan Your Dream Trip!</legend>
               <form id='tripForm'>
@@ -80,7 +77,11 @@
                 <input class="submit-trip input" id="submitTrip" type="submit" value="Book Trip"><br>
               </form>
             </fieldset>
-          </fieldset>
+          <!-- </fieldset> -->
+          <div class='message-display'>
+            <p class='trip-confirmation-message hidden' id="tripConfirmation">Congratulations, your trip has been successfully booked! Return 'Home' to book another trip, or continue browsing!</p>
+            <p class='no-trips-display hidden' id='noTripsDisplay'>Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!</p>
+          </div>
           </section>
         </div>
       </section>

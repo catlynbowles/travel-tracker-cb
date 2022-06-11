@@ -43,6 +43,7 @@ var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 let yearlyCostValue = document.getElementById('yearlyCostValue');
 let tripConfirmation = document.getElementById('tripConfirmation');
+let noTripsDisplay = document.getElementById('noTripsDisplay')
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
@@ -259,7 +260,8 @@ function displayPresentTrips() {
   let tripDates = getAllTripDates(travelerTrips);
   let presentTripDateMatch = globalTrip.findPresentTrips(tripDates, today);
   if (!presentTripDateMatch) {
-    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+    console.log('hehe')
+    removeHidden(noTripsDisplay);
   } else {
     console.log('there is a present trip')
     let presentTrip = globalTrip.returnPresentTrip(presentTripDateMatch, tripData);
@@ -303,12 +305,13 @@ function modifyTripsToCards(trips) {
 
 function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
-    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+    removeHidden(noTripsDisplay);
   }
 }
 
 function clearGrid() {
-  grid.innerHTML = ''
+  addHidden(noTripsDisplay);
+  grid.innerHTML = '';
 }
 
 //date functions

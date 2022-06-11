@@ -142,16 +142,16 @@ h4 {
   text-align: center
 }
 
-.form-and-book {
+/* .form-and-book {
   display: flex;
   flex-direction: column;
-  wrap: wrap;
-  width: 200px
-}
+  /* wrap: wrap; */
+  /* width: 200px */
 
-.trip-confirmation-message {
-  width: 1000px;
+
+.message-display {
+  width: 500px;
+  width: 200px;
   align-items: center;
   text-align: center;
-  padding-right: 300px;
 }
