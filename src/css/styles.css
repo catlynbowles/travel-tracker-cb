@@ -140,3 +140,17 @@ h4 {
   /* overflow: hidden; */
   text-align: center
 }
+
+/* .form-and-book {
+  display: flex;
+  flex-direction: column;
+  /* wrap: wrap; */
+  /* width: 200px */
+
+
+.message-display {
+  width: 500px;
+  width: 200px;
+  align-items: center;
+  text-align: center;
+}

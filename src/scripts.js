@@ -42,14 +42,23 @@ var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 let yearlyCostValue = document.getElementById('yearlyCostValue');
+let tripConfirmation = document.getElementById('tripConfirmation');
+let noTripsDisplay = document.getElementById('noTripsDisplay')
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
 let durationInput = document.getElementById('durationInput');
 let numTravelersInput = document.getElementById('numTravelersInput');
 let destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
-let submitTripButton = document.getElementById('submitTrip');
 let datalist = document.getElementById('datalist');
+
+// form selectors
+let tripForm = document.getElementById('tripForm');
+let addTripForm = document.getElementById('addTripSubmit');
+let tripPlanFieldset = document.getElementById('tripPlanFieldset');
+let priceAgreement = document.getElementById('priceAgreement');
+let priceEstimateField = document.getElementById('priceEstimateField');
+let tripCost = document.getElementById('cost');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -59,9 +68,47 @@ clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
 
-homeButton.addEventListener('click', backToHome);
-submitTripButton.addEventListener('click', addUserTripFromInput)
+homeButton.addEventListener('click', loadUserDashboard);
+tripForm.addEventListener('submit', displayCosts);
+addTripForm.addEventListener('submit', displayTripConfirmation);
 
+function displayTripConfirmation() {
+  event.preventDefault();
+  addHidden(priceEstimateField);
+  removeHidden(tripConfirmation);
+}
+
+function clearInputFields() {
+  bookingDateInput.value = '';
+  durationInput.value = '';
+  numTravelersInput.value = '';
+  priceAgreement.checked = false;
+  destinationsDropdownInput.value = ''
+  // document.getElementById(priceAgreement).value = '';
+  console.log('priceagree', priceAgreement)
+  tripCost.innerText = '';
+}
+
+function displayCosts() {
+  event.preventDefault()
+  removeHidden(priceEstimateField);
+  addHidden(tripPlanFieldset);
+  let tripExpense = calculateTripCosts();
+  tripCost.innerText = `$${tripExpense} USD`
+}
+
+function calculateTripCosts() {
+  // const bookingDate = bookingDateInput.value;
+  // let formattedDate = bookingDate.split('-').join('/')
+  const duration = Number(durationInput.value);
+  const numTravelers = Number(numTravelersInput.value);
+  const destination = destinationsDropdownInput.value;
+  const destinationID = globalDestination.findDestinationByName(destination);
+  // let tripID = tripData.length + 1;
+  let tripExpense = globalDestination.calculateTripExpense(duration, numTravelers, destinationID);
+  console.log(tripExpense)
+  return tripExpense.toFixed(2)
+}
 
 // Fetch API
 function displayResolvedData() {
@@ -112,7 +159,8 @@ function addUserTripFromInput() {
     status: 'pending',
     suggestedActivities: []
   };
-  var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
+  console.log(dataToTransmit)
+  // var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
   loadUserDashboard();
 }
 
@@ -130,6 +178,7 @@ function loadUserDashboard() {
   // let travelerInformation = blabla.value of the input
   backToHome();
   clearInputFields();
+  clearCostValue();
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
@@ -142,7 +191,7 @@ function loadUserDashboard() {
   console.log(newTraveler)
 }
 
-function clearInputFields() {
+function clearCostValue() {
   clearGrid();
   yearlyCostValue.innerHTML = '';
 }
@@ -155,6 +204,7 @@ function supplyDestinationDropDown() {
       datalist.innerHTML += `<option value="${destination}">${destination}</option>`
     }
   });
+  console.log('dropdowns', dropDownDestinations)
   return dropDownDestinations
 }
 
@@ -181,12 +231,18 @@ function displayYearlyCosts() {
 
 function backToHome() {
   removeHidden(tripRequestBox);
+  removeHidden(tripPlanFieldset);
+  addHidden(tripConfirmation);
   addHidden(userSelectedTrips);
+  addHidden(priceEstimateField);
 }
 
 function displayTripSelection() {
+  addHidden(tripPlanFieldset);
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
+  addHidden(priceEstimateField);
+  addHidden(tripConfirmation);
 }
 
 function displayPastTrips() {
@@ -201,14 +257,14 @@ function displayPastTrips() {
 }
 
 function displayPresentTrips() {
-  displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let tripDates = getAllTripDates(travelerTrips);
   let presentTripDateMatch = globalTrip.findPresentTrips(tripDates, today);
   if (!presentTripDateMatch) {
-    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+    noPresentTrips();
   } else {
+    displayTripSelection();
     console.log('there is a present trip')
     let presentTrip = globalTrip.returnPresentTrip(presentTripDateMatch, tripData);
     let presentTripProperties = globalDestination.returnLocationProperties(presentTrip);
@@ -251,12 +307,25 @@ function modifyTripsToCards(trips) {
 
 function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
-    grid.innerHTML = 'Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!'
+    addHidden(grid);
+    addHidden(userSelectedTrips);
+    removeHidden(tripRequestBox);
+    removeHidden(noTripsDisplay);
+    addHidden(tripPlanFieldset);
   }
 }
 
+function noPresentTrips() {
+      addHidden(grid);
+      addHidden(userSelectedTrips);
+      removeHidden(tripRequestBox);
+      removeHidden(noTripsDisplay);
+      addHidden(tripPlanFieldset);
+}
+
 function clearGrid() {
-  grid.innerHTML = ''
+  addHidden(noTripsDisplay);
+  grid.innerHTML = '';
 }
 
 //date functions
