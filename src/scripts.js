@@ -230,15 +230,16 @@ function displayYearlyCosts() {
 }
 
 function backToHome() {
-  addHidden(tripConfirmation);
   removeHidden(tripRequestBox);
   removeHidden(tripPlanFieldset);
+  addHidden(tripConfirmation);
   addHidden(userSelectedTrips);
   addHidden(priceEstimateField);
 }
 
 function displayTripSelection() {
   addHidden(tripPlanFieldset);
+  addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
   addHidden(priceEstimateField);
   addHidden(tripConfirmation);
@@ -261,12 +262,7 @@ function displayPresentTrips() {
   let tripDates = getAllTripDates(travelerTrips);
   let presentTripDateMatch = globalTrip.findPresentTrips(tripDates, today);
   if (!presentTripDateMatch) {
-    console.log('hehe')
-    clearGrid();
-    addHidden(grid)
-    removeHidden(noTripsDisplay);
-    addHidden(tripPlanFieldset);
-    // ^^ BUG. may come up again.
+    noPresentTrips();
   } else {
     displayTripSelection();
     console.log('there is a present trip')
@@ -311,12 +307,20 @@ function modifyTripsToCards(trips) {
 
 function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
-    removeHidden(noTripsDisplay);
     addHidden(grid);
-    // addHidden(tripPlanFieldset);
-  } else {
-    addHidden(tripRequestBox);
+    addHidden(userSelectedTrips);
+    removeHidden(tripRequestBox);
+    removeHidden(noTripsDisplay);
+    addHidden(tripPlanFieldset);
   }
+}
+
+function noPresentTrips() {
+      addHidden(grid);
+      addHidden(userSelectedTrips);
+      removeHidden(tripRequestBox);
+      removeHidden(noTripsDisplay);
+      addHidden(tripPlanFieldset);
 }
 
 function clearGrid() {
