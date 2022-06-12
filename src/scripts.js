@@ -295,9 +295,14 @@ function modifyTripsToCards(trips) {
   let displayCards = trips.map(trip => {
     grid.innerHTML +=
     `<article class="box" id="${trips.indexOf(trip)}">
+    <div class='img-container'>
     <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
-    <p class='location' id='location'>${trip.location}</p>
-    <p date='trip-date' id='tripDate'>${trip.date}</p>
+    </div>
+    <div class='text-container'>
+    <p class='location text' id='location'><b>Location: </b>${trip.location}</p>
+    <p class='trip-date text' id='tripDate'><b>When You Were There: </b> ${trip.date}</p>
+    <p class='length-stay text' id='lengthStay'><b>Duration of Your Trip: </b> ${trip.duration} days</p>
+    </div>
     </article>`
   });
 }

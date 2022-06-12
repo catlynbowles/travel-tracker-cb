@@ -59,7 +59,7 @@ class Destination {
     let locationProperties = tripsArr.reduce((acc, trip) => {
       let destProperties = this.data.forEach(destination => {
         if (trip.destinationID === destination.id) {
-          acc.push({location: destination.destination, date: trip.date, img: destination.image, alt: destination.alt})
+          acc.push({location: destination.destination, date: trip.date, img: destination.image, alt: destination.alt, duration: trip.duration})
         }
       })
       return acc

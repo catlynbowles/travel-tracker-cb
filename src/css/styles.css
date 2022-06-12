@@ -1,12 +1,13 @@
-* {
+/* * {
   border: 1px solid white;
-}
+} */
+
 
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background: #f8f8ff;
   font-family: 'Lato', sans-serif;
   height: 100%;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 p {
@@ -111,7 +112,7 @@ h4 {
   display: grid;
   justify-content: center;
   align-content: center;
-  grid-template-columns: repeat(2, 225px);
+  grid-template-columns: repeat(3, 325px);
   grid-template-rows: repeat(3, 270px);
   size: 80px;
   grid-gap: 30px;
@@ -128,6 +129,7 @@ h4 {
 .grid-contents{
   width: 500px;
   display: flex;
+  /* display: column; */
   justify-content: center;
   align-items: center;
   /* padding-right: 100px; */
@@ -138,6 +140,9 @@ h4 {
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   /* overflow: hidden; */
+  display: flex;
+  justify-content: column;
+  align-items: center;
   text-align: center
 }
 
@@ -154,3 +159,100 @@ h4 {
   align-items: center;
   text-align: center;
 }
+
+.user-costs {
+
+}
+
+.trip-type {
+  font-size: 25px;
+  height: 40px;
+  align-items: center;
+  margin: 0px;
+}
+
+.trip-type-styling {
+
+}
+
+.opacity {
+  opacity: 0.5;
+
+}
+
+.your-trips {
+  margin: 0px;
+  font-size: 40px;
+  border: 3px solid #FFADAD;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.instructions {
+  margin: 0px;
+  font-size: 15px;
+  border: 3px solid #FFD6A5;
+  background-color: rgba(255, 165, 0, 0.08);
+}
+
+.past {
+  margin-top: 25px;
+  background: #FDFFB6;
+  border: 3px solid #FDFFB6;
+  background-color: rgba(255, 255, 0, 0.08);
+}
+
+.present {
+  border: 3px solid #CAFFBF;
+  background-color: rgba(0, 128, 0, 0.08);
+}
+
+.upcoming {
+  border: 3px solid #9BF6FF;
+  background-color: rgba(0, 255, 255, 0.08);
+}
+
+.pending {
+  margin-bottom: 35px;
+  border: 3px solid #BDB2FF;
+  background-color: rgba(128, 0, 128, 0.08);
+}
+
+.yearly-cost-style {
+  border: 3px solid #FFC6FF;
+  background-color: rgba(255, 0, 255, 0.08);
+}
+
+.zoom:hover {
+   transform: scale(1.2);
+}
+
+.text {
+  font-size: 15px;
+}
+
+.img-container {
+
+}
+
+.text-container {
+
+}
+
+/* .zoom {
+  padding: 50px;
+  background-color: green;
+  transition: transform .2s; /* Animation */
+  /* width: 200px;
+  height: 200px;
+  margin: 0 auto;
+} */
+
+
+/* #f8f8ff off white
+#FFADAD red
+#FFD6A5 orange
+#FDFFB6 yellow
+#CAFFBF green
+#9BF6FF blue
+#BDB2FF purple
+#FFC6FF pink */
