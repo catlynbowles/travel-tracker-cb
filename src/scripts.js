@@ -69,9 +69,19 @@ var loginForm = document.getElementById('loginForm');
 var loginFormStyling = document.getElementById('loginStyling')
 var passwordInput = document.getElementById('passwordInput');
 var usernameInput = document.getElementById('usernameInput');
-loginForm.addEventListener('submit', checkValidLogin);
 
 // event listeners
+// window.addEventListener('load', displayResolvedData);
+//
+// clickPastTrips.addEventListener('click', displayPastTrips);
+// clickPresentTrips.addEventListener('click', displayPresentTrips);
+// clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
+// clickPendingTrips.addEventListener('click', displayPendingTrips);
+//
+// homeButton.addEventListener('click', loadUserDashboard);
+// tripForm.addEventListener('submit', displayCosts);
+// addTripForm.addEventListener('submit', displayTripConfirmation);
+
 window.addEventListener('load', displayResolvedData);
 
 clickPastTrips.addEventListener('click', displayPastTrips);
@@ -83,43 +93,41 @@ homeButton.addEventListener('click', loadUserDashboard);
 tripForm.addEventListener('submit', displayCosts);
 addTripForm.addEventListener('submit', displayTripConfirmation);
 
+loginForm.addEventListener('submit', checkValidLogin);
+
+// on page load, load all my data, and load the logindashboard
 
 // Fetch API
-//1
 function displayResolvedData() {
   fetchAllData()
   .then((allData) => {
     getAllTravelerData(allData[0].travelers)
     getAllTripData(allData[1].trips)
     getAllDestinationData(allData[2].destinations)
-    console.log(allData)
   })
 }
-//2
-const getAllTravelerData = (data) => {
+
+function getAllTravelerData(data) {
   travelerData = data;
-  console.log('travelerData', travelerData)
   travelerRepository = new TravelerRepository(travelerData);
 }
-//3
-const getAllTripData = (data) => {
+
+function getAllTripData (data) {
   tripData = data;
-  console.log('tripData', tripData)
   globalTrip = new Trip(tripData);
 }
 //4
-const getAllDestinationData = (data) => {
+function getAllDestinationData(data) {
   destinationData = data;
-  console.log('tripData', destinationData)
   globalDestination = new Destination(destinationData);
-  if (globalTraveler) {
-    loadUserDashboard()
-  } else {
-    displayLoginDashboard();
-  }
+  displayLoginDashboard();
 }
+// step 1 completed
+// on step 2, the user will login.
+// the first step of this login, is to check whether or not the information is valid.
+// if it is not, reset the values, show an error message ,and go back to the dashboard.
 
-
+//login page functions
 function checkValidLogin() {
   event.preventDefault();
   const username = usernameInput.value;
@@ -132,66 +140,110 @@ function checkValidLogin() {
   loadTraveler(id)
   console.log(validityCheck2)
 }
-
+//1.1
 function checkForFalse(ele) {
   if (!ele) {
-    console.log('hi')
     loginErrorMsg.classList.remove('hidden')
     usernameInput.value = ''
     passwordInput.value = ''
     setTimeout(displayLoginDashboard, 3000)
-    return
   }
 }
 
-function displayLoginDashboard() {
-  addHidden(tripConfirmation);
-  addHidden(userSelectedTrips);
-  addHidden(priceEstimateField);
-  addHidden(tripRequestBox);
-  addHidden(tripPlanFieldset);
-  addHidden(allUserTrips);
-  addHidden(userDashboardDisplay);
-  addHidden(loginErrorMsg);
-  removeHidden(loginPage);
-  removeHidden(loginForm);
-  removeHidden(loginPage);
-  removeHidden(loginPageField);
-  removeHidden(loginLegend);
-  removeHidden(loginPage);
+function splitIdValue(usernameString) {
+  let ID = usernameString.split(/(\d+)/);
+  console.log(ID)
+  return ID[1]
 }
 
-function reverseLogin() {
-  removeHidden(userSelectedTrips);
-  addHidden(priceEstimateField);
-  addHidden(tripRequestBox);
-  addHidden(tripPlanFieldset);
-  removeHidden(allUserTrips);
-  addHidden(loginErrorMsg);
+function checkIdIsValid(id) {
+  if (id >= 1 && id <= 50) {
+    return true
+  } else {
+    return false
+  }
 }
+
+// if the id is valid, and password correct, take them to the login
+// dashboard, where the trips menu bar and the dream trip box
+// are displayed.
+// step 2 complete
+// step 3, display dashboard.
+
+// function displayLoginDashboard() {
+//   removeHidden(loginPage);
+//   addHidden(allUserTrips);
+//   // addHidden(tripConfirmation);
+//   // addHidden(userSelectedTrips);
+//   // addHidden(priceEstimateField);
+//   // addHidden(tripRequestBox);
+//   // addHidden(tripPlanFieldset);
+//   // addHidden(userDashboardDisplay);
+//   // addHidden(loginErrorMsg);
+//   // removeHidden(loginPage);
+//   // removeHidden(loginForm);
+//   // removeHidden(loginPageField);
+//   // removeHidden(loginLegend);
+//   // removeHidden(loginPage);
+// }
+// function reverseLogin() {
+//   removeHidden(userSelectedTrips);
+//   addHidden(priceEstimateField);
+//   addHidden(tripRequestBox);
+//   addHidden(tripPlanFieldset);
+//   removeHidden(allUserTrips);
+//   addHidden(loginErrorMsg);
+// }
+// function hideLogin() {
+//   addHidden(loginPage);
+//   addHidden(loginPageField);
+//   // addHidden(userSelectedTrips);
+//   // addHidden(loginLegend);
+//   // addHidden(loginErrorMsg);
+//   // addHidden(loginForm);
+// }
+// function showDashboard() {
+//   removeHidden(userSelectedTrips);
+//   removeHidden(tripRequestBox);
+//
+//   removeHidden(tripConfirmation);
+//   removeHidden(tripPlanFieldset);
+//   removeHidden(allUserTrips);
+//   removeHidden(userDashboardDisplay);
+//   removeHidden(tripPlanFieldset)
+//   removeHidden(tripRequestBox)
+//   removeHidden(userDashboardDisplay);
+//   removeHidden(userSelectedTrips);
+//   removeHidden(messageDisplay);
+//   removeHidden(yearlyCostValue)
+// }
+
+function displayLoginDashboard() {
+  removeHidden(loginPage);
+  addHidden(allUserTrips);
+}
+
 
 function hideLogin() {
   addHidden(loginPage);
-  addHidden(userSelectedTrips);
   addHidden(loginPageField);
-  addHidden(loginLegend);
-  addHidden(loginErrorMsg);
-  addHidden(loginForm);
 }
 
 function showDashboard() {
-  removeHidden(tripConfirmation);
   removeHidden(userSelectedTrips);
   removeHidden(tripRequestBox);
-  removeHidden(tripPlanFieldset);
   removeHidden(allUserTrips);
-  removeHidden(userDashboardDisplay);
-  removeHidden(tripPlanFieldset)
-  removeHidden(tripRequestBox)
-  removeHidden(userDashboardDisplay);
-  removeHidden(userSelectedTrips);
-  removeHidden(messageDisplay);
-  removeHidden(yearlyCostValue)
+  addHidden(messageDisplay);
+
+  // removeHidden(tripConfirmation);
+  // removeHidden(tripPlanFieldset);
+  // removeHidden(userDashboardDisplay);
+  // removeHidden(tripPlanFieldset)
+  // removeHidden(tripRequestBox)
+  // removeHidden(userDashboardDisplay);
+  // removeHidden(userSelectedTrips);
+  // removeHidden(messageDisplay);
+  // removeHidden(yearlyCostValue)
 }
 
 function loadTraveler(id) {
@@ -217,21 +269,6 @@ function loadUserDashboard() {
   // supplyDestinationDropDown();
   // console.log(newTraveler)
 }
-
-function splitIdValue(usernameString) {
-  let ID = usernameString.split(/(\d+)/);
-  console.log(ID)
-  return ID[1]
-}
-
-function checkIdIsValid(id) {
-  if (id >= 1 && id <= 50) {
-    return true
-  } else {
-    return false
-  }
-}
-
 
 //posts
 function addUserTripFromInput() {

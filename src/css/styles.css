@@ -134,7 +134,7 @@ fieldset {
   width: 400px;
   height: 500px;
   text-align: center;
-  margin-right: 100px;
+  margin-right: 0px;
   font-weight: bold;
 }
 
@@ -207,10 +207,10 @@ h3, h4 {
 
 .message-display {
   font-weight: bold;
-  width: 870px;
+  width: 800px;
   align-items: center;
   text-align: center;
-  margin-left: 100px;
+  margin-left: 20px;
   margin-top: 90px;
   border: 5px solid transparent;
   border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
@@ -293,7 +293,7 @@ legend {
 
 .no-trips-display,
 .trip-confirmation-message {
-  width: 810px;
+  width: 700px;
   font-size: 35px;
 }
 

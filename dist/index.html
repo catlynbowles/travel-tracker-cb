@@ -24,12 +24,10 @@
           <h4 class='dashboard-buttons zoom' role="button" aria-pressed="false" id='logoutButton'>Logout</h4>
         </div>
       </section>
-      <!-- <div class='login-styling loginStyling hidden'> -->
+      <section class='user-dashboard-display' id='userDashboardDisplay'>
         <section class='login-page-section hidden' id='loginPage'>
-          <fieldset id='loginPageField' class='hidden'>
-            <legend id='loginLegend' class='hidden'>Login to Travel Tracker</legend>
-            <!-- <div id="loginErrorMsgHolder"> -->
-            <!-- </div> -->
+          <fieldset id='loginPageField'>
+            <legend id='loginLegend'>Login to Travel Tracker</legend>
             <form id='loginForm'>
               <label class="username login input" id="username">Username:</label>
               <input class="username-input login input" id="usernameInput" type="text" placeholder="traveler + (yourid)" required><br>
@@ -40,8 +38,7 @@
             </form>
           </fieldset>
         </section>
-      <!-- </div> -->
-      <section class='user-dashboard-display hidden' id='userDashboardDisplay'>
+        <!-- </div> -->
         <div tabindex=0 class='box-styling'>
           <section class='all-user-trips' id='allUserTrips'>
             <h5 class='your-trips'>Your Trips</h4>
