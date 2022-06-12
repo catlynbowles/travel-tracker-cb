@@ -36,14 +36,13 @@ var location = document.getElementById('location');
 var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
-var yearlyCost = document.getElementById('yearlyCost');
+// var yearlyCost = document.getElementById('yearlyCost');
 var yearlyCostValue = document.getElementById('yearlyCostValue');
 var tripConfirmation = document.getElementById('tripConfirmation');
 var noTripsDisplay = document.getElementById('noTripsDisplay');
 var messageDisplay = document.getElementById('messageDisplay');
 var boardDisplay = document.getElementById('boardDisplay')
 var allUserTrips = document.getElementById('allUserTrips');
-// loginForm.addEventListener('click', loadboard);
 
 //inputs
 var bookingDateInput = document.getElementById('bookingDateInput');
@@ -86,6 +85,7 @@ addTripForm.addEventListener('submit', displayTripConfirmation);
 
 
 // Fetch API
+//1
 function displayResolvedData() {
   fetchAllData()
   .then((allData) => {
@@ -95,44 +95,30 @@ function displayResolvedData() {
     console.log(allData)
   })
 }
-
-
-function displayLoginDashboard() {
-  // removeHidden(loginStyling);
-
-  addHidden(tripConfirmation);
-  addHidden(messageDisplay);
-  addHidden(userSelectedTrips);
-  addHidden(priceEstimateField);
-  addHidden(tripRequestBox);
-  addHidden(tripPlanFieldset);
-  addHidden(allUserTrips);
-  addHidden(userDashboardDisplay);
-  addHidden(loginErrorMsg);
-
-  removeHidden(loginPage);
-  removeHidden(loginForm);
-  removeHidden(loginPage);
-  removeHidden(loginPageField)
-  removeHidden(loginLegend)
-  removeHidden(loginPage)
-
-  // addHidden(loginPage);
-  // addHidden(loginPageField)
-  // addHidden(loginLegend)
-  // addHidden(loginErrorMsg);
+//2
+const getAllTravelerData = (data) => {
+  travelerData = data;
+  console.log('travelerData', travelerData)
+  travelerRepository = new TravelerRepository(travelerData);
+}
+//3
+const getAllTripData = (data) => {
+  tripData = data;
+  console.log('tripData', tripData)
+  globalTrip = new Trip(tripData);
+}
+//4
+const getAllDestinationData = (data) => {
+  destinationData = data;
+  console.log('tripData', destinationData)
+  globalDestination = new Destination(destinationData);
+  if (globalTraveler) {
+    loadUserDashboard()
+  } else {
+    displayLoginDashboard();
+  }
 }
 
-function reverseLogin() {
-  removeHidden(userSelectedTrips);
-  addHidden(priceEstimateField);
-  addHidden(tripRequestBox);
-  addHidden(tripPlanFieldset);
-  // addHidden(loginForm);
-  // removeHidden(loginPage);
-  removeHidden(allUserTrips);
-  addHidden(loginErrorMsg);
-}
 
 function checkValidLogin() {
   event.preventDefault();
@@ -143,7 +129,7 @@ function checkValidLogin() {
   let id = Number(splitIdValue(username));
   let validityCheck2 = checkIdIsValid(id);
   let phase2 = checkForFalse(validityCheck2);
-  loadUserDashboard(id)
+  loadTraveler(id)
   console.log(validityCheck2)
 }
 
@@ -157,55 +143,79 @@ function checkForFalse(ele) {
     return
   }
 }
-function loadUserDashboard(id) {
 
-  removeHidden(tripConfirmation);
-  // removeHidden(messageDisplay);
+function displayLoginDashboard() {
+  addHidden(tripConfirmation);
+  addHidden(userSelectedTrips);
+  addHidden(priceEstimateField);
+  addHidden(tripRequestBox);
+  addHidden(tripPlanFieldset);
+  addHidden(allUserTrips);
+  addHidden(userDashboardDisplay);
+  addHidden(loginErrorMsg);
+  removeHidden(loginPage);
+  removeHidden(loginForm);
+  removeHidden(loginPage);
+  removeHidden(loginPageField);
+  removeHidden(loginLegend);
+  removeHidden(loginPage);
+}
+
+function reverseLogin() {
   removeHidden(userSelectedTrips);
-  // removeHidden(priceEstimateField);
+  addHidden(priceEstimateField);
+  addHidden(tripRequestBox);
+  addHidden(tripPlanFieldset);
+  removeHidden(allUserTrips);
+  addHidden(loginErrorMsg);
+}
+
+function hideLogin() {
+  addHidden(loginPage);
+  addHidden(userSelectedTrips);
+  addHidden(loginPageField);
+  addHidden(loginLegend);
+  addHidden(loginErrorMsg);
+  addHidden(loginForm);
+}
+
+function showDashboard() {
+  removeHidden(tripConfirmation);
+  removeHidden(userSelectedTrips);
   removeHidden(tripRequestBox);
   removeHidden(tripPlanFieldset);
   removeHidden(allUserTrips);
   removeHidden(userDashboardDisplay);
-  // removeHidden(loginErrorMsg);
-  // refactored upon creation of login page.
-  // let travelerInformation = blabla.value of the input
-  // addHidden(loginStyling)
-  // addHidden(loginLegend)
   removeHidden(tripPlanFieldset)
   removeHidden(tripRequestBox)
-  // removeHidden(allUserTrips)
   removeHidden(userDashboardDisplay);
   removeHidden(userSelectedTrips);
-  // removeHidden(userTrip)
-  addHidden(loginPage);
-  // addHidden(loginPageSection)
-  addHidden(userSelectedTrips)
-  addHidden(loginPageField)
-  addHidden(loginLegend)
-  addHidden(loginErrorMsg);
-  loginForm.removeEventListener('submit', checkValidLogin)
-  addHidden(loginForm);
-  // removeHidden(loginPage);
-  // removeHidden(loginForm);
-  // removeHidden(loginPage);
-  // addHidden(loginPage);
-  addHidden(loginPageSection);
-  // addHidden(loginPageField)
-  backToHome();
-  clearInputFields();
-  clearCostValue();
-  addHidden(messageDisplay);
-  let today = getTodaysDate();
-  let calendarMin = today.split('/').join('-');
-  bookingDateInput.min = calendarMin;
-  // let travelerId = getRandomUserId(travelerData);
+  removeHidden(messageDisplay);
+  removeHidden(yearlyCostValue)
+}
+
+function loadTraveler(id) {
   let newTraveler = travelerRepository.getDataById(id);
   globalTraveler = newTraveler;
   displayFirstName();
   displayYearlyCosts();
   supplyDestinationDropDown();
-  console.log(newTraveler)
+  loadUserDashboard();
+}
+
+function loadUserDashboard() {
+  showDashboard();
+  hideLogin();
+  backToHome();
+  clearInputFields();
+  // updateCostValue();
+  let today = getTodaysDate();
+  let calendarMin = today.split('/').join('-');
+  bookingDateInput.min = calendarMin;
+  // displayFirstName();
+  // displayYearlyCosts();
+  // supplyDestinationDropDown();
+  // console.log(newTraveler)
 }
 
 function splitIdValue(usernameString) {
@@ -222,28 +232,6 @@ function checkIdIsValid(id) {
   }
 }
 
-
-
-
-const getAllTravelerData = (data) => {
-  travelerData = data;
-  console.log('travelerData', travelerData)
-  travelerRepository = new TravelerRepository(travelerData);
-}
-
-const getAllTripData = (data) => {
-  tripData = data;
-  console.log('tripData', tripData)
-  globalTrip = new Trip(tripData);
-}
-
-const getAllDestinationData = (data) => {
-  destinationData = data;
-  console.log('tripData', destinationData)
-  globalDestination = new Destination(destinationData);
-  displayLoginDashboard();
-  // loadUserDashboard();
-}
 
 //posts
 function addUserTripFromInput() {
@@ -281,34 +269,35 @@ function backToHome() {
   removeHidden(tripRequestBox);
   removeHidden(tripPlanFieldset);
   addHidden(tripConfirmation);
-  addHidden(messageDisplay);
+  removeHidden(messageDisplay)
   addHidden(userSelectedTrips);
   addHidden(priceEstimateField);
 }
-
-// function loginPageView() {
-//   addHidden(tripConfirmation);
-//   addHidden(messageDisplay);
-//   addHidden(userSelectedTrips);
-//   addHidden(priceEstimateField);
-//   addHidden(tripRequestBox);
-//   addHidden(tripPlanFieldset);
-//   removeHidden(loginPage);
-// }
 
 function displayTripSelection() {
   addHidden(tripPlanFieldset);
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
-  addHidden(messageDisplay)
+  // removeHidden(messageDisplay);
   addHidden(priceEstimateField);
   addHidden(tripConfirmation);
 }
 
-function clearCostValue() {
-  clearGrid();
-  yearlyCostValue.innerHTML = '';
+function checkForEmptyDisplay(trips) {
+  if (trips.length === 0) {
+    addHidden(grid);
+    addHidden(userSelectedTrips);
+    addHidden(tripPlanFieldset);
+    removeHidden(messageDisplay);
+    removeHidden(tripRequestBox);
+    removeHidden(noTripsDisplay);
+  }
 }
+//
+// function clearCostValue() {
+//   clearGrid();
+//   yearlyCostValue.innerHTML = '';
+// }
 
 function clearInputFields() {
   bookingDateInput.value = '';
@@ -352,13 +341,10 @@ function displayYearlyCosts() {
 }
 
 function calculateTripCosts() {
-  // const bookingDate = bookingDateInput.value;
-  // let formattedDate = bookingDate.split('-').join('/')
   const duration = Number(durationInput.value);
   const numTravelers = Number(numTravelersInput.value);
   const destination = destinationsDropdownInput.value;
   const destinationID = globalDestination.findDestinationByName(destination);
-  // let tripID = tripData.length + 1;
   let tripExpense = globalDestination.calculateTripExpense(duration, numTravelers, destinationID);
   console.log(tripExpense)
   return tripExpense.toFixed(2)
@@ -444,15 +430,6 @@ function modifyTripsToCards(trips) {
   });
 }
 
-function checkForEmptyDisplay(trips) {
-  if (trips.length === 0) {
-    addHidden(grid);
-    addHidden(userSelectedTrips);
-    addHidden(tripPlanFieldset);
-    removeHidden(tripRequestBox);
-    removeHidden(noTripsDisplay);
-  }
-}
 
 function clearGrid() {
   addHidden(noTripsDisplay);
