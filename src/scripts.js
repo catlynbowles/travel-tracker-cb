@@ -41,8 +41,11 @@ var yearlyCostValue = document.getElementById('yearlyCostValue');
 var tripConfirmation = document.getElementById('tripConfirmation');
 var noTripsDisplay = document.getElementById('noTripsDisplay');
 var messageDisplay = document.getElementById('messageDisplay');
-
-// var loginPage = document.getElementById('loginPage');
+var userDashboardDisplay = document.getElementById('userDashboardDisplay')
+var loginPage = document.getElementById('loginPage');
+var loginForm = document.getElementById('loginForm');
+var allUserTrips = document.getElementById('allUserTrips');
+// loginForm.addEventListener('click', loadUserDashboard);
 
 //inputs
 var bookingDateInput = document.getElementById('bookingDateInput');
@@ -99,7 +102,8 @@ const getAllDestinationData = (data) => {
   destinationData = data;
   console.log('tripData', destinationData)
   globalDestination = new Destination(destinationData);
-  loadUserDashboard();
+  loginDashboard();
+  // loadUserDashboard();
 }
 
 //posts
@@ -150,6 +154,7 @@ function backToHome() {
 //   addHidden(priceEstimateField);
 //   addHidden(tripRequestBox);
 //   addHidden(tripPlanFieldset);
+//   removeHidden(loginPage);
 // }
 
 function displayTripSelection() {
@@ -196,6 +201,19 @@ function supplyDestinationDropDown() {
     }
   });
   return dropDownDestinations
+}
+
+function loginDashboard() {
+  addHidden(tripConfirmation);
+   addHidden(messageDisplay);
+   addHidden(userSelectedTrips);
+   addHidden(priceEstimateField);
+   addHidden(tripRequestBox);
+   addHidden(tripPlanFieldset);
+   removeHidden(loginPage);
+   // addHidden(userDashboardDisplay);
+   addHidden(allUserTrips);
+   addHidden(userDashboardDisplay);
 }
 
 function loadUserDashboard() {
@@ -322,8 +340,8 @@ function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
     addHidden(grid);
     addHidden(userSelectedTrips);
-    removeHidden(tripRequestBox);
     addHidden(tripPlanFieldset);
+    removeHidden(tripRequestBox);
     removeHidden(noTripsDisplay);
   }
 }
