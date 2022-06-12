@@ -9,11 +9,6 @@ import Traveler from './Traveler';
 import Trip from './Trip';
 import Destination from './Destination';
 
-
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-
 // global variables
 var today;
 var travelerData;
@@ -43,7 +38,8 @@ var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 let yearlyCostValue = document.getElementById('yearlyCostValue');
 let tripConfirmation = document.getElementById('tripConfirmation');
-let noTripsDisplay = document.getElementById('noTripsDisplay')
+let noTripsDisplay = document.getElementById('noTripsDisplay');
+let messageDisplay = document.getElementById('messageDisplay')
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
@@ -139,6 +135,7 @@ function backToHome() {
   removeHidden(tripRequestBox);
   removeHidden(tripPlanFieldset);
   addHidden(tripConfirmation);
+  addHidden(messageDisplay);
   addHidden(userSelectedTrips);
   addHidden(priceEstimateField);
 }
@@ -147,6 +144,7 @@ function displayTripSelection() {
   addHidden(tripPlanFieldset);
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
+  addHidden(messageDisplay)
   addHidden(priceEstimateField);
   addHidden(tripConfirmation);
 }
@@ -162,8 +160,6 @@ function clearInputFields() {
   numTravelersInput.value = '';
   priceAgreement.checked = false;
   destinationsDropdownInput.value = ''
-  // document.getElementById(priceAgreement).value = '';
-  console.log('priceagree', priceAgreement)
   tripCost.innerText = '';
 }
 
@@ -171,7 +167,6 @@ function getTodaysDate() {
   let todaysDate = new Date();
   let formattedToday = formatDate(todaysDate);
   today = formattedToday;
-  console.log(today)
   return today;
 }
 
@@ -197,6 +192,7 @@ function loadUserDashboard() {
   backToHome();
   clearInputFields();
   clearCostValue();
+  addHidden(messageDisplay);
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
@@ -234,6 +230,7 @@ function displayCosts() {
   event.preventDefault()
   removeHidden(priceEstimateField);
   addHidden(tripPlanFieldset);
+  addHidden(tripConfirmation);
   let tripExpense = calculateTripCosts();
   tripCost.innerText = `$${tripExpense} USD`
 }
@@ -241,7 +238,9 @@ function displayCosts() {
 function displayTripConfirmation() {
   event.preventDefault();
   addHidden(priceEstimateField);
+  tripConfirmation.innerHTML = `<p class='trip-confirmation-message' id="tripConfirmation"><br> ${globalTraveler.returnFirstName()}: <br> We are booking your trip to ${destinationsDropdownInput.value} on ${bookingDateInput.value.split('-').join('/')}! </br><br>You will be redirected back to the main page.</p>`
   removeHidden(tripConfirmation);
+  removeHidden(messageDisplay);
   setTimeout(addUserTripFromInput, 3000);
 }
 
@@ -294,10 +293,15 @@ function displayPendingTrips() {
 function modifyTripsToCards(trips) {
   let displayCards = trips.map(trip => {
     grid.innerHTML +=
-    `<article class="box" id="${trips.indexOf(trip)}">
+    `<article class="box zoom" id="${trips.indexOf(trip)}">
+    <div tabindex=0 class='img-container'>
     <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
-    <p class='location' id='location'>${trip.location}</p>
-    <p date='trip-date' id='tripDate'>${trip.date}</p>
+    </div>
+    <div tabindex=0 class='text-container'>
+    <p class='location text' id='location'><b>Location: </b>${trip.location}</p>
+    <p class='trip-date text' id='tripDate'><b>Date of Your Trip: </b> ${trip.date}</p>
+    <p class='length-stay text' id='lengthStay'><b>Duration of Your Trip: </b> ${trip.duration} days</p>
+    </div>
     </article>`
   });
 }
@@ -307,8 +311,8 @@ function checkForEmptyDisplay(trips) {
     addHidden(grid);
     addHidden(userSelectedTrips);
     removeHidden(tripRequestBox);
-    removeHidden(noTripsDisplay);
     addHidden(tripPlanFieldset);
+    removeHidden(noTripsDisplay);
   }
 }
 

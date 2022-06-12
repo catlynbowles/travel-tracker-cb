@@ -1,12 +1,11 @@
 * {
-  border: 1px solid white;
+  border-radius: 25px;
 }
 
+
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   font-family: 'Lato', sans-serif;
   height: 100%;
-  font-weight: bold;
 }
 
 p {
@@ -25,16 +24,29 @@ p {
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	align-content: stretch;
 }
 
+h1, h2 {
+  font-size: 30px;
+  margin: 10px;
+}
+
+
 .top-bar {
+  border-radius: 0px;
   position:fixed;
   top: 0;
   right: 0;
   left: 0;
-  background-color: #7F7B82;
-  height: 100px;
+  background-color: black;
+  color: white;
+  height: 125px;
+}
+
+.dashboard-buttons {
+  margin: 30px;
+  margin-top: 80px;
+  font-size: 25px;
 }
 
 .right-contents {
@@ -42,9 +54,10 @@ p {
   margin: 0;
   padding: 0;
   display: flex;
-  height: 20px;
+  height: 60px;
   justify-content: flex-end;
   flex-wrap: wrap;
+  padding-bottom: 20px;
 }
 
 .box-styling {
@@ -55,29 +68,67 @@ p {
 }
 
 form {
-  width: 400px;
+  width: 700px;
+  height: 500px;
   text-align: center;
+}
+
+label {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+input {
+  font-size: 20px;
+  width: 200px;
+  height: 30px;
+  margin-bottom: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+@keyframes slidebg {
+  to {
+    background-position:20vw;
+  }
+}
+
+.rainbow-5:hover{
+   background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+   animation:slidebg 5s linear infinite;
+}
+
+.booking-date-input {
+  padding-bottom: 10px;
 }
 
 fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 5px solid transparent;
+  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  border-image-slice: 1;
+  border-radius: 25px;
 }
 
 .trip-request-box {
-  width: 500px;
-  height: 100%;
+  width: 700px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 50px;
+}
+
+.price-estimate {
+  margin-top: 30px;
 }
 
 .all-user-trips {
-  width: 300px;
+  width: 400px;
+  height: 500px;
   text-align: center;
-  margin-right: 50px;
+  margin-right: 100px;
+  font-weight: bold;
 }
 
 .welcome-text {
@@ -89,10 +140,6 @@ fieldset {
 
 h3, h4 {
   margin: 0;
-}
-
-h4 {
-  margin-left: 30px;
 }
 
 .trip-type,
@@ -111,13 +158,12 @@ h4 {
   display: grid;
   justify-content: center;
   align-content: center;
-  grid-template-columns: repeat(2, 225px);
+  grid-template-columns: repeat(3, 250px);
   grid-template-rows: repeat(3, 270px);
   size: 80px;
   grid-gap: 30px;
   padding: 0px;
-  cursor: pointer;
-  padding-right: 400px;
+  margin: 0px;
 }
 
 .location,
@@ -126,31 +172,137 @@ h4 {
 }
 
 .grid-contents{
-  width: 500px;
+  width: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding-right: 100px; */
 }
 
 .box {
   background-color: white;
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  /* overflow: hidden; */
-  text-align: center
+  border: 2px red;
+  text-align: center;
+  border-radius: 25px;
 }
 
-/* .form-and-book {
+.user-dashboard-display {
   display: flex;
-  flex-direction: column;
-  /* wrap: wrap; */
-  /* width: 200px */
+  align-items: center;
+  justify-content: center;
+}
 
+.style-plan-fieldset {
+  margin-top: 100px;
+  width: 700px;
+}
 
 .message-display {
-  width: 500px;
-  width: 200px;
+  font-weight: bold;
+  width: 870px;
   align-items: center;
   text-align: center;
+  margin-left: 100px;
+  margin-top: 90px;
+  border: 5px solid transparent;
+  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  border-image-slice: 1;
 }
+
+.trip-type {
+  font-size: 25px;
+  height: 40px;
+  align-items: center;
+  margin: 0px;
+}
+
+.trip-type-styling {
+  margin-top: 70px;
+  margin-right: 100px;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.your-trips {
+  margin-left: 0px;
+  margin-top: 30px;
+  margin-right: 100px;
+  font-size: 40px;
+  border: 3px solid #FFADAD;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.instructions {
+  margin: 0px;
+  font-size: 15px;
+  border: 3px solid #FFD6A5;
+  background-color: rgba(255, 165, 0, 0.08);
+}
+
+.past {
+  margin-top: 25px;
+  background: #FDFFB6;
+  border: 3px solid #FDFFB6;
+  background-color: rgba(255, 255, 0, 0.08);
+}
+
+.present {
+  border: 3px solid #CAFFBF;
+  background-color: rgba(0, 128, 0, 0.08);
+}
+
+.upcoming {
+  border: 3px solid #9BF6FF;
+  background-color: rgba(0, 255, 255, 0.08);
+}
+
+.pending {
+  margin-bottom: 35px;
+  border: 3px solid #BDB2FF;
+  background-color: rgba(128, 0, 128, 0.08);
+}
+
+.yearly-cost-style {
+  border: 3px solid #FFC6FF;
+  background-color: rgba(255, 0, 255, 0.08);
+}
+
+.zoom:hover {
+   transform: scale(1.5);
+}
+
+.text {
+  font-size: 15px;
+}
+
+legend {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.no-trips-display,
+.trip-confirmation-message {
+  width: 810px;
+  font-size: 35px;
+}
+
+.price-estimate {
+  width: 700px;
+  margin-top: 100px;
+  font-size: 30px;
+  /* display: flex; */
+  padding-bottom: 10px;
+}
+
+/* #f8f8ff off white
+#FFADAD red
+#FFD6A5 orange
+#FDFFB6 yellow
+#CAFFBF green
+#9BF6FF blue
+#BDB2FF purple
+#FFC6FF pink */
