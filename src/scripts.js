@@ -130,8 +130,8 @@ function getAllDestinationData(data) {
 //login page functions
 function checkValidLogin() {
   event.preventDefault();
-  const username = usernameInput.value;
-  const password = passwordInput.value;
+  let username = usernameInput.value;
+  let password = passwordInput.value;
   let validityCheck1 = (password === 'travel');
   let phase1 = checkForFalse(validityCheck1);
   let id = Number(splitIdValue(username));
@@ -140,7 +140,7 @@ function checkValidLogin() {
   loadTraveler(id)
   console.log(validityCheck2)
 }
-//1.1
+
 function checkForFalse(ele) {
   if (!ele) {
     loginErrorMsg.classList.remove('hidden')
@@ -167,6 +167,7 @@ function checkIdIsValid(id) {
 // if the id is valid, and password correct, take them to the login
 // dashboard, where the trips menu bar and the dream trip box
 // are displayed.
+// load the new traveler from the data
 // step 2 complete
 // step 3, display dashboard.
 
@@ -217,7 +218,46 @@ function checkIdIsValid(id) {
 //   removeHidden(messageDisplay);
 //   removeHidden(yearlyCostValue)
 // }
+// function showDashboard() {
+//   removeHidden(userSelectedTrips);
+//   removeHidden(tripRequestBox);
+//   removeHidden(allUserTrips);
+//   addHidden(messageDisplay);
+//
+//   // removeHidden(tripConfirmation);
+//   // removeHidden(tripPlanFieldset);
+//   // removeHidden(userDashboardDisplay);
+//   // removeHidden(tripPlanFieldset)
+//   // removeHidden(tripRequestBox)
+//   // removeHidden(userDashboardDisplay);
+//   // removeHidden(userSelectedTrips);
+//   // removeHidden(messageDisplay);
+//   // removeHidden(yearlyCostValue)
+// }
+// function backToHome() {
+//   removeHidden(tripRequestBox);
+//   removeHidden(tripPlanFieldset);
+//   addHidden(tripConfirmation);
+//   removeHidden(messageDisplay)
+//   addHidden(userSelectedTrips);
+//   addHidden(priceEstimateField);
+// }
+// function loadUserDashboard() {
+//   showDashboard();
+//   hideLogin();
+//   // backToHome();
+//   clearInputFields();
+//   // updateCostValue();
+//   let today = getTodaysDate();
+//   let calendarMin = today.split('/').join('-');
+//   bookingDateInput.min = calendarMin;
+//   // displayFirstName();
+//   // displayYearlyCosts();
+//   // supplyDestinationDropDown();
+//   // console.log(newTraveler)
+// }
 
+//login page display
 function displayLoginDashboard() {
   removeHidden(loginPage);
   addHidden(allUserTrips);
@@ -229,21 +269,13 @@ function hideLogin() {
   addHidden(loginPageField);
 }
 
+//dashboard display
 function showDashboard() {
   removeHidden(userSelectedTrips);
   removeHidden(tripRequestBox);
   removeHidden(allUserTrips);
   addHidden(messageDisplay);
-
-  // removeHidden(tripConfirmation);
-  // removeHidden(tripPlanFieldset);
-  // removeHidden(userDashboardDisplay);
-  // removeHidden(tripPlanFieldset)
-  // removeHidden(tripRequestBox)
-  // removeHidden(userDashboardDisplay);
-  // removeHidden(userSelectedTrips);
-  // removeHidden(messageDisplay);
-  // removeHidden(yearlyCostValue)
+  addHidden(userSelectedTrips);
 }
 
 function loadTraveler(id) {
@@ -251,98 +283,30 @@ function loadTraveler(id) {
   globalTraveler = newTraveler;
   displayFirstName();
   displayYearlyCosts();
-  supplyDestinationDropDown();
   loadUserDashboard();
+}
+
+function displayFirstName() {
+  let travelerFirstName = globalTraveler.returnFirstName();
+  welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
+}
+
+function displayYearlyCosts() {
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(travelerTrips);
+  yearlyCostValue.innerText = ` $${yearlyExpense}`;
+  // if the cost is 0, should i say something else?
+  console.log(yearlyExpense)
 }
 
 function loadUserDashboard() {
   showDashboard();
   hideLogin();
-  backToHome();
-  clearInputFields();
-  // updateCostValue();
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
-  // displayFirstName();
-  // displayYearlyCosts();
-  // supplyDestinationDropDown();
-  // console.log(newTraveler)
-}
-
-//posts
-function addUserTripFromInput() {
-  // event.preventDefault();
-  const bookingDate = bookingDateInput.value;
-  let formattedDate = bookingDate.split('-').join('/')
-  const duration = Number(durationInput.value);
-  const numTravelers = Number(numTravelersInput.value);
-  const destination = destinationsDropdownInput.value;
-  const destinationID = globalDestination.findDestinationByName(destination);
-  let tripID = tripData.length + 1;
-  let dataToTransmit = {id: tripID,
-    userID: globalTraveler.id,
-    destinationID: destinationID,
-    travelers: numTravelers,
-    date: formattedDate,
-    duration: duration,
-    status: 'pending',
-    suggestedActivities: []
-  };
-  console.log(dataToTransmit)
-  var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
-}
-
-//functions
-function removeHidden(ele) {
-  ele.classList.remove('hidden');
-}
-
-function addHidden(ele) {
-  ele.classList.add('hidden');
-}
-
-function backToHome() {
-  removeHidden(tripRequestBox);
-  removeHidden(tripPlanFieldset);
-  addHidden(tripConfirmation);
-  removeHidden(messageDisplay)
-  addHidden(userSelectedTrips);
-  addHidden(priceEstimateField);
-}
-
-function displayTripSelection() {
-  addHidden(tripPlanFieldset);
-  addHidden(tripRequestBox);
-  removeHidden(userSelectedTrips);
-  // removeHidden(messageDisplay);
-  addHidden(priceEstimateField);
-  addHidden(tripConfirmation);
-}
-
-function checkForEmptyDisplay(trips) {
-  if (trips.length === 0) {
-    addHidden(grid);
-    addHidden(userSelectedTrips);
-    addHidden(tripPlanFieldset);
-    removeHidden(messageDisplay);
-    removeHidden(tripRequestBox);
-    removeHidden(noTripsDisplay);
-  }
-}
-//
-// function clearCostValue() {
-//   clearGrid();
-//   yearlyCostValue.innerHTML = '';
-// }
-
-function clearInputFields() {
-  bookingDateInput.value = '';
-  durationInput.value = '';
-  numTravelersInput.value = '';
-  priceAgreement.checked = false;
-  destinationsDropdownInput.value = ''
-  tripCost.innerText = '';
+  clearInputFields();
+  supplyDestinationDropDown();
 }
 
 function getTodaysDate() {
@@ -350,11 +314,6 @@ function getTodaysDate() {
   let formattedToday = formatDate(todaysDate);
   today = formattedToday;
   return today;
-}
-
-function displayFirstName() {
-  let travelerFirstName = globalTraveler.returnFirstName();
-  welcomeText.innerText = `Welcome, ${travelerFirstName}!`;
 }
 
 function supplyDestinationDropDown() {
@@ -368,20 +327,136 @@ function supplyDestinationDropDown() {
   return dropDownDestinations
 }
 
+function clearInputFields() {
+  bookingDateInput.value = '';
+  durationInput.value = '';
+  numTravelersInput.value = '';
+  priceAgreement.checked = false;
+  destinationsDropdownInput.value = ''
+  tripCost.innerText = '';
+}
 
-function displayYearlyCosts() {
+// function displayTripSelection() {
+//   addHidden(tripPlanFieldset);
+//   addHidden(tripRequestBox);
+//   removeHidden(userSelectedTrips);
+//   // addHidden(priceEstimateField);
+//   // addHidden(tripConfirmation);
+// }
+//
+// function clearCostValue() {
+  //   clearGrid();
+  //   yearlyCostValue.innerHTML = '';
+  // }
+
+//trip selection bar//
+function displayTripSelection() {
+  addHidden(tripPlanFieldset);
+  addHidden(tripRequestBox);
+  removeHidden(userSelectedTrips);
+}
+
+function clearGrid() {
+  addHidden(noTripsDisplay);
+  grid.innerHTML = '';
+}
+
+function checkForEmptyDisplay(trips) {
+  if (trips.length === 0) {
+    console.log('empty')
+    removeHidden(messageDisplay);
+    removeHidden(noTripsDisplay);
+    addHidden(userSelectedTrips);
+    removeHidden(tripRequestBox)
+    // THE TRIP REQUEST BOX was in the way of the messages.
+  }
+}
+
+function modifyTripsToCards(trips) {
+  let displayCards = trips.map(trip => {
+    grid.innerHTML +=
+    `<article class="box zoom" id="${trips.indexOf(trip)}">
+    <div tabindex=0 class='img-container'>
+    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
+    </div>
+    <div tabindex=0 class='text-container'>
+    <p class='location text' id='location'><b>Location: </b>${trip.location}</p>
+    <p class='trip-date text' id='tripDate'><b>Date of Your Trip: </b> ${trip.date}</p>
+    <p class='length-stay text' id='lengthStay'><b>Duration of Your Trip: </b> ${trip.duration} days</p>
+    </div>
+    </article>`
+  });
+}
+
+// trip displays
+function displayPastTrips() {
+  displayTripSelection();
+  clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(travelerTrips);
-  yearlyCostValue.innerText = ` $${yearlyExpense}`;
-  // if the cost is 0, should i say something else?
-  console.log(yearlyExpense)
+  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
+  let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
+  checkForEmptyDisplay(pastTripProperties);
+  modifyTripsToCards(pastTripProperties);
+}
+
+function displayPresentTrips() {
+  displayTripSelection();
+  clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let tripDates = getAllTripDates(travelerTrips);
+  let presentTripMatches = globalTrip.findPresentTrips(tripDates, today);
+  let presentTrips = globalTrip.returnPresentTrip(presentTripMatches, tripData);
+  let presentTripProperties = globalDestination.returnLocationProperties(presentTrips);
+  checkForEmptyDisplay(presentTripProperties);
+  modifyTripsToCards(presentTripProperties);
+}
+
+function displayUpcomingTrips() {
+  displayTripSelection();
+  clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let upcomingTrips = globalTrip.getUpcomingTrips(travelerTrips, today);
+  let upcomingTripsProperties = globalDestination.returnLocationProperties(upcomingTrips);
+  checkForEmptyDisplay(upcomingTripsProperties);
+  modifyTripsToCards(upcomingTripsProperties);
+}
+
+function displayPendingTrips() {
+  displayTripSelection();
+  clearGrid();
+  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
+  let pendingTrips = globalTrip.getPendingTrips(travelerTrips, today);
+  let pendingTripsProperties = globalDestination.returnLocationProperties(pendingTrips);
+  checkForEmptyDisplay(pendingTripsProperties);
+  modifyTripsToCards(pendingTripsProperties);
+}
+
+//post
+function addUserTripFromInput() {
+  let bookingDate = bookingDateInput.value;
+  let formattedDate = bookingDate.split('-').join('/')
+  let duration = Number(durationInput.value);
+  let numTravelers = Number(numTravelersInput.value);
+  let destination = destinationsDropdownInput.value;
+  let destinationID = globalDestination.findDestinationByName(destination);
+  let tripID = tripData.length + 1;
+  let dataToTransmit = {id: tripID,
+    userID: globalTraveler.id,
+    destinationID: destinationID,
+    travelers: numTravelers,
+    date: formattedDate,
+    duration: duration,
+    status: 'pending',
+    suggestedActivities: []
+  };
+  var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
 }
 
 function calculateTripCosts() {
-  const duration = Number(durationInput.value);
-  const numTravelers = Number(numTravelersInput.value);
-  const destination = destinationsDropdownInput.value;
-  const destinationID = globalDestination.findDestinationByName(destination);
+  let duration = Number(durationInput.value);
+  let numTravelers = Number(numTravelersInput.value);
+  let destination = destinationsDropdownInput.value;
+  let destinationID = globalDestination.findDestinationByName(destination);
   let tripExpense = globalDestination.calculateTripExpense(duration, numTravelers, destinationID);
   console.log(tripExpense)
   return tripExpense.toFixed(2)
@@ -405,72 +480,13 @@ function displayTripConfirmation() {
   setTimeout(addUserTripFromInput, 3000);
 }
 
-function displayPastTrips() {
-  displayTripSelection();
-  clearGrid();
-  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  let pastTrips = globalTrip.getPastTrips(travelerTrips, today);
-  let pastTripProperties = globalDestination.returnLocationProperties(pastTrips);
-  checkForEmptyDisplay(pastTripProperties);
-  modifyTripsToCards(pastTripProperties);
-  console.log(pastTripProperties);
+//helper functions
+function removeHidden(ele) {
+  ele.classList.remove('hidden');
 }
 
-function displayPresentTrips() {
-  displayTripSelection();
-  clearGrid();
-  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  let tripDates = getAllTripDates(travelerTrips);
-  let presentTripMatches = globalTrip.findPresentTrips(tripDates, today);
-  let presentTrips = globalTrip.returnPresentTrip(presentTripMatches, tripData);
-  let presentTripProperties = globalDestination.returnLocationProperties(presentTrips);
-  checkForEmptyDisplay(presentTripProperties);
-  modifyTripsToCards(presentTripProperties);
-  console.log(presentTripProperties)
-}
-
-function displayUpcomingTrips() {
-  displayTripSelection();
-  clearGrid();
-  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  let upcomingTrips = globalTrip.getUpcomingTrips(travelerTrips, today);
-  let upcomingTripsProperties = globalDestination.returnLocationProperties(upcomingTrips);
-  checkForEmptyDisplay(upcomingTripsProperties);
-  modifyTripsToCards(upcomingTripsProperties);
-  console.log(upcomingTrips)
-}
-
-function displayPendingTrips() {
-  displayTripSelection();
-  clearGrid();
-  let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
-  let pendingTrips = globalTrip.getPendingTrips(travelerTrips, today);
-  let pendingTripsProperties = globalDestination.returnLocationProperties(pendingTrips);
-  checkForEmptyDisplay(pendingTripsProperties);
-  modifyTripsToCards(pendingTripsProperties);
-  console.log(pendingTrips)
-}
-
-function modifyTripsToCards(trips) {
-  let displayCards = trips.map(trip => {
-    grid.innerHTML +=
-    `<article class="box zoom" id="${trips.indexOf(trip)}">
-    <div tabindex=0 class='img-container'>
-    <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
-    </div>
-    <div tabindex=0 class='text-container'>
-    <p class='location text' id='location'><b>Location: </b>${trip.location}</p>
-    <p class='trip-date text' id='tripDate'><b>Date of Your Trip: </b> ${trip.date}</p>
-    <p class='length-stay text' id='lengthStay'><b>Duration of Your Trip: </b> ${trip.duration} days</p>
-    </div>
-    </article>`
-  });
-}
-
-
-function clearGrid() {
-  addHidden(noTripsDisplay);
-  grid.innerHTML = '';
+function addHidden(ele) {
+  ele.classList.add('hidden');
 }
 
 //date helpers
@@ -486,12 +502,11 @@ function stringDatesOfTrip(trip) {
   let endDate = calculateEndDate(trip.date, trip.duration);
   let allTripDays = getDaysInTrip(new Date(trip.date), endDate);
   let formattedTripDays = formatDatesList(allTripDays);
-  // console.log(formattedTripDays)
   return formattedTripDays;
 }
 
 function calculateEndDate(startDate, tripDuration) {
-  var endDate = new Date(startDate);
+  let endDate = new Date(startDate);
   endDate.setDate(endDate.getDate() + tripDuration);
   return endDate;
 }
@@ -505,23 +520,18 @@ function getDaysInTrip(startDate, endDate) {
 
 function formatDatesList(daylist) {
   let formattedDaylist = daylist.map(day => {
-    var dd = String(day.getDate()).padStart(2, '0');
-    var mm = String(day.getMonth() + 1).padStart(2, '0');
-    var yyyy = day.getFullYear();
+    let dd = String(day.getDate()).padStart(2, '0');
+    let mm = String(day.getMonth() + 1).padStart(2, '0');
+    let yyyy = day.getFullYear();
     return day = yyyy + '/' + mm + '/' + dd;
   })
     return formattedDaylist
 }
 
 function formatDate(day) {
-    var dd = String(day.getDate()).padStart(2, '0');
-    var mm = String(day.getMonth() + 1).padStart(2, '0');
-    var yyyy = day.getFullYear();
-    var formattedDay = yyyy + '/' + mm + '/' + dd;
+    let dd = String(day.getDate()).padStart(2, '0');
+    let mm = String(day.getMonth() + 1).padStart(2, '0');
+    let yyyy = day.getFullYear();
+    let formattedDay = yyyy + '/' + mm + '/' + dd;
     return formattedDay;
-}
-
-//get random user
-function getRandomUserId (anyUserData) {
-  return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }
