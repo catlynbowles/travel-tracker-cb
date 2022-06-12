@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Travel Tracker">
@@ -16,13 +21,11 @@
         <div class='left-contents'>
           <img class='tracker-logo'></img>
           <h1 class='title-header'>Travel Tracker Wishes You a Happy Pride Month! 🌈</h1>
-        </div>
-        <div class='welcome-text'>
-          <h2 id='welcomeText'>Welcome!</h2>
+          <h2 class='welcome-text' id='welcomeText'>Welcome!</h2>
         </div>
         <div class="right-contents">
-          <h3 class='dashboard-buttons' id='homeButton'>Home</h3>
-          <h4 class='dashboard-buttons' id='logoutButton'>Logout</h4>
+          <h3 class='dashboard-buttons zoom' id='homeButton'>Home</h3>
+          <h4 class='dashboard-buttons zoom' id='logoutButton'>Logout</h4>
         </div>
       </section>
       <section class='user-dashboard-display' id='userDashboardDisplay'>
@@ -31,10 +34,10 @@
             <h4 class='your-trips'>Your Trips</h4>
             <div class='trip-type-styling'>
               <p class='instructions'>Click below to learn more about your trips!</p>
-              <p class="trip-type past zoom" id="pastTrips">Past</p>
-              <p class="trip-type present zoom" id="presentTrips">Present</p>
-              <p class="trip-type upcoming zoom" id="upcomingTrips">Upcoming</p>
-              <p class="trip-type pending zoom" id="pendingTrips">Pending</p>
+              <p class="trip-type past zoom" id="pastTrips">Past Experiences</p>
+              <p class="trip-type present zoom" id="presentTrips">Present Encounters</p>
+              <p class="trip-type upcoming zoom" id="upcomingTrips">Upcoming Adventures</p>
+              <p class="trip-type pending zoom" id="pendingTrips">Pending Trips</p>
               <div class='yearly-cost-style'>
                 <p class='user-costs yearly-cost' id='yearlyCost'>Your Travel Expenses in 2022:</p>
                 <p class='user-costs yearly-cost value' id='yearlyCostValue'>Your Travel Expenses in 2022:</p>
@@ -51,6 +54,7 @@
         </section>
           <section class='trip-request-box hidden' id='tripRequestBox'>
             <!-- <fieldset class='form-and-book' id='formAndBook'> -->
+            <div class='style-plan-fieldset'>
             <fieldset id='tripPlanFieldset'>
               <legend>Plan Your Dream Trip!</legend>
               <form id='tripForm'>
@@ -62,12 +66,13 @@
                 <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" min='1' max='15' required><br><br>
                 <label class="destinations input" id="destinations">Destinations:</label><br>
                 <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdownInput" name='destination' placeholder="Choose your destination" required><br>
-                <input class="find-cost input" id="findCost" type="submit" value="Estimate Cost"><br>
+                <input class="find-cost input rainbow-5" id="findCost" type="submit" value="Estimate Cost"><br>
                     <datalist id='datalist'>
                     <!-- <option value='' disabled selected>Choose Destination</option> -->
                     </datalist><br>
               </form>
             </fieldset>
+          </div>
             <fieldset class='price-estimate hidden' id='priceEstimateField'>
               <legend>Book Trip</legend>
               <form id='addTripSubmit'>

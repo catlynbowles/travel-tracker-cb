@@ -301,7 +301,7 @@ function modifyTripsToCards(trips) {
     </div>
     <div class='text-container'>
     <p class='location text' id='location'><b>Location: </b>${trip.location}</p>
-    <p class='trip-date text' id='tripDate'><b>When You Were There: </b> ${trip.date}</p>
+    <p class='trip-date text' id='tripDate'><b>Date of Your Trip: </b> ${trip.date}</p>
     <p class='length-stay text' id='lengthStay'><b>Duration of Your Trip: </b> ${trip.duration} days</p>
     </div>
     </article>`
@@ -313,8 +313,8 @@ function checkForEmptyDisplay(trips) {
     addHidden(grid);
     addHidden(userSelectedTrips);
     removeHidden(tripRequestBox);
-    removeHidden(noTripsDisplay);
     addHidden(tripPlanFieldset);
+    removeHidden(noTripsDisplay);
   }
 }
 
