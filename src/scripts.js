@@ -43,7 +43,7 @@ var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
 let yearlyCostValue = document.getElementById('yearlyCostValue');
 let tripConfirmation = document.getElementById('tripConfirmation');
-let noTripsDisplay = document.getElementById('noTripsDisplay')
+let noTripsDisplay = document.getElementById('noTripsDisplay');
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
@@ -241,6 +241,7 @@ function displayCosts() {
 function displayTripConfirmation() {
   event.preventDefault();
   addHidden(priceEstimateField);
+  tripConfirmation.innerHTML = `<p class='trip-confirmation-message' id="tripConfirmation">Congratulations, your trip has been successfully booked! We'll see you in ${destinationsDropdownInput.value} on ${bookingDateInput.value}!</p>`
   removeHidden(tripConfirmation);
   setTimeout(addUserTripFromInput, 3000);
 }
