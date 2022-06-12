@@ -152,7 +152,8 @@ h3, h4 {
 .trip-type,
 .dashboard-buttons,
 .submit-trip,
-.input {
+.input,
+.book-new {
   cursor: pointer;
 }
 
@@ -233,24 +234,25 @@ h3, h4 {
   opacity: 0.5;
 }
 
-.your-trips {
+.book-new {
   margin-left: 0px;
   margin-top: 30px;
   margin-right: 100px;
+  margin-bottom: 0px;
   font-size: 40px;
   border: 3px solid #FFADAD;
   background-color: rgba(255, 0, 0, 0.1);
 }
 
-.instructions {
+/* .instructions {
   margin: 0px;
   font-size: 15px;
   border: 3px solid #FFD6A5;
   background-color: rgba(255, 165, 0, 0.08);
-}
+} */
 
 .past {
-  margin-top: 25px;
+  margin-top: 0px;
   background: #FDFFB6;
   border: 3px solid #FDFFB6;
   background-color: rgba(255, 255, 0, 0.08);

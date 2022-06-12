@@ -3,12 +3,12 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import {fetchAllData, addUserTravelData} from './apiCalls.js'
+import {fetchAllData, addUserTravelData} from './apiCalls.js';
 import TravelerRepository from './TravelerRepository';
 import Traveler from './Traveler';
 import Trip from './Trip';
 import Destination from './Destination';
-import './images/meteor-rain.gif'
+import './images/meteor-rain.gif';
 
 // global variables
 var today;
@@ -31,12 +31,11 @@ var clickPendingTrips = document.getElementById('pendingTrips');
 var tripRequestBox = document.getElementById('tripRequestBox');
 var userSelectedTrips = document.getElementById('userSelectedTrips');
 var logoutButton = document.getElementById('logoutButton');
-var homeButton = document.getElementById('homeButton');
+var bookNewTrip = document.getElementById('bookNew');
 var location = document.getElementById('location');
 var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
-// var yearlyCost = document.getElementById('yearlyCost');
 var yearlyCostValue = document.getElementById('yearlyCostValue');
 var tripConfirmation = document.getElementById('tripConfirmation');
 var noTripsDisplay = document.getElementById('noTripsDisplay');
@@ -53,49 +52,35 @@ var datalist = document.getElementById('datalist');
 
 // form selectors
 let tripForm = document.getElementById('tripForm');
-let addTripForm = document.getElementById('addTripSubmit');
 let tripPlanFieldset = document.getElementById('tripPlanFieldset');
+
+//price agreement
+let addTripForm = document.getElementById('addTripSubmit');
+let tripCost = document.getElementById('cost');
 let priceAgreement = document.getElementById('priceAgreement');
 let priceEstimateField = document.getElementById('priceEstimateField');
-let tripCost = document.getElementById('cost');
 
-var loginPageField = document.getElementById('loginPageField')
-var loginLegend = document.getElementById('loginLegend')
+//login pg
+var loginPageField = document.getElementById('loginPageField');
 var loginPageSection = document.getElementById('loginPageSection');
-var loginStyling = document.getElementById('loginStyling')
 
-var loginErrorMsg = document.getElementById('loginErrorMsg')
+var loginErrorMsg = document.getElementById('loginErrorMsg');
 var loginForm = document.getElementById('loginForm');
-var loginFormStyling = document.getElementById('loginStyling')
 var passwordInput = document.getElementById('passwordInput');
 var usernameInput = document.getElementById('usernameInput');
 
 // event listeners
-// window.addEventListener('load', displayResolvedData);
-//
-// clickPastTrips.addEventListener('click', displayPastTrips);
-// clickPresentTrips.addEventListener('click', displayPresentTrips);
-// clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
-// clickPendingTrips.addEventListener('click', displayPendingTrips);
-//
-// homeButton.addEventListener('click', loadUserDashboard);
-// tripForm.addEventListener('submit', displayCosts);
-// addTripForm.addEventListener('submit', displayTripConfirmation);
-
 window.addEventListener('load', displayResolvedData);
-
 clickPastTrips.addEventListener('click', displayPastTrips);
 clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
+bookNewTrip.addEventListener('click', bookTripDisplay)
 
-homeButton.addEventListener('click', loadUserDashboard);
+// bookTripButton.addEventListener('click', );
 tripForm.addEventListener('submit', displayCosts);
 addTripForm.addEventListener('submit', displayTripConfirmation);
-
 loginForm.addEventListener('submit', checkValidLogin);
-
-// on page load, load all my data, and load the logindashboard
 
 // Fetch API
 function displayResolvedData() {
@@ -120,7 +105,11 @@ function getAllTripData (data) {
 function getAllDestinationData(data) {
   destinationData = data;
   globalDestination = new Destination(destinationData);
-  displayLoginDashboard();
+  if (globalTraveler) {
+    loadTraveler(globalTraveler.id)
+  } else {
+    displayLoginDashboard();
+  }
 }
 // step 1 completed
 // on step 2, the user will login.
@@ -143,17 +132,17 @@ function checkValidLogin() {
 
 function checkForFalse(ele) {
   if (!ele) {
-    loginErrorMsg.classList.remove('hidden')
-    usernameInput.value = ''
-    passwordInput.value = ''
-    setTimeout(displayLoginDashboard, 3000)
+    loginErrorMsg.classList.remove('hidden');
+    usernameInput.value = '';
+    passwordInput.value = '';
+    setTimeout(displayLoginDashboard, 3000);
   }
 }
 
 function splitIdValue(usernameString) {
   let ID = usernameString.split(/(\d+)/);
-  console.log(ID)
-  return ID[1]
+  console.log(ID);
+  return ID[1];
 }
 
 function checkIdIsValid(id) {
@@ -171,92 +160,6 @@ function checkIdIsValid(id) {
 // step 2 complete
 // step 3, display dashboard.
 
-// function displayLoginDashboard() {
-//   removeHidden(loginPage);
-//   addHidden(allUserTrips);
-//   // addHidden(tripConfirmation);
-//   // addHidden(userSelectedTrips);
-//   // addHidden(priceEstimateField);
-//   // addHidden(tripRequestBox);
-//   // addHidden(tripPlanFieldset);
-//   // addHidden(userDashboardDisplay);
-//   // addHidden(loginErrorMsg);
-//   // removeHidden(loginPage);
-//   // removeHidden(loginForm);
-//   // removeHidden(loginPageField);
-//   // removeHidden(loginLegend);
-//   // removeHidden(loginPage);
-// }
-// function reverseLogin() {
-//   removeHidden(userSelectedTrips);
-//   addHidden(priceEstimateField);
-//   addHidden(tripRequestBox);
-//   addHidden(tripPlanFieldset);
-//   removeHidden(allUserTrips);
-//   addHidden(loginErrorMsg);
-// }
-// function hideLogin() {
-//   addHidden(loginPage);
-//   addHidden(loginPageField);
-//   // addHidden(userSelectedTrips);
-//   // addHidden(loginLegend);
-//   // addHidden(loginErrorMsg);
-//   // addHidden(loginForm);
-// }
-// function showDashboard() {
-//   removeHidden(userSelectedTrips);
-//   removeHidden(tripRequestBox);
-//
-//   removeHidden(tripConfirmation);
-//   removeHidden(tripPlanFieldset);
-//   removeHidden(allUserTrips);
-//   removeHidden(userDashboardDisplay);
-//   removeHidden(tripPlanFieldset)
-//   removeHidden(tripRequestBox)
-//   removeHidden(userDashboardDisplay);
-//   removeHidden(userSelectedTrips);
-//   removeHidden(messageDisplay);
-//   removeHidden(yearlyCostValue)
-// }
-// function showDashboard() {
-//   removeHidden(userSelectedTrips);
-//   removeHidden(tripRequestBox);
-//   removeHidden(allUserTrips);
-//   addHidden(messageDisplay);
-//
-//   // removeHidden(tripConfirmation);
-//   // removeHidden(tripPlanFieldset);
-//   // removeHidden(userDashboardDisplay);
-//   // removeHidden(tripPlanFieldset)
-//   // removeHidden(tripRequestBox)
-//   // removeHidden(userDashboardDisplay);
-//   // removeHidden(userSelectedTrips);
-//   // removeHidden(messageDisplay);
-//   // removeHidden(yearlyCostValue)
-// }
-// function backToHome() {
-//   removeHidden(tripRequestBox);
-//   removeHidden(tripPlanFieldset);
-//   addHidden(tripConfirmation);
-//   removeHidden(messageDisplay)
-//   addHidden(userSelectedTrips);
-//   addHidden(priceEstimateField);
-// }
-// function loadUserDashboard() {
-//   showDashboard();
-//   hideLogin();
-//   // backToHome();
-//   clearInputFields();
-//   // updateCostValue();
-//   let today = getTodaysDate();
-//   let calendarMin = today.split('/').join('-');
-//   bookingDateInput.min = calendarMin;
-//   // displayFirstName();
-//   // displayYearlyCosts();
-//   // supplyDestinationDropDown();
-//   // console.log(newTraveler)
-// }
-
 //login page display
 function displayLoginDashboard() {
   removeHidden(loginPage);
@@ -270,8 +173,15 @@ function hideLogin() {
 }
 
 //dashboard display
+// function displayAfterPost() {
+//   removeHidden(userSelectedTrips);
+//   removeHidden(tripRequestBox);
+//   removeHidden(allUserTrips);
+//   addHidden(priceEstimateField);
+// }
+
 function showDashboard() {
-  removeHidden(userSelectedTrips);
+  // removeHidden(userSelectedTrips);
   removeHidden(tripRequestBox);
   removeHidden(allUserTrips);
   addHidden(messageDisplay);
@@ -279,6 +189,7 @@ function showDashboard() {
 }
 
 function loadTraveler(id) {
+  console.log(id)
   let newTraveler = travelerRepository.getDataById(id);
   globalTraveler = newTraveler;
   displayFirstName();
@@ -301,7 +212,11 @@ function displayYearlyCosts() {
 
 function loadUserDashboard() {
   showDashboard();
+  bookTripDisplay();
   hideLogin();
+  addHidden(priceEstimateField);
+  removeHidden(allUserTrips);
+  // addHidden(tripPlanFieldset)
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
@@ -332,22 +247,9 @@ function clearInputFields() {
   durationInput.value = '';
   numTravelersInput.value = '';
   priceAgreement.checked = false;
-  destinationsDropdownInput.value = ''
+  destinationsDropdownInput.value = '';
   tripCost.innerText = '';
 }
-
-// function displayTripSelection() {
-//   addHidden(tripPlanFieldset);
-//   addHidden(tripRequestBox);
-//   removeHidden(userSelectedTrips);
-//   // addHidden(priceEstimateField);
-//   // addHidden(tripConfirmation);
-// }
-//
-// function clearCostValue() {
-  //   clearGrid();
-  //   yearlyCostValue.innerHTML = '';
-  // }
 
 //trip selection bar//
 function displayTripSelection() {
@@ -361,13 +263,20 @@ function clearGrid() {
   grid.innerHTML = '';
 }
 
+function bookTripDisplay() {
+  removeHidden(tripPlanFieldset);
+  removeHidden(tripRequestBox);
+  addHidden(userSelectedTrips);
+  addHidden(messageDisplay);
+}
+
 function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
     console.log('empty')
     removeHidden(messageDisplay);
     removeHidden(noTripsDisplay);
     addHidden(userSelectedTrips);
-    removeHidden(tripRequestBox)
+    removeHidden(tripRequestBox);
     // THE TRIP REQUEST BOX was in the way of the messages.
   }
 }
@@ -389,6 +298,7 @@ function modifyTripsToCards(trips) {
 }
 
 // trip displays
+
 function displayPastTrips() {
   displayTripSelection();
   clearGrid();
@@ -434,7 +344,7 @@ function displayPendingTrips() {
 //post
 function addUserTripFromInput() {
   let bookingDate = bookingDateInput.value;
-  let formattedDate = bookingDate.split('-').join('/')
+  let formattedDate = bookingDate.split('-').join('/');
   let duration = Number(durationInput.value);
   let numTravelers = Number(numTravelersInput.value);
   let destination = destinationsDropdownInput.value;
@@ -459,16 +369,16 @@ function calculateTripCosts() {
   let destinationID = globalDestination.findDestinationByName(destination);
   let tripExpense = globalDestination.calculateTripExpense(duration, numTravelers, destinationID);
   console.log(tripExpense)
-  return tripExpense.toFixed(2)
+  return tripExpense.toFixed(2);
 }
 
 function displayCosts() {
-  event.preventDefault()
+  event.preventDefault();
   removeHidden(priceEstimateField);
   addHidden(tripPlanFieldset);
   addHidden(tripConfirmation);
   let tripExpense = calculateTripCosts();
-  tripCost.innerText = `$${tripExpense} USD`
+  tripCost.innerText = `$${tripExpense} USD`;
 }
 
 function displayTripConfirmation() {
@@ -495,7 +405,7 @@ function getAllTripDates(allTripData) {
     let tripDates = stringDatesOfTrip(trip)
     return tripDates
   })
-  return allTripDates
+  return allTripDates;
 }
 
 function stringDatesOfTrip(trip) {
@@ -525,7 +435,7 @@ function formatDatesList(daylist) {
     let yyyy = day.getFullYear();
     return day = yyyy + '/' + mm + '/' + dd;
   })
-    return formattedDaylist
+    return formattedDaylist;
 }
 
 function formatDate(day) {
