@@ -294,7 +294,7 @@ function displayPendingTrips() {
 function modifyTripsToCards(trips) {
   let displayCards = trips.map(trip => {
     grid.innerHTML +=
-    `<article class="box" id="${trips.indexOf(trip)}">
+    `<article class="box zoom" id="${trips.indexOf(trip)}">
     <div class='img-container'>
     <img class='box-img' id='boxImg' alt=${trip.alt} src=${trip.img} width='150' height='150'></img>
     </div>

@@ -1,13 +1,11 @@
-/* * {
-  border: 1px solid white;
-} */
+* {
+  border-radius: 25px;
+}
 
 
 body {
-  background: #f8f8ff;
   font-family: 'Lato', sans-serif;
   height: 100%;
-  /* font-weight: bold; */
 }
 
 p {
@@ -30,6 +28,7 @@ p {
 }
 
 .top-bar {
+  border-radius: 0px;
   position:fixed;
   top: 0;
   right: 0;
@@ -67,12 +66,12 @@ fieldset {
 }
 
 .trip-request-box {
-  width: 500px;
+  width: 700px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 50px;
+  /* margin-left: 50px; */
 }
 
 .all-user-trips {
@@ -112,13 +111,11 @@ h4 {
   display: grid;
   justify-content: center;
   align-content: center;
-  grid-template-columns: repeat(3, 325px);
+  grid-template-columns: repeat(3, 250px);
   grid-template-rows: repeat(3, 270px);
   size: 80px;
   grid-gap: 30px;
   padding: 0px;
-  cursor: pointer;
-  padding-right: 400px;
 }
 
 .location,
@@ -127,41 +124,24 @@ h4 {
 }
 
 .grid-contents{
-  width: 500px;
+  width: 700px;
   display: flex;
-  /* display: column; */
   justify-content: center;
   align-items: center;
-  /* padding-right: 100px; */
 }
 
 .box {
   background-color: white;
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  /* overflow: hidden; */
-  display: flex;
-  justify-content: column;
-  align-items: center;
-  text-align: center
+  text-align: center;
+  border-radius: 25px;
 }
-
-/* .form-and-book {
-  display: flex;
-  flex-direction: column;
-  /* wrap: wrap; */
-  /* width: 200px */
-
 
 .message-display {
-  width: 500px;
-  width: 200px;
+  width: 900px;
   align-items: center;
   text-align: center;
-}
-
-.user-costs {
-
 }
 
 .trip-type {
@@ -237,15 +217,6 @@ h4 {
 .text-container {
 
 }
-
-/* .zoom {
-  padding: 50px;
-  background-color: green;
-  transition: transform .2s; /* Animation */
-  /* width: 200px;
-  height: 200px;
-  margin: 0 auto;
-} */
 
 
 /* #f8f8ff off white
