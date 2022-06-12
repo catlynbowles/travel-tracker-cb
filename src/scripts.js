@@ -8,6 +8,7 @@ import TravelerRepository from './TravelerRepository';
 import Traveler from './Traveler';
 import Trip from './Trip';
 import Destination from './Destination';
+import './images/meteor-rain.gif'
 
 // global variables
 var today;
@@ -36,17 +37,19 @@ var tripDate = document.getElementById('tripDate');
 var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
 var yearlyCost = document.getElementById('yearlyCost');
-let yearlyCostValue = document.getElementById('yearlyCostValue');
-let tripConfirmation = document.getElementById('tripConfirmation');
-let noTripsDisplay = document.getElementById('noTripsDisplay');
-let messageDisplay = document.getElementById('messageDisplay')
+var yearlyCostValue = document.getElementById('yearlyCostValue');
+var tripConfirmation = document.getElementById('tripConfirmation');
+var noTripsDisplay = document.getElementById('noTripsDisplay');
+var messageDisplay = document.getElementById('messageDisplay');
+
+// var loginPage = document.getElementById('loginPage');
 
 //inputs
-let bookingDateInput = document.getElementById('bookingDateInput');
-let durationInput = document.getElementById('durationInput');
-let numTravelersInput = document.getElementById('numTravelersInput');
-let destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
-let datalist = document.getElementById('datalist');
+var bookingDateInput = document.getElementById('bookingDateInput');
+var durationInput = document.getElementById('durationInput');
+var numTravelersInput = document.getElementById('numTravelersInput');
+var destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
+var datalist = document.getElementById('datalist');
 
 // form selectors
 let tripForm = document.getElementById('tripForm');
@@ -139,6 +142,15 @@ function backToHome() {
   addHidden(userSelectedTrips);
   addHidden(priceEstimateField);
 }
+
+// function loginPageView() {
+//   addHidden(tripConfirmation);
+//   addHidden(messageDisplay);
+//   addHidden(userSelectedTrips);
+//   addHidden(priceEstimateField);
+//   addHidden(tripRequestBox);
+//   addHidden(tripPlanFieldset);
+// }
 
 function displayTripSelection() {
   addHidden(tripPlanFieldset);
@@ -238,7 +250,7 @@ function displayCosts() {
 function displayTripConfirmation() {
   event.preventDefault();
   addHidden(priceEstimateField);
-  tripConfirmation.innerHTML = `<p class='trip-confirmation-message' id="tripConfirmation"><br> ${globalTraveler.returnFirstName()}: <br> We are booking your trip to ${destinationsDropdownInput.value} on ${bookingDateInput.value.split('-').join('/')}! </br><br>You will be redirected back to the main page.</p>`
+  tripConfirmation.innerHTML = `<img src='../images/meteor-rain.gif' height='75' width='75'></img><p class='trip-confirmation-message' id="tripConfirmation"><br> ${globalTraveler.returnFirstName()}: <br> We are booking your trip to ${destinationsDropdownInput.value} on ${bookingDateInput.value.split('-').join('/')}! </br><br>You will be redirected back to the main page.</p>`
   removeHidden(tripConfirmation);
   removeHidden(messageDisplay);
   setTimeout(addUserTripFromInput, 3000);

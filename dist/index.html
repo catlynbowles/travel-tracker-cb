@@ -2,18 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- <link rel="preload" as="font"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Travel Tracker">
     <title>Travel Tracker</title>
+    Cache-Control: max-age=31536000
   </head>
   <body>
     <main>
       <section class ="top-bar">
         <div tabindex=0 class='left-contents'>
-          <h1 class='title-header'>Travel Tracker Wishes You a Happy Pride Month! 🌈</h1>
+          <h1 class='title-header'>🌈  Travel Tracker Wishes You a Happy Pride Month 🌈</h1>
           <h2 class='welcome-text' id='welcomeText'>Welcome!</h2>
         </div>
         <div tabindex=0 class="right-contents">
@@ -21,14 +24,26 @@
           <h4 class='dashboard-buttons zoom' role="button" aria-pressed="false" id='logoutButton'>Logout</h4>
         </div>
       </section>
+      <!-- <section class='login-page-section hidden' id='loginPage'>
+        <fieldset id='loginPage'>
+          <legend>Login to Travel Tracker</legend>
+          <form id='loginForm'>
+            <label class="username input" id="username">Username:</label>
+            <input class="username-input input" id="usernameInput" type="text" placeholder="traveltracker(yourid)" required><br>
+            <label class="password input" id="password">Password:</label>
+            <input class="password-input input" id="passwordInput" type="password" placeholder="password" required>
+            <input class="login-input input rainbow-5" role="button" aria-pressed="false" id="findCost" type="submit" value="Login"><br>
+          </form>
+        </fieldset>
+      </section> -->
       <section class='user-dashboard-display' id='userDashboardDisplay'>
         <div tabindex=0 class='box-styling'>
           <section class='all-user-trips' id='allUserTrips'>
-            <h4 class='your-trips'>Your Trips</h4>
-            <div tabindex=0 class='trip-type-styling'>
-              <p class='instructions'>Click below to learn more about your trips!</p>
-              <p class="trip-type past zoom" id="pastTrips">Past Experiences</p>
-              <p class="trip-type present zoom" id="presentTrips">Present Encounters</p>
+            <h5 class='your-trips'>Your Trips</h4>
+            <div tabindex=0 class='trip-type-styling' role='tablist'>
+              <p class='instructions' role='tab'>Click below to learn more about your trips!</p>
+              <p class="trip-type past zoom" id="pastTrips" role='tab'>Past Experiences</p>
+              <p class="trip-type present zoom" id="presentTrips" role='tab'>Present Encounters</p>
               <p class="trip-type upcoming zoom" id="upcomingTrips">Upcoming Adventures</p>
               <p class="trip-type pending zoom" id="pendingTrips">Pending Destinations</p>
               <div tabindex=0 class='yearly-cost-style'>

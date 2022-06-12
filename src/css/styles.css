@@ -2,15 +2,22 @@
   border-radius: 25px;
 }
 
+@@font-face {
+  font-family: 'Lato', sans-serif;
+  display: swap;
+}
 
 body {
   font-family: 'Lato', sans-serif;
+  /* font-display: swap; */
   height: 100%;
 }
 
 p {
   font-size: 20px;
 }
+
+
 
 
 .left-contents {
