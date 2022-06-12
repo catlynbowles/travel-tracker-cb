@@ -24,22 +24,24 @@
           <h4 class='dashboard-buttons zoom' role="button" aria-pressed="false" id='logoutButton'>Logout</h4>
         </div>
       </section>
-      <section class='user-dashboard-display hidden' id='userDashboardDisplay'>
-        <section class='login-page-section' id='loginPage'>
-          <fieldset id='loginPage'>
-            <legend>Login to Travel Tracker</legend>
-            <div id="loginErrorMsgHolder">
-              <p class='login-error-msg hidden' id="loginErrorMsg">Invalid username<span id="errorMsgSecondLine">and/or password</span></p>
-            </div>
+      <!-- <div class='login-styling loginStyling hidden'> -->
+        <section class='login-page-section hidden' id='loginPage'>
+          <fieldset id='loginPageField' class='hidden'>
+            <legend id='loginLegend' class='hidden'>Login to Travel Tracker</legend>
+            <!-- <div id="loginErrorMsgHolder"> -->
+            <!-- </div> -->
             <form id='loginForm'>
-              <label class="username input" id="username">Username:</label>
-              <input class="username-input input" id="usernameInput" type="text" placeholder="traveler + (yourid)" required><br>
-              <label class="password input" id="password">Password:</label>
-              <input class="password-input input" id="passwordInput" type="password" placeholder="password" required>
-              <input class="login-input input rainbow-5" role="button" aria-pressed="false" id="loginSubmit" type="submit" value="Login"><br>
+              <label class="username login input" id="username">Username:</label>
+              <input class="username-input login input" id="usernameInput" type="text" placeholder="traveler + (yourid)" required><br>
+              <label class="password input login" id="password">Password:</label>
+              <input class="password-input input login" id="passwordInput" type="password" placeholder="password" required><br>
+              <input class="login-input input login rainbow-5" role="button" aria-pressed="false" id="loginSubmit" type="submit" value="Login"><br>
+              <p class='login-error-msg hidden' id="loginErrorMsg">Invalid username<span id="errorMsgSecondLine"> and/or password</span></p>
             </form>
           </fieldset>
         </section>
+      <!-- </div> -->
+      <section class='user-dashboard-display hidden' id='userDashboardDisplay'>
         <div tabindex=0 class='box-styling'>
           <section class='all-user-trips' id='allUserTrips'>
             <h5 class='your-trips'>Your Trips</h4>
