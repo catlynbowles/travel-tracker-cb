@@ -39,6 +39,7 @@ var yearlyCost = document.getElementById('yearlyCost');
 let yearlyCostValue = document.getElementById('yearlyCostValue');
 let tripConfirmation = document.getElementById('tripConfirmation');
 let noTripsDisplay = document.getElementById('noTripsDisplay');
+let messageDisplay = document.getElementById('messageDisplay')
 
 //inputs
 let bookingDateInput = document.getElementById('bookingDateInput');
@@ -134,6 +135,7 @@ function backToHome() {
   removeHidden(tripRequestBox);
   removeHidden(tripPlanFieldset);
   addHidden(tripConfirmation);
+  addHidden(messageDisplay);
   addHidden(userSelectedTrips);
   addHidden(priceEstimateField);
 }
@@ -142,6 +144,7 @@ function displayTripSelection() {
   addHidden(tripPlanFieldset);
   addHidden(tripRequestBox);
   removeHidden(userSelectedTrips);
+  addHidden(messageDisplay)
   addHidden(priceEstimateField);
   addHidden(tripConfirmation);
 }
@@ -189,6 +192,7 @@ function loadUserDashboard() {
   backToHome();
   clearInputFields();
   clearCostValue();
+  addHidden(messageDisplay);
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
@@ -226,6 +230,7 @@ function displayCosts() {
   event.preventDefault()
   removeHidden(priceEstimateField);
   addHidden(tripPlanFieldset);
+  addHidden(tripConfirmation);
   let tripExpense = calculateTripCosts();
   tripCost.innerText = `$${tripExpense} USD`
 }
@@ -235,6 +240,7 @@ function displayTripConfirmation() {
   addHidden(priceEstimateField);
   tripConfirmation.innerHTML = `<p class='trip-confirmation-message' id="tripConfirmation"><br> ${globalTraveler.returnFirstName()}: <br> We are booking your trip to ${destinationsDropdownInput.value} on ${bookingDateInput.value.split('-').join('/')}! </br><br>You will be redirected back to the main page.</p>`
   removeHidden(tripConfirmation);
+  removeHidden(messageDisplay);
   setTimeout(addUserTripFromInput, 3000);
 }
 

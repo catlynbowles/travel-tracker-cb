@@ -67,16 +67,16 @@
             <fieldset class='price-estimate hidden' id='priceEstimateField'>
               <legend>Book Trip</legend>
               <form id='addTripSubmit'>
-                  <div tabindex=0>
+                  <div tabindex=0 class='estimate-styling'>
                     <p class='price-estimate' id='priceEstimate'>Total Estimated Cost of Trip:<span id='cost'>$</span></p>
                     <p class='price-estimate' id='priceAgent'>(includes a 10% travel agent fee)</p>
                     <input type="checkbox" id="priceAgreement" name="priceAgreement" required>
                     <label for="checkbox">I understand that by clicking this button I am booking this trip, and responsible for the fees thereof.</label>
-                  </div>
                 <input class="submit-trip input" id="submitTrip" type="submit" value="Book Trip" role="button" aria-pressed="false"><br>
+              </div>
               </form>
             </fieldset>
-          <div tabindex=0 class='message-display'>
+          <div tabindex=0 class='message-display hidden' id='messageDisplay'>
             <p class='trip-confirmation-message hidden' id="tripConfirmation">Congratulations, your trip has been successfully booked! We'll see you in Columbia on June 1st!</p>
             <p class='no-trips-display hidden' id='noTripsDisplay'>Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!</p>
           </div>

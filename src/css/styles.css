@@ -67,17 +67,9 @@ h1, h2 {
   height: 400px;
 }
 
-/* background-color: #302244;
-  border: 5px solid transparent;
-  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
-  border-image-slice: 1;
-  height: 200px;
-  margin: 20px auto;
-  width: 200px; */
-
 form {
   width: 700px;
-  height: 470px;
+  height: 500px;
   text-align: center;
 }
 
@@ -117,16 +109,18 @@ fieldset {
   border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
   border-image-slice: 1;
   border-radius: 25px;
-  margin-top: 60px;
 }
 
 .trip-request-box {
   width: 700px;
-  /* height: 100%; */
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-left: 50px; */
+}
+
+.price-estimate {
+  margin-top: 30px;
 }
 
 .all-user-trips {
@@ -147,10 +141,6 @@ fieldset {
 h3, h4 {
   margin: 0;
 }
-
-/* h4 {
-  margin-left: 30px;
-} */
 
 .trip-type,
 .dashboard-buttons,
@@ -213,7 +203,8 @@ h3, h4 {
   width: 870px;
   align-items: center;
   text-align: center;
-  margin-right: 200px;
+  margin-left: 100px;
+  margin-top: 90px;
   border: 5px solid transparent;
   border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
   border-image-slice: 1;
@@ -233,7 +224,6 @@ h3, h4 {
 
 .opacity {
   opacity: 0.5;
-
 }
 
 .your-trips {
@@ -294,24 +284,18 @@ legend {
   margin-bottom: 10px;
 }
 
-.img-container {
-
-}
-
-.text-container {
-
-}
-
 .no-trips-display,
 .trip-confirmation-message {
   width: 810px;
-  /* margin-left: 100px; */
   font-size: 35px;
 }
 
 .price-estimate {
+  width: 700px;
   margin-top: 100px;
   font-size: 30px;
+  /* display: flex; */
+  padding-bottom: 10px;
 }
 
 /* #f8f8ff off white
