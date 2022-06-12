@@ -2,14 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Travel Tracker">
@@ -18,27 +12,26 @@
   <body>
     <main>
       <section class ="top-bar">
-        <div class='left-contents'>
-          <img class='tracker-logo'></img>
+        <div tabindex=0 class='left-contents'>
           <h1 class='title-header'>Travel Tracker Wishes You a Happy Pride Month! 🌈</h1>
           <h2 class='welcome-text' id='welcomeText'>Welcome!</h2>
         </div>
-        <div class="right-contents">
-          <h3 class='dashboard-buttons zoom' id='homeButton'>Home</h3>
-          <h4 class='dashboard-buttons zoom' id='logoutButton'>Logout</h4>
+        <div tabindex=0 class="right-contents">
+          <h3 class='dashboard-buttons zoom' role="button" aria-pressed="false" id='homeButton'>Book a New Trip</h3>
+          <h4 class='dashboard-buttons zoom' role="button" aria-pressed="false" id='logoutButton'>Logout</h4>
         </div>
       </section>
       <section class='user-dashboard-display' id='userDashboardDisplay'>
-        <div class='box-styling'>
+        <div tabindex=0 class='box-styling'>
           <section class='all-user-trips' id='allUserTrips'>
             <h4 class='your-trips'>Your Trips</h4>
-            <div class='trip-type-styling'>
+            <div tabindex=0 class='trip-type-styling'>
               <p class='instructions'>Click below to learn more about your trips!</p>
               <p class="trip-type past zoom" id="pastTrips">Past Experiences</p>
               <p class="trip-type present zoom" id="presentTrips">Present Encounters</p>
               <p class="trip-type upcoming zoom" id="upcomingTrips">Upcoming Adventures</p>
-              <p class="trip-type pending zoom" id="pendingTrips">Pending Trips</p>
-              <div class='yearly-cost-style'>
+              <p class="trip-type pending zoom" id="pendingTrips">Pending Destinations</p>
+              <div tabindex=0 class='yearly-cost-style'>
                 <p class='user-costs yearly-cost' id='yearlyCost'>Your Travel Expenses in 2022:</p>
                 <p class='user-costs yearly-cost value' id='yearlyCostValue'>Your Travel Expenses in 2022:</p>
               </div>
@@ -46,15 +39,14 @@
           </section>
           <section class='user-selected-trips hidden' id='userSelectedTrips'>
             <section class='grid-contents' id='gridContents'>
-              <div class='grid-container'>
+              <div tabindex=0 class='grid-container'>
             <section class='grid' id='grid'>
             </section>
             </div>
             </section>
         </section>
           <section class='trip-request-box hidden' id='tripRequestBox'>
-            <!-- <fieldset class='form-and-book' id='formAndBook'> -->
-            <div class='style-plan-fieldset'>
+            <div tabindex=0 class='style-plan-fieldset'>
             <fieldset id='tripPlanFieldset'>
               <legend>Plan Your Dream Trip!</legend>
               <form id='tripForm'>
@@ -66,9 +58,8 @@
                 <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" min='1' max='15' required><br><br>
                 <label class="destinations input" id="destinations">Destinations:</label><br>
                 <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdownInput" name='destination' placeholder="Choose your destination" required><br>
-                <input class="find-cost input rainbow-5" id="findCost" type="submit" value="Estimate Cost"><br>
+                <input class="find-cost input rainbow-5" role="button" aria-pressed="false" id="findCost" type="submit" value="Estimate Cost"><br>
                     <datalist id='datalist'>
-                    <!-- <option value='' disabled selected>Choose Destination</option> -->
                     </datalist><br>
               </form>
             </fieldset>
@@ -76,18 +67,16 @@
             <fieldset class='price-estimate hidden' id='priceEstimateField'>
               <legend>Book Trip</legend>
               <form id='addTripSubmit'>
-                  <div>
+                  <div tabindex=0>
                     <p class='price-estimate' id='priceEstimate'>Total Estimated Cost of Trip:<span id='cost'>$</span></p>
                     <p class='price-estimate' id='priceAgent'>(includes a 10% travel agent fee)</p>
                     <input type="checkbox" id="priceAgreement" name="priceAgreement" required>
                     <label for="checkbox">I understand that by clicking this button I am booking this trip, and responsible for the fees thereof.</label>
                   </div>
-                <!-- </fieldset> -->
-                <input class="submit-trip input" id="submitTrip" type="submit" value="Book Trip"><br>
+                <input class="submit-trip input" id="submitTrip" type="submit" value="Book Trip" role="button" aria-pressed="false"><br>
               </form>
             </fieldset>
-          <!-- </fieldset> -->
-          <div class='message-display'>
+          <div tabindex=0 class='message-display'>
             <p class='trip-confirmation-message hidden' id="tripConfirmation">Congratulations, your trip has been successfully booked! We'll see you in Columbia on June 1st!</p>
             <p class='no-trips-display hidden' id='noTripsDisplay'>Sorry, no trips match the selected criteria. Return home to book a trip, or select another category!</p>
           </div>
