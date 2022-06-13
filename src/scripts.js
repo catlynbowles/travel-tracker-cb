@@ -23,19 +23,6 @@ var globalTrip;
 var globalDestination;
 
 
-export function displayAPIError(error) {
-  console.log(Object.keys(error))
-  console.log(error.message)
-  // removeHidden(messageDisplay);
-  // removeHidden(noTripsDisplay);
-  // addHidden(userSelectedTrips);
-  // removeHidden(tripRequestBox);
-  // addHidden(tripConfirmation)
-  loginErrorMsg.innerHTML = `${error}`
-  loginErrorMsg.classList.remove('hidden');
-  usernameInput.value = '';
-  passwordInput.value = '';
-}
 
 var userDashboardDisplay = document.getElementById('userDashboardDisplay')
 // query selectors
@@ -66,14 +53,14 @@ var destinationsDropdownInput = document.getElementById('destinationsDropdownInp
 var datalist = document.getElementById('datalist');
 
 // form selectors
-let tripForm = document.getElementById('tripForm');
-let tripPlanFieldset = document.getElementById('tripPlanFieldset');
+var tripForm = document.getElementById('tripForm');
+var tripPlanFieldset = document.getElementById('tripPlanFieldset');
 
 //price agreement
-let addTripForm = document.getElementById('addTripSubmit');
-let tripCost = document.getElementById('cost');
-let priceAgreement = document.getElementById('priceAgreement');
-let priceEstimateField = document.getElementById('priceEstimateField');
+var addTripForm = document.getElementById('addTripSubmit');
+var tripCost = document.getElementById('cost');
+var priceAgreement = document.getElementById('priceAgreement');
+var priceEstimateField = document.getElementById('priceEstimateField');
 
 //login pg
 var loginPageField = document.getElementById('loginPageField');
@@ -141,12 +128,18 @@ function checkValidLogin() {
   let username = usernameInput.value;
   let password = passwordInput.value;
   let validityCheck1 = (password === 'travel');
-  let phase1 = checkForFalse(validityCheck1);
   let id = Number(splitIdValue(username));
   let validityCheck2 = checkIdIsValid(id);
-  let phase2 = checkForFalse(validityCheck2);
   if (validityCheck1 && validityCheck2) {
     loadTraveler(id)
+  } else {
+    respondToFalseLogin();
+  }
+}
+
+function checkForFalse(ele) {
+  if (!ele) {
+    respondToFalseLogin();
   }
 }
 
@@ -157,15 +150,9 @@ function respondToFalseLogin() {
   setTimeout(displayLoginDashboard, 3000);
 }
 
-function checkForFalse(ele) {
-  if (!ele) {
-    respondToFalseLogin();
-  }
-}
-
 function fireLogoutEvent() {
   window.location.reload();
-  return false;
+  // return false;
 }
 
 function splitIdValue(usernameString) {
@@ -173,17 +160,12 @@ function splitIdValue(usernameString) {
   if (ID[0] !== 'traveler') {
     respondToFalseLogin();
   } else {
-    console.log(ID);
     return ID[1];
   }
 }
 
 function checkIdIsValid(id) {
-  if (id >= 1 && id <= 50) {
-    return true
-  } else {
-    return false
-  }
+  return (id >= 1 && id <= 50)
 }
 
 // if the id is valid, and password correct, take them to the login
@@ -394,6 +376,13 @@ function addUserTripFromInput() {
     suggestedActivities: []
   };
   var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
+}
+
+export function displayAPIError(error) {
+  loginErrorMsg.innerHTML = `${error}`
+  loginErrorMsg.classList.remove('hidden');
+  usernameInput.value = '';
+  passwordInput.value = '';
 }
 
 function calculateTripCosts() {

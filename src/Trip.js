@@ -51,7 +51,7 @@ findPresentTrips(tripArrs, today) {
 returnPresentTrip(presentTripDateMatch, userID) {
     let presentTrips = this.data.reduce((acc, trip) => {
       presentTripDateMatch.forEach(date => {
-        if (trip.date === date && trip.userID === userID) {
+        if (trip.date === date && trip.userID === userID && !acc.includes(trip)) {
           acc.push(trip)
         }
       })
