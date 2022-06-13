@@ -121,12 +121,15 @@ function checkValidLogin() {
   event.preventDefault();
   let username = usernameInput.value;
   let password = passwordInput.value;
+  console.log(password)
   let validityCheck1 = (password === 'travel');
   let phase1 = checkForFalse(validityCheck1);
   let id = Number(splitIdValue(username));
   let validityCheck2 = checkIdIsValid(id);
   let phase2 = checkForFalse(validityCheck2);
-  loadTraveler(id)
+  if (validityCheck1 && validityCheck2) {
+    loadTraveler(id)
+  }
   console.log(validityCheck2)
 }
 
@@ -141,8 +144,15 @@ function checkForFalse(ele) {
 
 function splitIdValue(usernameString) {
   let ID = usernameString.split(/(\d+)/);
-  console.log(ID);
-  return ID[1];
+  if (ID[0] !== 'traveler') {
+    loginErrorMsg.classList.remove('hidden');
+    usernameInput.value = '';
+    passwordInput.value = '';
+    setTimeout(displayLoginDashboard, 3000);
+  } else {
+    console.log(ID);
+    return ID[1];
+  }
 }
 
 function checkIdIsValid(id) {
@@ -164,6 +174,7 @@ function checkIdIsValid(id) {
 function displayLoginDashboard() {
   removeHidden(loginPage);
   addHidden(allUserTrips);
+  addHidden(loginErrorMsg);
 }
 
 
@@ -172,16 +183,7 @@ function hideLogin() {
   addHidden(loginPageField);
 }
 
-//dashboard display
-// function displayAfterPost() {
-//   removeHidden(userSelectedTrips);
-//   removeHidden(tripRequestBox);
-//   removeHidden(allUserTrips);
-//   addHidden(priceEstimateField);
-// }
-
 function showDashboard() {
-  // removeHidden(userSelectedTrips);
   removeHidden(tripRequestBox);
   removeHidden(allUserTrips);
   addHidden(messageDisplay);
@@ -214,9 +216,6 @@ function loadUserDashboard() {
   showDashboard();
   bookTripDisplay();
   hideLogin();
-  addHidden(priceEstimateField);
-  removeHidden(allUserTrips);
-  // addHidden(tripPlanFieldset)
   let today = getTodaysDate();
   let calendarMin = today.split('/').join('-');
   bookingDateInput.min = calendarMin;
@@ -277,6 +276,7 @@ function checkForEmptyDisplay(trips) {
     removeHidden(noTripsDisplay);
     addHidden(userSelectedTrips);
     removeHidden(tripRequestBox);
+    addHidden(tripConfirmation)
     // THE TRIP REQUEST BOX was in the way of the messages.
   }
 }
@@ -384,7 +384,8 @@ function displayCosts() {
 function displayTripConfirmation() {
   event.preventDefault();
   addHidden(priceEstimateField);
-  tripConfirmation.innerHTML = `<img src='../images/meteor-rain.gif' height='75' width='75'></img><p class='trip-confirmation-message' id="tripConfirmation"><br> ${globalTraveler.returnFirstName()}: <br> We are booking your trip to ${destinationsDropdownInput.value} on ${bookingDateInput.value.split('-').join('/')}! </br><br>You will be redirected back to the main page.</p>`
+  addHidden(noTripsDisplay);
+  tripConfirmation.innerHTML = `<img src='../images/meteor-rain.gif' height='75' width='75'></img><p class='trip-confirmation-message' id="tripConfirmation"><br> ${globalTraveler.returnFirstName()}: <br> We are booking your trip to ${destinationsDropdownInput.value} on ${bookingDateInput.value.split('-').join('/')}! </br><br>You will be redirected back to the main page shortly.</p>`
   removeHidden(tripConfirmation);
   removeHidden(messageDisplay);
   setTimeout(addUserTripFromInput, 3000);
