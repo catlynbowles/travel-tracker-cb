@@ -2,15 +2,22 @@
   border-radius: 25px;
 }
 
+@@font-face {
+  font-family: 'Lato', sans-serif;
+  display: swap;
+}
 
 body {
   font-family: 'Lato', sans-serif;
+  /* font-display: swap; */
   height: 100%;
 }
 
 p {
   font-size: 20px;
 }
+
+
 
 
 .left-contents {
@@ -84,6 +91,7 @@ input {
   height: 30px;
   margin-bottom: 20px;
   font-family: 'Lato', sans-serif;
+  text-align: center;
 }
 
 @keyframes slidebg {
@@ -127,7 +135,7 @@ fieldset {
   width: 400px;
   height: 500px;
   text-align: center;
-  margin-right: 100px;
+  margin-right: 0px;
   font-weight: bold;
 }
 
@@ -145,7 +153,10 @@ h3, h4 {
 .trip-type,
 .dashboard-buttons,
 .submit-trip,
-.input {
+.input,
+.checkbox,
+input,
+.book-new {
   cursor: pointer;
 }
 
@@ -200,10 +211,10 @@ h3, h4 {
 
 .message-display {
   font-weight: bold;
-  width: 870px;
+  width: 800px;
   align-items: center;
   text-align: center;
-  margin-left: 100px;
+  margin-left: 20px;
   margin-top: 90px;
   border: 5px solid transparent;
   border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
@@ -226,24 +237,25 @@ h3, h4 {
   opacity: 0.5;
 }
 
-.your-trips {
+.book-new {
   margin-left: 0px;
   margin-top: 30px;
   margin-right: 100px;
+  margin-bottom: 0px;
   font-size: 40px;
   border: 3px solid #FFADAD;
   background-color: rgba(255, 0, 0, 0.1);
 }
 
-.instructions {
+/* .instructions {
   margin: 0px;
   font-size: 15px;
   border: 3px solid #FFD6A5;
   background-color: rgba(255, 165, 0, 0.08);
-}
+} */
 
 .past {
-  margin-top: 25px;
+  margin-top: 0px;
   background: #FDFFB6;
   border: 3px solid #FDFFB6;
   background-color: rgba(255, 255, 0, 0.08);
@@ -286,7 +298,7 @@ legend {
 
 .no-trips-display,
 .trip-confirmation-message {
-  width: 810px;
+  width: 700px;
   font-size: 35px;
 }
 
@@ -296,6 +308,24 @@ legend {
   font-size: 30px;
   /* display: flex; */
   padding-bottom: 10px;
+}
+
+.login-page-section {
+  margin-top: 100px;
+  margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-styling {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+}
+
+.login-input {
+  height: 50px;
 }
 
 /* #f8f8ff off white
