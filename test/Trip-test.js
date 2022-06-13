@@ -251,7 +251,7 @@ describe('Trip', () => {
 
   it('should take in the start date of the present trip found, and return the information of that trip.', () => {
     let presentDateMatch = trip.findPresentTrips(presentTripData, date);
-    let tripMatch = trip.returnPresentTrip(presentDateMatch);
+    let tripMatch = trip.returnPresentTrip(presentDateMatch, 29);
     expect(tripMatch).to.be.an('array');
     expect(tripMatch).to.deep.equal([
       {

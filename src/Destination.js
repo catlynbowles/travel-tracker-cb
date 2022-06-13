@@ -12,12 +12,12 @@ class Destination {
       })
       return acc
     }, []);
+    console.log(destinationNames)
     return destinationNames;
   }
 
-  calculateTripExpense(duration, numTravelers, id) {
-      let userTrip = this.data.filter(destination => destination.id === id);
-      console.log(userTrip)
+  calculateTripExpense(duration, numTravelers, destId) {
+      let userTrip = this.data.filter(destination => destination.id === destId);
         let tripExpense = userTrip.reduce((acc, destination) => {
           acc += destination.estimatedLodgingCostPerDay * duration;
           acc += destination.estimatedFlightCostPerPerson * numTravelers;
