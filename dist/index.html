@@ -70,12 +70,12 @@
               <form id='tripForm'>
                 <label class="booking-date input" id="bookingDate">Date:</label><br>
                 <input class="booking-date-input input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" min='' max='2025-01-01' required><br>
-                <label class="duration input" id="duration">Duration:</label><br>
-                <input class="duration-input input" id="durationInput" type="number" placeholder="Duration of Stay" min='1' max='30' required><br>
-                <label class="num-travelers input" id="numTravelers">Travelers:</label><br>
-                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" min='1' max='15' required><br><br>
-                <label class="destinations input" id="destinations">Destinations:</label><br>
-                <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdownInput" name='destination' placeholder="Choose your destination" required><br>
+                <label class="duration input" id="duration">Duration of Stay:</label><br>
+                <input class="duration-input input" id="durationInput" type="number" placeholder="days" min='1' max='30' required><br>
+                <label class="num-travelers input" id="numTravelers">Travelers in Your Party:</label><br>
+                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="travelers" min='1' max='15' required><br><br>
+                <label class="destinations input" id="destinations">Choose Your Destination:</label><br>
+                <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdownInput" name='destination' placeholder="location" required><br>
                 <input class="find-cost input rainbow-5" role="button" aria-pressed="false" id="findCost" type="submit" value="Estimate Cost"><br>
                     <datalist id='datalist'>
                     </datalist><br>

@@ -32,3 +32,7 @@ export function addUserTravelData(dataToTransmit) {
 
   return response;
 }
+
+export function catchError(error) {
+
+}

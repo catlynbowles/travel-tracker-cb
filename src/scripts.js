@@ -3,7 +3,7 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import {fetchAllData, addUserTravelData} from './apiCalls.js';
+import {fetchAllData, addUserTravelData, catchError} from './apiCalls.js';
 import TravelerRepository from './TravelerRepository';
 import Traveler from './Traveler';
 import Trip from './Trip';
