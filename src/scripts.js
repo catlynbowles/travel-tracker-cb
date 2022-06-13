@@ -171,7 +171,7 @@ function fireLogoutEvent() {
 function splitIdValue(usernameString) {
   let ID = usernameString.split(/(\d+)/);
   if (ID[0] !== 'traveler') {
-    respondFalseLogin();
+    respondToFalseLogin();
   } else {
     console.log(ID);
     return ID[1];
@@ -264,6 +264,12 @@ function supplyDestinationDropDown() {
   return dropDownDestinations
 }
 
+function clearTripSelection() {
+  addHidden(priceEstimateField);
+  addHidden(noTripsDisplay);
+  clearInputFields();
+}
+
 function clearInputFields() {
   bookingDateInput.value = '';
   durationInput.value = '';
@@ -323,6 +329,7 @@ function modifyTripsToCards(trips) {
 // trip displays
 
 function displayPastTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
@@ -333,18 +340,21 @@ function displayPastTrips() {
 }
 
 function displayPresentTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let tripDates = getAllTripDates(travelerTrips);
   let presentTripMatches = globalTrip.findPresentTrips(tripDates, today);
-  let presentTrips = globalTrip.returnPresentTrip(presentTripMatches, tripData);
+  console.log(presentTripMatches)
+  let presentTrips = globalTrip.returnPresentTrip(presentTripMatches, globalTraveler.id);
   let presentTripProperties = globalDestination.returnLocationProperties(presentTrips);
   checkForEmptyDisplay(presentTripProperties);
   modifyTripsToCards(presentTripProperties);
 }
 
 function displayUpcomingTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
@@ -355,6 +365,7 @@ function displayUpcomingTrips() {
 }
 
 function displayPendingTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
@@ -403,6 +414,7 @@ function displayCosts() {
   let tripExpense = calculateTripCosts();
   tripCost.innerText = `$${tripExpense} USD`;
 }
+
 
 function displayTripConfirmation() {
   event.preventDefault();

@@ -44,19 +44,20 @@ findPresentTrips(tripArrs, today) {
       }
       return acc
     }, []);
+    console.log(presentTripDate)
     return presentTripDate;
   }
 
-returnPresentTrip(tripStartDates) {
+returnPresentTrip(presentTripDateMatch, userID) {
     let presentTrips = this.data.reduce((acc, trip) => {
-      tripStartDates.forEach(date => {
-        if (trip.date === date && !acc.includes(trip)) {
+      presentTripDateMatch.forEach(date => {
+        if (trip.date === date && trip.userID === userID) {
           acc.push(trip)
         }
       })
       return acc
     }, [])
-    console.log('there is one!', presentTrips)
+    console.log(presentTrips)
     return presentTrips
   }
 }
