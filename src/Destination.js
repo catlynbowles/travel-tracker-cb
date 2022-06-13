@@ -49,9 +49,7 @@ class Destination {
   }
 
   findDestinationByName(name) {
-    let travelerDestination = this.data.find(destination => {
-      return destination.destination === name
-    });
+    let travelerDestination = this.data.find(destination => destination.destination === name);
     return travelerDestination.id;
   }
 
