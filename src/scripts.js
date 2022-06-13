@@ -23,6 +23,21 @@ var globalTrip;
 var globalDestination;
 
 
+export function displayAPIError(error) {
+  console.log(Object.keys(error))
+  console.log(error.message)
+  // removeHidden(messageDisplay);
+  // removeHidden(noTripsDisplay);
+  // addHidden(userSelectedTrips);
+  // removeHidden(tripRequestBox);
+  // addHidden(tripConfirmation)
+  loginErrorMsg.innerHTML = `${error}`
+  loginErrorMsg.classList.remove('hidden');
+  usernameInput.value = '';
+  passwordInput.value = '';
+}
+
+var userDashboardDisplay = document.getElementById('userDashboardDisplay')
 // query selectors
 var clickPastTrips = document.getElementById('pastTrips');
 var clickPresentTrips = document.getElementById('presentTrips');
@@ -125,7 +140,6 @@ function checkValidLogin() {
   event.preventDefault();
   let username = usernameInput.value;
   let password = passwordInput.value;
-  console.log(password)
   let validityCheck1 = (password === 'travel');
   let phase1 = checkForFalse(validityCheck1);
   let id = Number(splitIdValue(username));
@@ -134,10 +148,9 @@ function checkValidLogin() {
   if (validityCheck1 && validityCheck2) {
     loadTraveler(id)
   }
-  console.log(validityCheck2)
 }
 
-function travelerLogout() {
+function respondToFalseLogin() {
   loginErrorMsg.classList.remove('hidden');
   usernameInput.value = '';
   passwordInput.value = '';
@@ -146,7 +159,7 @@ function travelerLogout() {
 
 function checkForFalse(ele) {
   if (!ele) {
-    travelerLogout();
+    respondToFalseLogin();
   }
 }
 
@@ -158,7 +171,7 @@ function fireLogoutEvent() {
 function splitIdValue(usernameString) {
   let ID = usernameString.split(/(\d+)/);
   if (ID[0] !== 'traveler') {
-    travelerLogout();
+    respondFalseLogin();
   } else {
     console.log(ID);
     return ID[1];

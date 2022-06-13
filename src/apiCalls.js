@@ -1,4 +1,6 @@
 //FETCH REQUESTS
+import {displayAPIError} from './scripts'
+
 export function fetchAllData() {
   let apis = [
     'http://localhost:3001/api/v1/travelers',
@@ -8,8 +10,8 @@ export function fetchAllData() {
 
   let endpoints = apis.map((url) => {
     return fetch(url)
-    .then(response => response.json())
-    .catch(error => console.log(error));
+    .then(response => checkForError(response))
+    .catch(error => displayAPIError(error));
   })
 
   const allData = Promise.all(endpoints).then((value) => {
@@ -27,12 +29,22 @@ export function addUserTravelData(dataToTransmit) {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify(dataToTransmit)
-  }).then(res => {return res.json()})
-  .catch(error => console.log(error));
+}).then(response => checkForError(response))
+  .catch(error => displayAPIError(error))
 
   return response;
 }
 
-export function catchError(error) {
-
+export function checkForError(response) {
+  if (!response.ok) {
+    throw new Error('Oops, something went wrong. Check back again with us soon while we resolve the issue!')
+  } else {
+    return response.json()
+  }
 }
+
+// export function displayErrorMessage(error) {
+//   console.log(Object.keys(error))
+//   console.log(error.message)
+//   userDashboardDisplay.innerHTML = `${error}, please try again later!`
+// }
