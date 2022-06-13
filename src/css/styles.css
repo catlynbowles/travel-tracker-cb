@@ -91,6 +91,7 @@ input {
   height: 30px;
   margin-bottom: 20px;
   font-family: 'Lato', sans-serif;
+  text-align: center;
 }
 
 @keyframes slidebg {
@@ -153,6 +154,8 @@ h3, h4 {
 .dashboard-buttons,
 .submit-trip,
 .input,
+.checkbox,
+input,
 .book-new {
   cursor: pointer;
 }

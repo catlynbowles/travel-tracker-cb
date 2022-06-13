@@ -69,6 +69,8 @@ var loginForm = document.getElementById('loginForm');
 var passwordInput = document.getElementById('passwordInput');
 var usernameInput = document.getElementById('usernameInput');
 
+var logout = document.getElementById('logoutButton');
+
 // event listeners
 window.addEventListener('load', displayResolvedData);
 clickPastTrips.addEventListener('click', displayPastTrips);
@@ -81,6 +83,8 @@ bookNewTrip.addEventListener('click', bookTripDisplay)
 tripForm.addEventListener('submit', displayCosts);
 addTripForm.addEventListener('submit', displayTripConfirmation);
 loginForm.addEventListener('submit', checkValidLogin);
+
+logout.addEventListener('click', fireLogoutEvent)
 
 // Fetch API
 function displayResolvedData() {
@@ -133,22 +137,28 @@ function checkValidLogin() {
   console.log(validityCheck2)
 }
 
+function travelerLogout() {
+  loginErrorMsg.classList.remove('hidden');
+  usernameInput.value = '';
+  passwordInput.value = '';
+  setTimeout(displayLoginDashboard, 3000);
+}
+
 function checkForFalse(ele) {
   if (!ele) {
-    loginErrorMsg.classList.remove('hidden');
-    usernameInput.value = '';
-    passwordInput.value = '';
-    setTimeout(displayLoginDashboard, 3000);
+    travelerLogout();
   }
+}
+
+function fireLogoutEvent() {
+  window.location.reload();
+  return false;
 }
 
 function splitIdValue(usernameString) {
   let ID = usernameString.split(/(\d+)/);
   if (ID[0] !== 'traveler') {
-    loginErrorMsg.classList.remove('hidden');
-    usernameInput.value = '';
-    passwordInput.value = '';
-    setTimeout(displayLoginDashboard, 3000);
+    travelerLogout();
   } else {
     console.log(ID);
     return ID[1];
