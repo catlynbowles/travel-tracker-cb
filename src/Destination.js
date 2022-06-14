@@ -12,7 +12,6 @@ class Destination {
       })
       return acc
     }, []);
-    console.log(destinationNames)
     return destinationNames;
   }
 

@@ -7,7 +7,6 @@ class Trip {
     let userTripData = this.data.filter(trip => {
       return trip.userID === id
     })
-    // console.log(userTripData)
     return userTripData
   }
 
@@ -15,7 +14,6 @@ class Trip {
     let pastTrips = userTripData.filter(trip => {
       return trip.date < currentDate
     });
-    // console.log(pastTrips)
     return pastTrips;
   }
 
@@ -23,7 +21,6 @@ class Trip {
     let upcomingTrips = userTripData.filter(trip => {
       return trip.date > currentDate
     });
-    // console.log(upcomingTrips)
     return upcomingTrips;
   }
 
@@ -44,7 +41,6 @@ findPresentTrips(tripArrs, today) {
       }
       return acc
     }, []);
-    console.log(presentTripDate)
     return presentTripDate;
   }
 
@@ -56,9 +52,8 @@ returnPresentTrip(presentTripDateMatch, userID) {
         }
       })
       return acc
-    }, [])
-    console.log(presentTrips)
-    return presentTrips
+    }, []);
+    return presentTrips;
   }
 }
 

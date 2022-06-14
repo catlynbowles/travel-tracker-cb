@@ -32,30 +32,35 @@ describe('Destination', () => {
 
   it('should calculate the trip expense for the current traveler booking', () => {
     let tripCalculation = destination.calculateTripExpense(6, 3, 49);
+
     expect(tripCalculation).to.be.a('number');
     expect(tripCalculation).to.equal(4587);
   });
 
   it('should calculate the current year', () => {
     let currentYear = destination.getCurrentYear();
+
     expect(currentYear).to.be.a('number');
     expect(currentYear).to.equal(2022);
   });
 
   it('should calculate yearly travel expenses based on taking in a list of trips', () => {
     let userExpenses = destination.calculateYearlyTravelExpenses(destTripData);
+
     expect(userExpenses).to.be.a('number');
     expect(userExpenses).to.equal(14344);
   });
 
   it('should find a destination by name and return the id of the destination', () => {
     let destinationMatch = destination.findDestinationByName("Caye Caulker, Belize");
+
     expect(destinationMatch).to.be.a('number');
     expect(destinationMatch).to.deep.equal(44);
   });
 
   it('should be able to take in an array of destinations and trip data and return the name of the location, the date, the days of the trip, a picture and alt text of each associated location.', () => {
     let locationInformation = destination.returnLocationProperties(destTripData);
+    
     expect(locationInformation).to.be.an('array');
     expect(locationInformation).to.deep.equal([
       {

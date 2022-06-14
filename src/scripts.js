@@ -18,15 +18,6 @@ var globalTravelerInfo;
 var globalTrip;
 var globalDestination;
 
-
-// removeHidden(loginPage);
-// var userDashboardDisplay = document.getElementById('userDashboardDisplay')
-// var location = document.getElementById('location');
-// var tripDate = document.getElementById('tripDate');
-// var boxImage = document.getElementById('boxImg');
-// var boardDisplay = document.getElementById('boardDisplay')
-// addHidden(loginPage);
-
 // query selectors
 var clickPastTrips = document.getElementById('pastTrips');
 var clickPresentTrips = document.getElementById('presentTrips');

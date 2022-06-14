@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import Trip from '../src/Trip';
 import {tripData, presentTripData} from '../test-data/Trip-data';
-// import presentTripData from '../test-data/Trip-data'
 
 describe('Trip', () => {
   let trip;
@@ -243,13 +242,34 @@ describe('Trip', () => {
     ]);
   });
 
+  it('should return an empty array if there are no present, past, pending or upcomings trips calculated.', () => {
+    let noUpcomingMatches = trip.getUpcomingTrips(userTripData5);
+    expect(noUpcomingMatches).to.be.an('array');
+    expect(noUpcomingMatches).to.deep.equal([]);
+
+    let presentDateMatch = trip.findPresentTrips(presentTripData, date);
+    let noPresentMatches = trip.returnPresentTrip(presentDateMatch, 50);
+    expect(noPresentMatches).to.be.an('array');
+    expect(noPresentMatches).to.deep.equal([]);
+
+
+    let noPendingMatches = trip.getPendingTrips(userTripData5)
+    expect(noPendingMatches).to.be.an('array');
+    expect(noPendingMatches).to.deep.equal([]);
+
+    let userTripData6 = trip.getUserTripData(12);
+    let noPastMatches = trip.getPendingTrips(userTripData6)
+    expect(noPastMatches).to.be.an('array');
+    expect(noPastMatches).to.deep.equal([]);
+  });
+
   it('should take in a list of trip dates and return the trip start date if it finds a match within the duration of the trip', () => {
     let presentDateMatch = trip.findPresentTrips(presentTripData, date);
     expect(presentDateMatch).to.be.an('array');
     expect(presentDateMatch).to.deep.equal(["2022/06/07"])
   });
 
-  it('should take in the start date of the present trip found, and return the information of that trip.', () => {
+  it('should take in the start date of the present trip found, and return the information of that trip if the trip userID matches the current user.', () => {
     let presentDateMatch = trip.findPresentTrips(presentTripData, date);
     let tripMatch = trip.returnPresentTrip(presentDateMatch, 29);
     expect(tripMatch).to.be.an('array');
