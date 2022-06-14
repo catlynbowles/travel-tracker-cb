@@ -137,12 +137,6 @@ function checkValidLogin() {
   }
 }
 
-function checkForFalse(ele) {
-  if (!ele) {
-    respondToFalseLogin();
-  }
-}
-
 function respondToFalseLogin() {
   loginErrorMsg.classList.remove('hidden');
   usernameInput.value = '';
@@ -152,7 +146,6 @@ function respondToFalseLogin() {
 
 function fireLogoutEvent() {
   window.location.reload();
-  // return false;
 }
 
 function splitIdValue(usernameString) {
@@ -177,7 +170,7 @@ function checkIdIsValid(id) {
 
 //login page display
 function displayLoginDashboard() {
-  removeHidden(loginPage);
+  // removeHidden(loginPage);
   addHidden(allUserTrips);
   addHidden(loginErrorMsg);
 }
