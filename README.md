@@ -1,99 +1,70 @@
-# Webpack Starter Kit
+# Travel Tracker
 
-## Clone This Repo
+## Table of Contents
+- [Introduction](#introduction)
+- [Technologies](#technologies)
+- [Set Up](#set-up)
+- [Features](#features)
+- [Organizational Resources](#organizational-resources)
+- [Future Features](#future-features)
+- [Reflection](#reflection)
+- [Contributors](#contributors)
+- [Project Specifications](#project-specifications)
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+### Introduction
+It's the summer of 2022, and in this pre-pandemic life you're ready to travel! The problem is, no one can keep up with you. What if you could hire someone to do that? We've found the perfect candidate for you with Travel Tracker. View the trips you've taken, along with upcoming trips, pending trips, and trips you may currently be on. With the ability to book new trips, you can also jet off to any destination, and view your trip's estimated cost before booking. Travel Tracker is accessible to a wide variety of users, and currently supporting pride month. Clone down this repo to get started: 
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+### Set Up
+1. Clone this [repository](https://github.com/ASands17/fitlit).
+2. `cd` into the directory.
+3. Run `npm install`.
+4. To run tests, run `npm test`.
+5. Start the server by running `npm start` and view at http://localhost:8080/.
 
-Now try to commit something (just add a line in the README) and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+## Set Up the Backend Database
+1. 
 
-## Setup
+### Features
+- User sees a 👋 welcome card with their 🪪 id, 🤠 name, 🏡 address, 💌 email, 🏃‍♀️ stride length, 🥅 daily step goal, and 👯‍♀️ friends.
+- User can view their current 🦶 step goal and average steps.
+- User can view their daily and weekly water 🚰 consumption.
+- User can view their daily and weekly sleep hours and sleep quality 💤.
+- User can add new sleep 😴, hydration 🐳, and activity 🏃💨 data to the local server. 
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo.
+<img width="1437" alt="Screen Shot 2022-06-06 at 1 55 00 PM" src="https://user-images.githubusercontent.com/98493391/172237647-e4b8ec12-9467-454f-8744-e319d2a5ecc5.png">
 
-Then install the library dependencies. Run:
 
-```bash
-npm install
-```
+### Organizational Resources
+- [Figma Dashboard]([https://www.figma.com/file/SxZltJr5XcWric3Lbufna7/CIA's-Dashboard-Template?node-id=0%3A1](https://excalidraw.com/#json=zV7Wn-_iSUBgFc9665SEo,OyMuA1WK9KIgj1OtKcFKTA))
+- [GitHub Project Board](https://github.com/ASands17/fitlit/projects/1)
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with the Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+### Future Features
+- Weekly sleep and hydration data will be displayed using charts for a better user experience.
+- Dashboard will update with data added by the user. 
+- User will be able to delete data no longer needed or added by accident. 
 
-## Where to Add Your Code
+### Reflection
+- One of the most valuable lessons we learned is that we should avoid manipulating the data in our data model. We created a function in our hydration class that would parse our date, and then we would use that parsed date to sort dates in order from most to least recent. However, since we mutated our date data, we encountered bugs once we were further along in our project, and we needed to do a major refactor so that our data remained consistent throughout the application. We learned that it is vital to keep our data consistent, and avoid manipulating it unless absolutely necessary. 
 
-### JavaScript
+- We utilized many iterator methods in this project. It was fun to see the practical usages of these iterators in our webpage. Most notably, we decided to map through our API endpoints in our fetch call. We also used iterator methods to manipulate the DOM. We look forward to refining our iterator methods in future iterations of this project. 
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+- This project taught us a lot about Git workflow and troubleshooting Git issues. We encountered errors that none of us had seen before, and we had to spend some time googling those error messages and attempting to solve the issues. We also learned that co-authoring commits is an option, and we intend to do more research on this to implement in the second half of our project.
 
-**Create all of your feature code files in the `src` directory.**
+- Writing the code for the post requests was helpful because it showed how GET calls work together with POST calls. It helped us see how an app manages those interactions and how it works with changing the database. 
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+- Refactoring proved to be easier than initially expected. It's like the code wanted to be refactored, as it was easily set up to do so. 🤪
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+### Technologies
+- JavaScript
+- HTML
+- CSS
+- API Fetch
+- API Post
+- Chai/Mocha testing
+- Webpack
 
-### HTML
+### Contributors of the CIA 🕵️‍♀️
+- [Catlyn Bowles](https://www.linkedin.com/in/catlyn-bowles/)
 
-Add the HTML you need in the `index.html` file in the `./dist` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`scripts.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
----
-
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory.
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+### Project Specifications
+- Project specs can be found [here](https://frontend.turing.edu/projects/Fitlit-part-one.html).
