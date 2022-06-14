@@ -31,6 +31,9 @@ It's the summer of 2022, and in this pre-pandemic life you're ready to travel! T
 ### Login: 
 - Login to the site using the the username 'traveler' + a number 1 - 50. Use the password 'travel'. 
 
+### Check It Out!
+![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/98493391/173706465-509c2559-388b-490a-894e-a268561f6ae8.gif)
+
 ### Features
 - Traveler logs in using 'traveler' + the id number, and the password 'travel.' 
 - Upon login in, the traveler can select 'Past Experiences,' 'Present Encounters,' 'Upcoming Destinations', or 'Pending Destinations.'
