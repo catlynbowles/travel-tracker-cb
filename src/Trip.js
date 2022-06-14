@@ -7,7 +7,6 @@ class Trip {
     let userTripData = this.data.filter(trip => {
       return trip.userID === id
     })
-    // console.log(userTripData)
     return userTripData
   }
 
@@ -15,7 +14,6 @@ class Trip {
     let pastTrips = userTripData.filter(trip => {
       return trip.date < currentDate
     });
-    // console.log(pastTrips)
     return pastTrips;
   }
 
@@ -23,7 +21,6 @@ class Trip {
     let upcomingTrips = userTripData.filter(trip => {
       return trip.date > currentDate
     });
-    // console.log(upcomingTrips)
     return upcomingTrips;
   }
 
@@ -47,17 +44,16 @@ findPresentTrips(tripArrs, today) {
     return presentTripDate;
   }
 
-returnPresentTrip(tripStartDates) {
+returnPresentTrip(presentTripDateMatch, userID) {
     let presentTrips = this.data.reduce((acc, trip) => {
-      tripStartDates.forEach(date => {
-        if (trip.date === date && !acc.includes(trip)) {
+      presentTripDateMatch.forEach(date => {
+        if (trip.date === date && trip.userID === userID && !acc.includes(trip)) {
           acc.push(trip)
         }
       })
       return acc
-    }, [])
-    console.log('there is one!', presentTrips)
-    return presentTrips
+    }, []);
+    return presentTrips;
   }
 }
 

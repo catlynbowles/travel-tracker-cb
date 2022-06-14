@@ -174,6 +174,16 @@ export const tripData = [
     "duration": 10,
     "status": "approved",
     "suggestedActivities": []
+  },
+  {
+    "id": 88,
+    "userID": 12,
+    "destinationID": 46,
+    "travelers": 4,
+    "date": "2023/11/27",
+    "duration": 10,
+    "status": "approved",
+    "suggestedActivities": []
   }
 ];
 

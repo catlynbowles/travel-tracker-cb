@@ -2,15 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <!-- <link rel="preload" as="font"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Travel Tracker">
     <title>Travel Tracker</title>
-    Cache-Control: max-age=31536000
   </head>
   <body>
     <main>
@@ -20,35 +18,32 @@
           <h2 class='welcome-text' id='welcomeText'>Welcome!</h2>
         </div>
         <div tabindex=0 class="right-contents">
-          <!-- <h3 class='dashboard-buttons zoom' role="button" aria-pressed="false" id='homeButton'>Book a New Trip</h3> -->
-          <h4 class='dashboard-buttons zoom' role="button" aria-pressed="false" id='logoutButton'>Logout</h4>
+          <button class='logout zoom rainbow-3' id='logoutButton'>Logout</button>
         </div>
       </section>
       <section class='user-dashboard-display' id='userDashboardDisplay'>
         <section class='login-page-section hidden' id='loginPage'>
-          <fieldset id='loginPageField'>
-            <legend id='loginLegend'>Login to Travel Tracker</legend>
-            <form id='loginForm'>
-              <label class="username login input" id="username">Username:</label>
-              <input class="username-input login input" id="usernameInput" type="text" placeholder="traveler + (yourid)" required><br>
-              <label class="password input login" id="password">Password:</label>
-              <input class="password-input input login" id="passwordInput" type="password" placeholder="password" required><br>
-              <input class="login-input input login rainbow-5" role="button" id="loginSubmit" type="submit" value="Login"><br>
-              <p class='login-error-msg hidden' id="loginErrorMsg">Invalid username<span id="errorMsgSecondLine"> and/or password</span></p>
-            </form>
-          </fieldset>
+            <fieldset id='loginPageField'>
+              <legend id='loginLegend'>Login to Travel Tracker</legend>
+              <form id='loginForm'>
+                <label class="username login input" id="username">Username:</label>
+                <input class="username-input login input" id="usernameInput" type="text" placeholder="traveler + (yourid)" required><br>
+                <label class="password input login" id="password">Password:</label>
+                <input class="password-input input login" id="passwordInput" type="password" placeholder="password" required><br>
+                <button class="login-input input login rainbow-5" role="button" id="loginSubmit" type="submit" value="Login">Login</button><br>
+                <p class='login-error-msg hidden' id="loginErrorMsg">Invalid username<span id="errorMsgSecondLine"> and/or password</span></p>
+              </form>
+            </fieldset>
         </section>
         <!-- </div> -->
         <div tabindex=0 class='box-styling'>
           <section class='all-user-trips hidden' id='allUserTrips'>
-            <h5 class='book-new zoom rainbow-5' id='bookNew'>Book a New Trip!</h5>
-            <!-- <h6 class='book-new'>Book A New Trip!</h6> -->
+            <button class='book-new zoom rainbow-5' id='bookNew'>Book a New Trip!</button>
             <div tabindex=0 class='trip-type-styling' role='tablist'>
-              <!-- <p class='instructions' role='tab'>Click below to learn more about your trips!</p> -->
-              <p class="trip-type past zoom" id="pastTrips" role='tab'>Past Experiences</p>
-              <p class="trip-type present zoom" id="presentTrips" role='tab'>Present Encounters</p>
-              <p class="trip-type upcoming zoom" id="upcomingTrips">Upcoming Adventures</p>
-              <p class="trip-type pending zoom" id="pendingTrips">Pending Destinations</p>
+              <button class="trip-type past zoom" id="pastTrips" role='tab'>Past Experiences</button>
+              <button class="trip-type present zoom" id="presentTrips" role='tab'>Present Encounters</button>
+              <button class="trip-type upcoming zoom" id="upcomingTrips" role='tab'>Upcoming Adventures</button>
+              <button class="trip-type pending zoom" id="pendingTrips" role='tab'>Pending Destinations</button>
               <div tabindex=0 class='yearly-cost-style'>
                 <p class='user-costs yearly-cost' id='yearlyCost'>Your Travel Expenses in 2022:</p>
                 <p class='user-costs yearly-cost value' id='yearlyCostValue'>Your Travel Expenses in 2022:</p>
@@ -70,13 +65,13 @@
               <form id='tripForm'>
                 <label class="booking-date input" id="bookingDate">Date:</label><br>
                 <input class="booking-date-input input" id="bookingDateInput" type="date" placeholder="dd/mm/yyyy" min='' max='2025-01-01' required><br>
-                <label class="duration input" id="duration">Duration:</label><br>
-                <input class="duration-input input" id="durationInput" type="number" placeholder="Duration of Stay" min='1' max='30' required><br>
-                <label class="num-travelers input" id="numTravelers">Travelers:</label><br>
-                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="Number of Travelers" min='1' max='15' required><br><br>
-                <label class="destinations input" id="destinations">Destinations:</label><br>
-                <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdownInput" name='destination' placeholder="Choose your destination" required><br>
-                <input class="find-cost input rainbow-5" role="button" aria-pressed="false" id="findCost" type="submit" value="Estimate Cost"><br>
+                <label class="duration input" id="duration">Duration of Stay:</label><br>
+                <input class="duration-input input" id="durationInput" type="number" placeholder="days" min='1' max='30' required><br>
+                <label class="num-travelers input" id="numTravelers">Travelers in Your Party:</label><br>
+                <input class="num-travelers-input input" id="numTravelersInput" type="number" placeholder="travelers" min='1' max='15' required><br><br>
+                <label class="destinations input" id="destinations">Choose Your Destination:</label><br>
+                <input autcomplete='on' list='datalist' class="destinations-dropdown input" id="destinationsDropdownInput" name='destination' placeholder="location" required><br>
+                <input class="find-cost input rainbow-5" role="button" id="findCost" type="submit" value="Estimate Cost"><br>
                     <datalist id='datalist'>
                     </datalist><br>
               </form>
@@ -90,7 +85,7 @@
                     <p class='price-estimate' id='priceAgent'>(includes a 10% travel agent fee)</p>
                     <input type="checkbox" id="priceAgreement" name="priceAgreement" required>
                     <label for="checkbox" class='checkbox'>I understand that by clicking this button I am booking this trip, and responsible for the fees thereof.</label>
-                <input class="submit-trip input" id="submitTrip" type="submit" value="Book Trip" role="button" aria-pressed="false"><br>
+                <input class="submit-trip input rainbow-5" id="submitTrip" type="submit" value="Book Trip" role="button"><br>
               </div>
               </form>
             </fieldset>

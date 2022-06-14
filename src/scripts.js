@@ -1,9 +1,5 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import {fetchAllData, addUserTravelData} from './apiCalls.js';
+import {fetchAllData, addUserTravelData, catchError} from './apiCalls.js';
 import TravelerRepository from './TravelerRepository';
 import Traveler from './Traveler';
 import Trip from './Trip';
@@ -22,7 +18,6 @@ var globalTravelerInfo;
 var globalTrip;
 var globalDestination;
 
-
 // query selectors
 var clickPastTrips = document.getElementById('pastTrips');
 var clickPresentTrips = document.getElementById('presentTrips');
@@ -30,18 +25,14 @@ var clickUpcomingTrips = document.getElementById('upcomingTrips');
 var clickPendingTrips = document.getElementById('pendingTrips');
 var tripRequestBox = document.getElementById('tripRequestBox');
 var userSelectedTrips = document.getElementById('userSelectedTrips');
-var logoutButton = document.getElementById('logoutButton');
-var bookNewTrip = document.getElementById('bookNew');
-var location = document.getElementById('location');
-var tripDate = document.getElementById('tripDate');
-var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
+var allUserTrips = document.getElementById('allUserTrips');
+
+//messages
+var messageDisplay = document.getElementById('messageDisplay');
 var yearlyCostValue = document.getElementById('yearlyCostValue');
 var tripConfirmation = document.getElementById('tripConfirmation');
 var noTripsDisplay = document.getElementById('noTripsDisplay');
-var messageDisplay = document.getElementById('messageDisplay');
-var boardDisplay = document.getElementById('boardDisplay')
-var allUserTrips = document.getElementById('allUserTrips');
 
 //inputs
 var bookingDateInput = document.getElementById('bookingDateInput');
@@ -49,27 +40,28 @@ var durationInput = document.getElementById('durationInput');
 var numTravelersInput = document.getElementById('numTravelersInput');
 var destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
 var datalist = document.getElementById('datalist');
-
-// form selectors
-let tripForm = document.getElementById('tripForm');
-let tripPlanFieldset = document.getElementById('tripPlanFieldset');
-
-//price agreement
-let addTripForm = document.getElementById('addTripSubmit');
-let tripCost = document.getElementById('cost');
-let priceAgreement = document.getElementById('priceAgreement');
-let priceEstimateField = document.getElementById('priceEstimateField');
-
-//login pg
-var loginPageField = document.getElementById('loginPageField');
-var loginPageSection = document.getElementById('loginPageSection');
-
-var loginErrorMsg = document.getElementById('loginErrorMsg');
-var loginForm = document.getElementById('loginForm');
 var passwordInput = document.getElementById('passwordInput');
 var usernameInput = document.getElementById('usernameInput');
 
+// form selectors
+var tripPlanFieldset = document.getElementById('tripPlanFieldset');
+var priceEstimateField = document.getElementById('priceEstimateField');
+
+//price agreement
+var tripCost = document.getElementById('cost');
+var priceAgreement = document.getElementById('priceAgreement');
+
+//login pg
+var loginPageField = document.getElementById('loginPageField');
+var loginErrorMsg = document.getElementById('loginErrorMsg');
+
+// buttons
+var tripForm = document.getElementById('tripForm');
 var logout = document.getElementById('logoutButton');
+var addTripForm = document.getElementById('addTripSubmit');
+var loginForm = document.getElementById('loginForm');
+var logoutButton = document.getElementById('logoutButton');
+var bookNewTrip = document.getElementById('bookNew');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -77,13 +69,10 @@ clickPastTrips.addEventListener('click', displayPastTrips);
 clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
-bookNewTrip.addEventListener('click', bookTripDisplay)
-
-// bookTripButton.addEventListener('click', );
+bookNewTrip.addEventListener('click', bookTripDisplay);
 tripForm.addEventListener('submit', displayCosts);
 addTripForm.addEventListener('submit', displayTripConfirmation);
 loginForm.addEventListener('submit', checkValidLogin);
-
 logout.addEventListener('click', fireLogoutEvent)
 
 // Fetch API
@@ -115,81 +104,56 @@ function getAllDestinationData(data) {
     displayLoginDashboard();
   }
 }
-// step 1 completed
-// on step 2, the user will login.
-// the first step of this login, is to check whether or not the information is valid.
-// if it is not, reset the values, show an error message ,and go back to the dashboard.
 
 //login page functions
 function checkValidLogin() {
   event.preventDefault();
   let username = usernameInput.value;
   let password = passwordInput.value;
-  console.log(password)
   let validityCheck1 = (password === 'travel');
-  let phase1 = checkForFalse(validityCheck1);
   let id = Number(splitIdValue(username));
   let validityCheck2 = checkIdIsValid(id);
-  let phase2 = checkForFalse(validityCheck2);
   if (validityCheck1 && validityCheck2) {
     loadTraveler(id)
+  } else {
+    respondToFalseLogin();
   }
-  console.log(validityCheck2)
 }
 
-function travelerLogout() {
+function respondToFalseLogin() {
   loginErrorMsg.classList.remove('hidden');
   usernameInput.value = '';
   passwordInput.value = '';
   setTimeout(displayLoginDashboard, 3000);
 }
 
-function checkForFalse(ele) {
-  if (!ele) {
-    travelerLogout();
-  }
-}
-
 function fireLogoutEvent() {
   window.location.reload();
-  return false;
 }
 
 function splitIdValue(usernameString) {
   let ID = usernameString.split(/(\d+)/);
   if (ID[0] !== 'traveler') {
-    travelerLogout();
+    respondToFalseLogin();
   } else {
-    console.log(ID);
     return ID[1];
   }
 }
 
 function checkIdIsValid(id) {
-  if (id >= 1 && id <= 50) {
-    return true
-  } else {
-    return false
-  }
+  return (id >= 1 && id <= 50)
 }
-
-// if the id is valid, and password correct, take them to the login
-// dashboard, where the trips menu bar and the dream trip box
-// are displayed.
-// load the new traveler from the data
-// step 2 complete
-// step 3, display dashboard.
 
 //login page display
 function displayLoginDashboard() {
-  removeHidden(loginPage);
   addHidden(allUserTrips);
   addHidden(loginErrorMsg);
 }
 
 
+
+// dashboard display
 function hideLogin() {
-  addHidden(loginPage);
   addHidden(loginPageField);
 }
 
@@ -201,7 +165,6 @@ function showDashboard() {
 }
 
 function loadTraveler(id) {
-  console.log(id)
   let newTraveler = travelerRepository.getDataById(id);
   globalTraveler = newTraveler;
   displayFirstName();
@@ -218,8 +181,6 @@ function displayYearlyCosts() {
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(travelerTrips);
   yearlyCostValue.innerText = ` $${yearlyExpense}`;
-  // if the cost is 0, should i say something else?
-  console.log(yearlyExpense)
 }
 
 function loadUserDashboard() {
@@ -251,6 +212,12 @@ function supplyDestinationDropDown() {
   return dropDownDestinations
 }
 
+function clearTripSelection() {
+  addHidden(priceEstimateField);
+  addHidden(noTripsDisplay);
+  clearInputFields();
+}
+
 function clearInputFields() {
   bookingDateInput.value = '';
   durationInput.value = '';
@@ -273,6 +240,7 @@ function clearGrid() {
 }
 
 function bookTripDisplay() {
+  clearTripSelection();
   removeHidden(tripPlanFieldset);
   removeHidden(tripRequestBox);
   addHidden(userSelectedTrips);
@@ -281,7 +249,6 @@ function bookTripDisplay() {
 
 function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
-    console.log('empty')
     removeHidden(messageDisplay);
     removeHidden(noTripsDisplay);
     addHidden(userSelectedTrips);
@@ -308,8 +275,8 @@ function modifyTripsToCards(trips) {
 }
 
 // trip displays
-
 function displayPastTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
@@ -320,18 +287,21 @@ function displayPastTrips() {
 }
 
 function displayPresentTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let tripDates = getAllTripDates(travelerTrips);
   let presentTripMatches = globalTrip.findPresentTrips(tripDates, today);
-  let presentTrips = globalTrip.returnPresentTrip(presentTripMatches, tripData);
+  console.log(presentTripMatches)
+  let presentTrips = globalTrip.returnPresentTrip(presentTripMatches, globalTraveler.id);
   let presentTripProperties = globalDestination.returnLocationProperties(presentTrips);
   checkForEmptyDisplay(presentTripProperties);
   modifyTripsToCards(presentTripProperties);
 }
 
 function displayUpcomingTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
@@ -342,6 +312,7 @@ function displayUpcomingTrips() {
 }
 
 function displayPendingTrips() {
+  clearTripSelection();
   displayTripSelection();
   clearGrid();
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
@@ -372,6 +343,13 @@ function addUserTripFromInput() {
   var response = addUserTravelData(dataToTransmit).then((res) => displayResolvedData());
 }
 
+export function displayAPIError(error) {
+  loginErrorMsg.innerHTML = `${error}`
+  loginErrorMsg.classList.remove('hidden');
+  usernameInput.value = '';
+  passwordInput.value = '';
+}
+
 function calculateTripCosts() {
   let duration = Number(durationInput.value);
   let numTravelers = Number(numTravelersInput.value);
@@ -390,6 +368,7 @@ function displayCosts() {
   let tripExpense = calculateTripCosts();
   tripCost.innerText = `$${tripExpense} USD`;
 }
+
 
 function displayTripConfirmation() {
   event.preventDefault();
@@ -413,7 +392,7 @@ function addHidden(ele) {
 //date helpers
 function getAllTripDates(allTripData) {
   let allTripDates = allTripData.map(trip => {
-    let tripDates = stringDatesOfTrip(trip)
+    let tripDates = stringDatesOfTrip(trip);
     return tripDates
   })
   return allTripDates;
