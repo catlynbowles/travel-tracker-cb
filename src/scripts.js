@@ -23,8 +23,12 @@ var globalTrip;
 var globalDestination;
 
 
+// var userDashboardDisplay = document.getElementById('userDashboardDisplay')
+// var location = document.getElementById('location');
+// var tripDate = document.getElementById('tripDate');
+// var boxImage = document.getElementById('boxImg');
+// var boardDisplay = document.getElementById('boardDisplay')
 
-var userDashboardDisplay = document.getElementById('userDashboardDisplay')
 // query selectors
 var clickPastTrips = document.getElementById('pastTrips');
 var clickPresentTrips = document.getElementById('presentTrips');
@@ -32,18 +36,14 @@ var clickUpcomingTrips = document.getElementById('upcomingTrips');
 var clickPendingTrips = document.getElementById('pendingTrips');
 var tripRequestBox = document.getElementById('tripRequestBox');
 var userSelectedTrips = document.getElementById('userSelectedTrips');
-var logoutButton = document.getElementById('logoutButton');
-var bookNewTrip = document.getElementById('bookNew');
-var location = document.getElementById('location');
-var tripDate = document.getElementById('tripDate');
-var boxImage = document.getElementById('boxImg');
 var grid = document.getElementById('grid');
+var allUserTrips = document.getElementById('allUserTrips');
+
+//messages
+var messageDisplay = document.getElementById('messageDisplay');
 var yearlyCostValue = document.getElementById('yearlyCostValue');
 var tripConfirmation = document.getElementById('tripConfirmation');
 var noTripsDisplay = document.getElementById('noTripsDisplay');
-var messageDisplay = document.getElementById('messageDisplay');
-var boardDisplay = document.getElementById('boardDisplay')
-var allUserTrips = document.getElementById('allUserTrips');
 
 //inputs
 var bookingDateInput = document.getElementById('bookingDateInput');
@@ -51,27 +51,28 @@ var durationInput = document.getElementById('durationInput');
 var numTravelersInput = document.getElementById('numTravelersInput');
 var destinationsDropdownInput = document.getElementById('destinationsDropdownInput');
 var datalist = document.getElementById('datalist');
-
-// form selectors
-var tripForm = document.getElementById('tripForm');
-var tripPlanFieldset = document.getElementById('tripPlanFieldset');
-
-//price agreement
-var addTripForm = document.getElementById('addTripSubmit');
-var tripCost = document.getElementById('cost');
-var priceAgreement = document.getElementById('priceAgreement');
-var priceEstimateField = document.getElementById('priceEstimateField');
-
-//login pg
-var loginPageField = document.getElementById('loginPageField');
-var loginPageSection = document.getElementById('loginPageSection');
-
-var loginErrorMsg = document.getElementById('loginErrorMsg');
-var loginForm = document.getElementById('loginForm');
 var passwordInput = document.getElementById('passwordInput');
 var usernameInput = document.getElementById('usernameInput');
 
+// form selectors
+var tripPlanFieldset = document.getElementById('tripPlanFieldset');
+var priceEstimateField = document.getElementById('priceEstimateField');
+
+//price agreement
+var tripCost = document.getElementById('cost');
+var priceAgreement = document.getElementById('priceAgreement');
+
+//login pg
+var loginPageField = document.getElementById('loginPageField');
+var loginErrorMsg = document.getElementById('loginErrorMsg');
+
+// buttons
+var tripForm = document.getElementById('tripForm');
 var logout = document.getElementById('logoutButton');
+var addTripForm = document.getElementById('addTripSubmit');
+var loginForm = document.getElementById('loginForm');
+var logoutButton = document.getElementById('logoutButton');
+var bookNewTrip = document.getElementById('bookNew');
 
 // event listeners
 window.addEventListener('load', displayResolvedData);
@@ -79,13 +80,10 @@ clickPastTrips.addEventListener('click', displayPastTrips);
 clickPresentTrips.addEventListener('click', displayPresentTrips);
 clickUpcomingTrips.addEventListener('click', displayUpcomingTrips);
 clickPendingTrips.addEventListener('click', displayPendingTrips);
-bookNewTrip.addEventListener('click', bookTripDisplay)
-
-// bookTripButton.addEventListener('click', );
+bookNewTrip.addEventListener('click', bookTripDisplay);
 tripForm.addEventListener('submit', displayCosts);
 addTripForm.addEventListener('submit', displayTripConfirmation);
 loginForm.addEventListener('submit', checkValidLogin);
-
 logout.addEventListener('click', fireLogoutEvent)
 
 // Fetch API
@@ -177,7 +175,7 @@ function displayLoginDashboard() {
 
 
 function hideLogin() {
-  addHidden(loginPage);
+  // addHidden(loginPage);
   addHidden(loginPageField);
 }
 
@@ -206,8 +204,6 @@ function displayYearlyCosts() {
   let travelerTrips = globalTrip.getUserTripData(globalTraveler.id);
   let yearlyExpense = globalDestination.calculateYearlyTravelExpenses(travelerTrips);
   yearlyCostValue.innerText = ` $${yearlyExpense}`;
-  // if the cost is 0, should i say something else?
-  console.log(yearlyExpense)
 }
 
 function loadUserDashboard() {
@@ -267,6 +263,7 @@ function clearGrid() {
 }
 
 function bookTripDisplay() {
+  clearTripSelection();
   removeHidden(tripPlanFieldset);
   removeHidden(tripRequestBox);
   addHidden(userSelectedTrips);
