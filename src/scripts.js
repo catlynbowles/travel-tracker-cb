@@ -174,7 +174,6 @@ function showDashboard() {
 }
 
 function loadTraveler(id) {
-  console.log(id)
   let newTraveler = travelerRepository.getDataById(id);
   globalTraveler = newTraveler;
   displayFirstName();

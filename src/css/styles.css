@@ -90,6 +90,10 @@ input {
   text-align: center;
 }
 
+h3, h4 {
+  margin: 0;
+}
+
 .trip-request-box {
   width: 700px;
   margin-top: 100px;
@@ -102,7 +106,6 @@ input {
 .price-estimate {
   margin-top: 30px;
 }
-
 
 .booking-date-input {
   padding-bottom: 10px;
@@ -120,9 +123,6 @@ input {
   text-emphasis-color: white;
 }
 
-h3, h4 {
-  margin: 0;
-}
 /* fancy animations/ colors */
 @keyframes slidebg {
   to {
@@ -151,7 +151,6 @@ h3, h4 {
   justify-content: center;
   font-weight: bold;
 }
-
 
 .trip-type,
 .dashboard-buttons,
@@ -313,7 +312,6 @@ height: 400px;
   width: 700px;
   font-size: 35px;
 }
-
 
 /* login page */
 .login-page-section {
