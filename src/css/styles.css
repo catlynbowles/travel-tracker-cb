@@ -7,14 +7,6 @@ body {
   height: 100%;
 }
 
-/* @@font-face {
-  font-family: 'Lato', sans-serif;
-  display: swap;
-} */
-
-/* p {
-  font-size: 20px;
-} */
 /* top bar content */
 h1, h2 {
   font-size: 30px;
@@ -61,16 +53,6 @@ h1, h2 {
   flex-wrap: wrap;
 }
 
-
-/* grid styling */
-.box-styling {
-  margin: 150px;
-  display: flex;
-  justify-content: space-between;
-  height: 400px;
-}
-
-
 /* form styling */
 fieldset {
   display: flex;
@@ -86,6 +68,12 @@ form {
   width: 700px;
   height: 500px;
   text-align: center;
+}
+
+legend {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 label {
@@ -119,6 +107,22 @@ input {
 .booking-date-input {
   padding-bottom: 10px;
 }
+
+.welcome-text {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.logout-button {
+  background: none;
+  text-emphasis-color: white;
+}
+
+h3, h4 {
+  margin: 0;
+}
 /* fancy animations/ colors */
 @keyframes slidebg {
   to {
@@ -148,21 +152,6 @@ input {
   font-weight: bold;
 }
 
-.welcome-text {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-}
-
-.logout-button {
-  background: none;
-  text-emphasis-color: white;
-}
-
-h3, h4 {
-  margin: 0;
-}
 
 .trip-type,
 .dashboard-buttons,
@@ -174,8 +163,27 @@ input,
   cursor: pointer;
 }
 
+.trip-type {
+  font-size: 25px;
+  height: 40px;
+  margin: 0px;
+}
+
+.trip-type-styling {
+  margin-top: 20px;
+}
+
+/* DO NOT MOVE */
 .hidden {
   display: none;
+}
+
+/* grid styling */
+.box-styling {
+margin: 150px;
+display: flex;
+justify-content: space-between;
+height: 400px;
 }
 
 .grid {
@@ -212,6 +220,7 @@ input,
   border-radius: 25px;
 }
 
+/* trip booking */
 .user-dashboard-display {
   display: flex;
   align-items: center;
@@ -236,49 +245,12 @@ input,
 }
 
 .trip-type {
-  font-size: 25px;
-  height: 40px;
-  /* align-items: center; */
-  margin: 0px;
-}
-
-.trip-type-styling {
-  margin-top: 20px;
-  /* margin-right: 100px; */
-}
-
-.opacity {
-  opacity: 0.5;
-}
-
-.book-new {
-  margin-left: 0px;
-  /* margin-top: 30px; */
-  width: 350px;
-  height: 95px;
-  /* margin-right: 200px; */
-  /* margin-bottom: 0px; */
-  font-size: 40px;
-  border: 3px solid #FFADAD;
-  background-color: rgba(255, 0, 0, 0.1);
-  font-family: 'Lato', sans-serif;
-  font-weight: bold;
-}
-
-.trip-type {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
   font-size: 25px;
   width: 350px;
   height: 60px;
 }
-
-/* .instructions {
-  margin: 0px;
-  font-size: 15px;
-  border: 3px solid #FFD6A5;
-  background-color: rgba(255, 165, 0, 0.08);
-} */
 
 .past {
   margin-top: 0px;
@@ -306,22 +278,34 @@ input,
 .yearly-cost-style {
   border: 3px solid #FFC6FF;
   background-color: rgba(255, 0, 255, 0.08);
-  /* margin-right: 200px; */
   width: 350px;
 }
 
 .zoom:hover {
-   transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 .text {
   font-size: 15px;
 }
 
-legend {
+/* trip booking */
+.book-new {
+  margin-left: 0px;
+  width: 350px;
+  height: 95px;
   font-size: 40px;
+  border: 3px solid #FFADAD;
+  background-color: rgba(255, 0, 0, 0.1);
+  font-family: 'Lato', sans-serif;
   font-weight: bold;
-  margin-bottom: 10px;
+}
+
+.price-estimate {
+  width: 700px;
+  margin-top: 100px;
+  font-size: 30px;
+  padding-bottom: 10px;
 }
 
 .no-trips-display,
@@ -330,27 +314,14 @@ legend {
   font-size: 35px;
 }
 
-.price-estimate {
-  width: 700px;
-  margin-top: 100px;
-  font-size: 30px;
-  /* display: flex; */
-  padding-bottom: 10px;
-}
 
+/* login page */
 .login-page-section {
   margin-top: 150px;
   margin-left: 200px;
   display: flex;
   flex-direction: column;
 }
-/*
-#loginPageField {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-} */
 
 .username-input {
   margin-top: 100px;
@@ -367,12 +338,3 @@ legend {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
 }
-
-/* #f8f8ff off white
-#FFADAD red
-#FFD6A5 orange
-#FDFFB6 yellow
-#CAFFBF green
-#9BF6FF blue
-#BDB2FF purple
-#FFC6FF pink */

@@ -1,7 +1,3 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import {fetchAllData, addUserTravelData, catchError} from './apiCalls.js';
 import TravelerRepository from './TravelerRepository';
@@ -23,11 +19,13 @@ var globalTrip;
 var globalDestination;
 
 
+// removeHidden(loginPage);
 // var userDashboardDisplay = document.getElementById('userDashboardDisplay')
 // var location = document.getElementById('location');
 // var tripDate = document.getElementById('tripDate');
 // var boxImage = document.getElementById('boxImg');
 // var boardDisplay = document.getElementById('boardDisplay')
+// addHidden(loginPage);
 
 // query selectors
 var clickPastTrips = document.getElementById('pastTrips');
@@ -115,10 +113,6 @@ function getAllDestinationData(data) {
     displayLoginDashboard();
   }
 }
-// step 1 completed
-// on step 2, the user will login.
-// the first step of this login, is to check whether or not the information is valid.
-// if it is not, reset the values, show an error message ,and go back to the dashboard.
 
 //login page functions
 function checkValidLogin() {
@@ -159,23 +153,16 @@ function checkIdIsValid(id) {
   return (id >= 1 && id <= 50)
 }
 
-// if the id is valid, and password correct, take them to the login
-// dashboard, where the trips menu bar and the dream trip box
-// are displayed.
-// load the new traveler from the data
-// step 2 complete
-// step 3, display dashboard.
-
 //login page display
 function displayLoginDashboard() {
-  // removeHidden(loginPage);
   addHidden(allUserTrips);
   addHidden(loginErrorMsg);
 }
 
 
+
+// dashboard display
 function hideLogin() {
-  // addHidden(loginPage);
   addHidden(loginPageField);
 }
 
@@ -272,7 +259,6 @@ function bookTripDisplay() {
 
 function checkForEmptyDisplay(trips) {
   if (trips.length === 0) {
-    console.log('empty')
     removeHidden(messageDisplay);
     removeHidden(noTripsDisplay);
     addHidden(userSelectedTrips);
@@ -299,7 +285,6 @@ function modifyTripsToCards(trips) {
 }
 
 // trip displays
-
 function displayPastTrips() {
   clearTripSelection();
   displayTripSelection();
@@ -417,7 +402,7 @@ function addHidden(ele) {
 //date helpers
 function getAllTripDates(allTripData) {
   let allTripDates = allTripData.map(trip => {
-    let tripDates = stringDatesOfTrip(trip)
+    let tripDates = stringDatesOfTrip(trip);
     return tripDates
   })
   return allTripDates;
